@@ -2,7 +2,7 @@ import re
 from warnings import resetwarnings
 import flask
 import json
-from flask import jsonify, request
+from flask import jsonify
 from werkzeug.wrappers import response
 from lib.response_parser import Response_Parser
 
@@ -31,8 +31,8 @@ class Users:
         response = self.db.engine.execute(sql_statement)
         return Response_Parser.get(response)
     
-    def get_one(self, user_data):
-        users_id = user_data
+    def get_one(self, data):
+        users_id = data
         
         sql_statement = "SELECT * FROM users WHERE id = '{0}'"
         sql_statement = sql_statement.format(users_id)
@@ -40,10 +40,10 @@ class Users:
         response = self.db.engine.execute(sql_statement)
         return Response_Parser.get(response)
 
-    def delete(self, user_data):
-        users_id = user_data
+    def delete(self, data):
+        users_id = data
 
-        sql_statement = "DELETE FROM users, user_tests WHERE id = '{0}'"
+        sql_statement = "DELETE FROM users WHERE id = '{0}'"
         sql_statement = sql_statement.format(users_id)
 
         response = self.db.engine.execute(sql_statement)

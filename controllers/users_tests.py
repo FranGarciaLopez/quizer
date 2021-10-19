@@ -10,9 +10,9 @@ class UsersTests:
     def __init__(self, db):
         self.db = db
 
-    def post(self, data):
-        user_id = data["user_id"]
-        test_id = data["test_id"]
+    def post(self, Userdata, Testdata):
+        user_id = Userdata
+        test_id = Testdata
         
         sql_statement = "INSERT INTO user_tests (user_id, test_id) VALUES ('{0}','{1}')"
         sql_statement = sql_statement.format(user_id, test_id)
