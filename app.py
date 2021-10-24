@@ -10,8 +10,8 @@ from controllers.tests import Tests
 from controllers.resources import Resources
 from controllers.questions import Questions
 from controllers.topics import Topics
-from controllers.users_tests import UsersTests
-from controllers.users_resources import UsersResources
+from controllers.user_tests import UserTests
+from controllers.user_resources import UserResources
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:changeme@localhost:5432/tfg-db"
@@ -125,40 +125,39 @@ def topic_put(topic_id):
 def topic_delete(topic_id):
     return Topics(db).delete(topic_id)
 
-
 #user/tests--------------------------------------------------------------#
 @app.route('/users/<int:user_id>/tests/<int:test_id>', methods=['POST'])
 def user_test_post(user_id, test_id):
-    return UsersTests(db).post(user_id, test_id)
+    return UserTests(db).post(user_id, test_id)
 
 @app.route('/users/<int:user_id>/tests', methods=['GET'])
 def users_tests_get(user_id):
-    return UsersTests(db).get_all(user_id)
+    return UserTests(db).get_all(user_id)
 
 @app.route('/users/<int:user_id>/tests/<int:test_id>', methods=['GET'])
 def user_test_get(user_id, test_id):
-    return UsersTests(db).get_one(user_id, test_id)
+    return UserTests(db).get_one(user_id, test_id)
 
 @app.route('/users/<int:user_id>/tests/<int:test_id>', methods=['DELETE'])
 def user_test_delete(user_id, test_id):
-    return UsersTests(db).delete(user_id, test_id)
+    return UserTests(db).delete(user_id, test_id)
 
 #user/resources-----------------------------------------------------------#
 @app.route('/users/<int:user_id>/resources/<int:topic_id>', methods=['POST'])
 def user_resource_post(user_id, topic_id):
-    return UsersResources(db).post(user_id, topic_id)
+    return UserResources(db).post(user_id, topic_id)
 
 @app.route('/users/<int:user_id>/resources', methods=['GET'])
 def users_resources_get(user_id):
-    return UsersResources(db).get_all(user_id)
+    return UserResources(db).get_all(user_id)
 
 @app.route('/users/<int:user_id>/resources/<int:topic_id>', methods=['GET'])
 def user_resource_get(user_id, topic_id):
-    return UsersResources(db).get_one(user_id, topic_id)
+    return UserResources(db).get_one(user_id, topic_id)
 
 @app.route('/users/<int:user_id>/resources/<int:topic_id>', methods=['DELETE'])
 def user_resource_delete(user_id, topic_id):
-    return UsersResources(db).delete(user_id, topic_id)
+    return UserResources(db).delete(user_id, topic_id)
 
 if __name__ == "__main__":
     app.run(port=3000,debug=True)

@@ -18,37 +18,30 @@ class Topics:
         return Response_Parser.post(response)
         
     def get_all(self):
-
         sql_statement = "SELECT * FROM topics"
 
         response = self.db.engine.execute(sql_statement)
         return Response_Parser.get(response)
     
-    def get_one(self, data):
-        topic_id = data
-        
+    def get_one(self, topic_id):
         sql_statement = "SELECT * FROM topics WHERE id = '{0}'"
         sql_statement = sql_statement.format(topic_id)
 
         response = self.db.engine.execute(sql_statement)
         return Response_Parser.get(response)
 
-    def put(self, Topicdata, data):
-        name = json.dumps(Topicdata["name"])
-        topic_id = data
-        
+    def put(self, topic_id, data):
+        name = json.dumps(data["name"])
+
         sql_statement = "UPDATE topics SET name = '{0}' WHERE id = '{1}'"
         sql_statement = sql_statement.format(name, topic_id)
 
         response = self.db.engine.execute(sql_statement)
         return Response_Parser.put(response)
 
-    def delete(self, data):
-        topic_id = data
-
+    def delete(self, topic_id):
         sql_statement = "DELETE FROM topics WHERE id = '{0}'"
         sql_statement = sql_statement.format(topic_id)
-        print(sql_statement)
 
         response = self.db.engine.execute(sql_statement)
         return Response_Parser.delete(response)
