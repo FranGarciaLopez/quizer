@@ -1,6 +1,8 @@
 from imports import *
+from flask_cors import cross_origin
 
 app = Flask(__name__)
+cross_origin(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:changeme@localhost:5432/tfg-db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False

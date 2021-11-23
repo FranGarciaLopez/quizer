@@ -1,5 +1,6 @@
 from imports import Users, request
 from __main__ import app, db
+from flask_cors import cross_origin
 
 #/users-----------------------------------------------------------------#
 @app.route('/users', methods = ['POST'])
@@ -7,6 +8,7 @@ def user_post():
     return Users(db).post(request.json)
 
 @app.route('/users', methods=['GET'])
+@cross_origin()
 def users_get():
     return Users(db).get_all()
 
