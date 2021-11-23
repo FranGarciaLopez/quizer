@@ -75,10 +75,27 @@
     },
     "paths": {
         "/questions": {
-            "post": {
-                "tags": [
-                    "Add user"
-                ],
+            
+            "get" :{
+                "tags": ["Questions"],
+                "summary": "Get all users",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    },
+                    "404": {
+                        "description": "The data does not exists.",
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    }
+                }
+            }
+            ,"post": {
+                "tags": ["Questions"],
                 "summary": "Add user",
                 "requestBody": {
                     "description": "Post new user to database",
@@ -105,33 +122,11 @@
                         }
                     }
                 }
-            },
-            "get" :{
-                "tags": [
-                    "Get all users from database"
-                ],
-                "summary": "Get all users",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/components/schemas/Users"
-                        }
-                    },
-                    "404": {
-                        "description": "The data does not exists.",
-                        "schema": {
-                            "$ref": "#/components/schemas/Users"
-                        }
-                    }
-                }
             }
         },
         "/questions/{id}":{
             "get" :{
-                "tags": [
-                    "Get one user form database."
-                ],
+                "tags": ["Questions"],
                 "summary": "Get one user",
                 "parameters": [{
                     "name": "id",
@@ -159,9 +154,7 @@
                 }
             },
             "put": {
-                "tags": [
-                    "Update the data from a user in database"
-                ],
+                "tags": ["Questions"],
                 "parameters": [{
                     "name": "id",
                     "in": "path",
@@ -200,9 +193,7 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "Delete user from    API"
-                ],
+                "tags": ["Questions"],
                 "parameters": [{
                     "name": "id",
                     "in": "path",
