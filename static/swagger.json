@@ -1,0 +1,236 @@
+{
+  "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Quizer api documentation",
+        "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "servers": [{
+        "url": "HTTP"
+
+    }],
+    "components": {
+        "schemas": {
+            "Users": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "surname": {
+                        "type": "string"
+                    },
+                    "nickname": {
+                        "type": "string"
+                    },
+                    "lang": {
+                        "type": "string"
+                    },
+                    "telegram_id": {
+                        "type": "integer"
+                    },
+                    "email": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Id":{
+                "type" : "integer",
+                "properties" : {
+                    "user_id" : {
+                        "type" : "integer"
+                    }
+                }
+            },
+            "update":{
+                "type": "object",
+                "properties" :{
+                    "name": {
+                        "type": "string"
+                    },
+                    "surname": {
+                        "type": "string"
+                    },
+                    "nickname": {
+                        "type": "string"
+                    },
+                    "lang": {
+                        "type": "string"
+                    },
+                    "telegram_id": {
+                        "type": "integer"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "completed": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        }
+    },
+    "paths": {
+        "/questions": {
+            "post": {
+                "tags": [
+                    "Add user"
+                ],
+                "summary": "Add user",
+                "requestBody": {
+                    "description": "Post new user to database",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Users"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    },
+                    "500": {
+                        "description": "No response.",
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    }
+                }
+            },
+            "get" :{
+                "tags": [
+                    "Get all users from database"
+                ],
+                "summary": "Get all users",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    },
+                    "404": {
+                        "description": "The data does not exists.",
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    }
+                }
+            }
+        },
+        "/questions/{id}":{
+            "get" :{
+                "tags": [
+                    "Get one user form database."
+                ],
+                "summary": "Get one user",
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "user id",
+                    "required": true,
+                    "type": "integer",
+                    "schema" : {
+                        "$ref": "#/components/schemas/Id"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    },
+                    "404": {
+                        "description": "The data does not exists.",
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Update the data from a user in database"
+                ],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "User id to update.",
+                    "required": true,
+                    "type": "integer",
+                    "schema" : {
+                        "$ref": "#/components/schemas/Id"
+                    }
+                }],
+                "summary": "Update user",
+                "requestBody": {
+                    "description": "Update existing user on database",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/update"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Delete user from    API"
+                ],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "user id to delete",
+                    "required": true,
+                    "type": "integer",
+                    "schema" : {
+                        "$ref": "#/components/schemas/Id"
+                    }
+                }],
+                "summary": "Delete user",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "schema": {
+                            "$ref": "#/components/schemas/Users"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+ 

@@ -1,9 +1,3 @@
-import re
-from warnings import resetwarnings
-import flask
-import json
-from flask import jsonify
-from werkzeug.wrappers import response
 from lib.response_parser import Response_Parser
 from .user_tests import UserTests
 from .user_paths import UserPaths
@@ -29,7 +23,6 @@ class Users:
         return Response_Parser.post(response)
         
     def get_all(self):
-
         sql_statement = "SELECT * FROM users"
 
         response = self.conn.engine.execute(sql_statement)
@@ -41,6 +34,20 @@ class Users:
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.get(response)
 
+    def put(self, user_id, data):
+        name = data["name"]
+        surname = data["surname"]
+        nickname = data["nickname"]
+        lang = data["lang"]
+        email = data["email"]
+        telegram_id = data["telegram_id"]
+
+        sql_statement = "UPDATE users SET name = '{0}', surname = '{1}', nickname = '{2}', lang = '{3}', email = '{4}', telegram_id = '{5}' WHERE id = '{6}'"
+        sql_statement = sql_statement.format(name, surname, nickname, lang, email, telegram_id, user_id)
+
+        response = self.conn.engine.execute(sql_statement)
+        return Response_Parser.put(response)
+    
     def delete(self, user_id):
         UserPaths.delete_all(self, "user_paths", "user_id", user_id)
         UserTests.delete_all(self, "user_tests", "user_id", user_id)

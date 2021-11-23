@@ -1,6 +1,5 @@
-import flask
-import json
 from lib.response_parser import Response_Parser
+from lib.db import Db
 
 class UserTests:
     def __init__(self, conn):
@@ -28,12 +27,8 @@ class UserTests:
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.get(response)
 
-    def delete_all(self, user_id):
-        sql_statement = "DELETE FROM user_tests WHERE user_id = '{0}'"
-        sql_statement = sql_statement.format(user_id)
-
-        response = self.conn.engine.execute(sql_statement)
-        return Response_Parser.delete(response)
+    def delete_all(self, table_name, id_name, id_value):
+        Db.delete_all_subelement(self, table_name, id_name, id_value)
 
     def delete(self, user_id, test_id, question_id):
         sql_statement = "DELETE FROM user_tests WHERE user_id = '{0}' and test_id = '{1}'and question_id = '{2}'"
