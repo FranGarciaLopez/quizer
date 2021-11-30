@@ -1,4 +1,5 @@
-from imports import UserResources, request
+from controllers.user_resources import UserResources
+from flask import request
 from __main__ import app, db
 
 #user/resources-----------------------------------------------------------#

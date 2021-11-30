@@ -1,4 +1,5 @@
-from imports import UserTests, request
+from flask import request
+from controllers.user_tests import UserTests
 from __main__ import app, db
 
 #user/tests--------------------------------------------------------------#

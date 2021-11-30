@@ -1,4 +1,5 @@
-from imports import Users, request
+from flask import request
+from controllers.users import Users
 from __main__ import app, db
 from flask_cors import cross_origin
 

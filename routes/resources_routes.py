@@ -1,4 +1,5 @@
-from imports import Resources, request
+from flask import request
+from controllers.resources import Resources
 from __main__ import app, db
 
 #resources-------------------------------------------------------#

@@ -1,4 +1,5 @@
-from imports import UserQuestions, request
+from flask import request
+from controllers.user_questions import UserQuestions
 from __main__ import app, db
 
 #user/questions--------------------------------------------------------------#

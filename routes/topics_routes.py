@@ -1,4 +1,5 @@
-from imports import Topics, request
+from flask import request
+from controllers.topics import Topics
 from __main__ import app, db
 
 #topics----------------------------------------------------------------------#

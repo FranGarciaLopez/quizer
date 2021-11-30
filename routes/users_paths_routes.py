@@ -1,4 +1,5 @@
-from imports import UserPaths, request
+from flask import request
+from controllers.user_paths import UserPaths
 from __main__ import app, db
 
 #user/paths--------------------------------------------------------------#
