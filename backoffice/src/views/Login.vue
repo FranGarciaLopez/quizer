@@ -7,10 +7,10 @@
           <img src="../assets/logo.png" id="icon" alt="User Icon" />
         </div>
 
-        <form v-on:submit.prevent="onSubmit">
+        <form class="login" v-on:submit.prevent="onSubmit">
           <input type="text" id="user" class="fadeIn second" name="login" placeholder="User" v-model="user"/>
-          <input type="text" id="password" class="fadeIn third" name="login" placeholder="Password" v-model="password"/>
-          <input type="submit" class="fadeIn fourth" value="Log In"/>
+          <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password" v-model="password"/>
+          <input type="submit" class="fadeIn fourth" value="Login"/>
         </form>
 
         <div v-if="error" class="alert alert-danger">
@@ -29,7 +29,7 @@
 <script>
 //import axios from 'axios';
 export default {
-  name: 'Login',
+  name: 'login',
   components: {
 
   },
@@ -42,30 +42,22 @@ export default {
     }
   },
   methods: {
-    onSubmit() {
-      console.log("IN", this.user, this.password)
-      debugger;
-      if(this.user === 'fran' && this.password === '1234'){
-        this.error = false;
-        console.log('login ok');
+    onSubmit:function() {
+      /* console.log("IN", this.user, this.password)
+      debugger; */
+      let user = this.user
+      let password = this.password
+      this.$store.dispatch('login', {user, password} )
+        .then(()=> this.$router.push('/'))
+        .catch(error => console.log(error))
+      if(user === 'fran' && password === '1234'){
+        this.error = false; 
+        
       }
       else {
         this.error = true;
         this.error_msg = 'User and password does not match';
       }
-      /*       let json = {
-        "usuario": this.user,
-        "password": this.password
-      }; 
-      axios.post('http://localhost:3000/users', json).then(data => {
-        if(data.data.status == "ok"){
-          console.log("Ok")
-        }else{
-          this.error = true;
-          this.error_msg = data.data.result.error_msg;
-          
-        }
-      }) */
     }
   }
 }
