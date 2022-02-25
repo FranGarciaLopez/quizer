@@ -1,27 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link><span v-if="isLoggedIn"> | <a @click="logout">Logout</a></span>
-    </div>
+    <Nav/>
     <router-view/>
   </div>
 </template>;
 
 <script>
+import Nav from "@/components/Nav";
+export default{
+  
+  components: {Nav},
 
-export default {
-  created: function () {
-    this.$http.interceptors.response.use(undefined, function (err) {
-      return new Promise(function (resolve, reject) {
-        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-          this.$store.dispatch(logout)
-        }
-        throw err;
-      });
-    });
-  }
 }
 </script>
+
 
 <style>
 #app {
