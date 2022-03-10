@@ -24,7 +24,7 @@
 <script>
 import { authComputed } from '../store/helpers.js'
 export default {
-  name: 'Nav',
+  name: 'NavView',
   computed: {
     ...authComputed
   },

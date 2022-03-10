@@ -1,16 +1,14 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../components/Login.vue'
-import Register from '../components/Register.vue'
-import Secure from '../components/Secure.vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import Home from '../views/HomeView.vue'
+import Login from '../components/LoginView.vue'
+import Register from '../components/RegisterView.vue'
+import Secure from '../components/SecureView.vue'
 
-Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'homeView',
     component: Home,
     meta: {requiresAuth: true}
     
@@ -38,9 +36,8 @@ const routes = [
 ]
 
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes,
 })
 

@@ -18,7 +18,7 @@
 
 
 <script>
-import bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
 
 export default {
   data: function() {
@@ -37,7 +37,7 @@ export default {
           password: this.encryptPassword(this.password)
         })
         .then(()=>{
-          this.$router.push({name:'home'})
+          this.$router.push({name:'homeView'})
         })
         this.error = false;
 

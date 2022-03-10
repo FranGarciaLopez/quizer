@@ -7,7 +7,7 @@
 <script>
 import {authComputed} from '../store/helpers.js'
 export default {
-  name: 'home',
+  name: 'homeView',
   computed:{
     ...authComputed
   },

@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <Nav/>
+    <nav-view/>
     <router-view/>
   </div>
 </template>;
 
 <script>
-import Nav from "@/components/Nav";
+import NavView from './components/NavView.vue';
 export default{
   
-  components: {Nav},
+  components: {NavView},
 
 }
 </script>

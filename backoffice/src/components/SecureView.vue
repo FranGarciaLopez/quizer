@@ -17,7 +17,7 @@
 <script>
 import {authComputed} from '../store/helpers.js'
 export default {
-  name: 'secure',
+  name: 'secureView',
   computed:{
     ...authComputed
   },
