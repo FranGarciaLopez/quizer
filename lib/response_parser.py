@@ -22,7 +22,7 @@ class Response_Parser:
     def delete(sql_response):
         if sql_response == None:
             return jsonify({'Message': "No responde"})  , 500
-        return jsonify({'Message': "Deleted"}), 200
+        return jsonify({'Message': "Deleted"    }), 200
         
 
 Response_Parser.get = staticmethod(Response_Parser.get)

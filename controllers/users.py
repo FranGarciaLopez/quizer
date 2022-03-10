@@ -49,6 +49,7 @@ class Users:
         return Response_Parser.put(response)
     
     def delete(self, user_id):
+        
         UserPaths.delete_all(self, "user_paths", "user_id", user_id)
         UserTests.delete_all(self, "user_tests", "user_id", user_id)
         UserQuestions.delete_all(self, "user_questions", "user_id", user_id)
