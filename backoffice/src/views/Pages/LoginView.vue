@@ -1,16 +1,16 @@
 <template>
-  <div>
-    <div v-if="error == true" class="alert alert-danger">{{ this.error_msg }}</div>
+  <div class="content">
+    <div v-if="error" class="alert alert-danger">
+      {{ error_msg }}
+    </div>
     <form class="login" @submit.prevent="login">
-     
-      
       <h1>Sign in</h1>
+      
       <input required v-model="nickname" type="text" placeholder="NickName"/>
       <br>
-      <input required v-model="password" type="password" placeholder="Password"/>
+      <input required type="password" placeholder="Password" v-model="password" autocomplete="false"/>
       <br><br/>
       <button type="submit"  class="btn btn-primary btn-lg btn-block">Login</button>
-      
     </form>
     
   </div>
@@ -26,21 +26,22 @@ export default {
       nickname: '',
       password: '',
       error: false,
-      error_msg: '',
+      error_msg:"",
     }
   },
   methods: {
     login() {
       try{
+        
         this.$store.dispatch('login',{
           nickname: this.nickname, 
           password: this.encryptPassword(this.password)
         })
         .then(()=>{
           this.$router.push({name:'homeView'})
+          
         })
-        this.error = false;
-
+        
       }catch(error){
         this.error = true;
         this.error_msg = "User and Password does not match";
@@ -55,3 +56,17 @@ export default {
   }
 }
 </script>
+
+
+<style scoped>
+.content{
+    position:fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 40%;
+    height: 40%;
+}
+</style>

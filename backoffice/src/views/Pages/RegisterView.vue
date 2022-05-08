@@ -1,7 +1,6 @@
 <template>
-
-    <div>
-        <h4>Register</h4>
+    <div class="content">
+        <h1>Register</h1>
         <form @submit.prevent="register">
             <div>
                 <input required v-model="user_name" type="text" placeholder="User Name"/>
@@ -29,7 +28,6 @@
 
 <script>
 import bcrypt from 'bcryptjs';
-/* import auth from "@/logic/auth";*/
 export default {
    data: () => ({
     user_name: '',
@@ -48,7 +46,7 @@ export default {
                 lang: this.lang
             })
             .then(()=>{
-                this.$router.push({name: 'home'})
+                this.$router.push({name: 'login'})
             })
         },
         encryptPassword(password) {
@@ -59,3 +57,18 @@ export default {
     }
 }
 </script>
+
+
+
+<style scoped>
+.content{
+    position:fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 40%;
+    height: 40%;
+}
+</style>
