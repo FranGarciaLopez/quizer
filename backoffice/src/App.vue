@@ -12,7 +12,19 @@ export default {
   name: 'App',
   components: {
     NavView,
-  }
+  },
+  mounted() {
+    if (localStorage.user) {
+      var user = JSON.parse(localStorage.user)
+      if (user.AccessToken){
+        this.$store.dispatch('setUser',user)
+      }
+      else {
+        this.$router.push({name:'login'})
+      }
+        
+    }
+  },
 }
 </script>
 
