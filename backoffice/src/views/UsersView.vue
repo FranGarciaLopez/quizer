@@ -2,7 +2,7 @@
   <div class="users">
     <Sidebar />
     <div class="content">
-      <div class="user_data">
+      <div v-if="loggedIn" class="user_data">
         
         <table class="table table-hover">
           <thead>
@@ -26,6 +26,16 @@
                 </span>
               </td>
               <td>
+                <span>
+                  {{ user.surname }}
+                </span>
+              </td>
+              <td>
+                <span>
+                  {{ user.nickname }}
+                </span>
+              </td>
+              <td>
                 <span v-if="updateForm && newId == user.id">
                   <button @click="saveUpdate(user.id)" class="btn btn-success">Guardar</button>
                 </span>
@@ -38,13 +48,13 @@
             </tr>
           </tbody>
         </table>
-        <!-- <section class="form">
+        <section  class="form">
           <form action="" class="text-center">
             <input v-model="name" @keyup.enter="addUser" type="text" class="form-control" placeholder="Name">
             
             <input @click="addUser" type="button" value="Add" class="btn btn-success">
           </form>
-        </section> -->
+        </section>
       </div>
     </div>
   </div>
@@ -64,9 +74,9 @@ export default {
     };
   },
   mounted() {
-    axios.get("http://localhost:3000/users").then((response) => (
-      this.users = response.data
-    )).catch((error) => console.log(error));
+    axios.get("http://localhost:3000/users").then((response) => {
+      return this.users = response.data
+    }).catch((error) => console.log(error));
   },
   components: {
     Sidebar,
@@ -84,18 +94,23 @@ export default {
       let self = this;
       this.updateForm = false;
       this.users.name = this.newName;
-      axios.put(`http://localhost:3000/users/${userId}`, {
+      var updatedUser = {
         name: this.newName,
         surname: this.newName,
         nickname: this.newName, 
         lang: "es",
         email: "frangalo34@gmail.com",
         telegram_id: 3
-      }).then(function(response){
+      };
+      axios.put(`http://localhost:3000/users/${userId}`, updatedUser).then(function(response){
         const status = JSON.stringify(response.status);
         if (status == '200') {
-          window.location.reload();
+          var user = self.users.find(user => user.id === userId)
+          user.name = updatedUser.name;
+          user.surname = updatedUser.surname;
+          user.nickname = updatedUser.nickname;
         }
+        
       })
 
     }
