@@ -3,6 +3,9 @@
     <Sidebar />
     <div class="content">
       <div v-if="loggedIn" class="user_data">
+        <div class="addNewUser">
+          <button  class="btn btn-success"><router-link to="/addUser"><i class="fa-solid fa-user-plus"></i></router-link></button>
+        </div>
         
         <table class="table table-hover">
           <thead>
@@ -37,24 +40,19 @@
               </td>
               <td>
                 <span v-if="updateForm && newId == user.id">
-                  <button @click="saveUpdate(user.id)" class="btn btn-success">Guardar</button>
+                  <button @click="saveUpdate(user.id)" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i></button>
                 </span>
                 <span v-else>
-                  <button @click="viewUpdateForm(user.id)" class="btn btn-primary">Actualizar</button>
+                  <button @click="viewUpdateForm(user.id)" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button>
+                  
                   <div class="space"></div>
-                  <button @click="deleteUser(user.id)" class="btn btn-danger">Borrar</button>
+                  <button @click="deleteUser(user.id)" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
                 </span>
               </td>
             </tr>
           </tbody>
         </table>
-        <section  class="form">
-          <form action="" class="text-center">
-            <input v-model="name" @keyup.enter="addUser" type="text" class="form-control" placeholder="Name">
-            
-            <input @click="addUser" type="button" value="Add" class="btn btn-success">
-          </form>
-        </section>
+      
       </div>
     </div>
   </div>
@@ -82,6 +80,7 @@ export default {
     Sidebar,
   },
   methods: {
+    
     deleteUser(userId) {
       axios.delete(`http://localhost:3000/users/${userId}`)
     },
@@ -143,6 +142,7 @@ export default {
   color: rgb(167, 167, 167);
   
 }
+
 
 .user_data {
   margin: 20px 20px;

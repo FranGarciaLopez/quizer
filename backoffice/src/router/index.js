@@ -8,6 +8,7 @@ import Resources from '../views/ResourcesView.vue'
 import Topics from '../views/TopicsView.vue'
 import Questions from '../views/QuestionsView.vue'
 import Paths from '../views/PathsView.vue'
+import addUser from '@/views/Pages/addUserView.vue'
 
 const routes = [
   {
@@ -42,6 +43,15 @@ const routes = [
     path: '/users',
     name: 'users',
     component: Users,
+    meta: {
+      requiresAuth: true,
+      
+    }
+  },
+  {
+    path: '/addUser',
+    name: 'addUserView',
+    component: addUser,
     meta: {
       requiresAuth: true,
       

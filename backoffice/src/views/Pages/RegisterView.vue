@@ -30,12 +30,12 @@
 import bcrypt from 'bcryptjs';
 export default {
    data: () => ({
-    user_name: '',
-    password: '',
-    nickname: '',
-    lang: '',
-    error: false
-  }),   
+        user_name: '',
+        password: '',
+        nickname: '',
+        lang: '',
+        error: false
+    }),   
     methods: {
         register () {
             this.$store
