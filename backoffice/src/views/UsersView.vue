@@ -6,15 +6,13 @@
         <div class="addNewUser">
           <button  class="btn btn-success"><router-link to="/addUser"><i class="fa-solid fa-user-plus"></i></router-link></button>
         </div>
-        
-        <table class="table table-hover">
+          <table class="table table-hover">
           <thead>
             <tr>
               <th scope="col">Id</th>
-              <th scope="col">Name</th>
-              
-              <th></th>
-              <th></th>
+              <th scope="col">Name</th>              
+              <th scope="col">Surname</th>
+              <th scope="col">Nickname</th>
             </tr>
           </thead>
           <tbody>
@@ -52,6 +50,7 @@
             </tr>
           </tbody>
         </table>
+        
       
       </div>
     </div>
@@ -142,7 +141,6 @@ export default {
   color: rgb(167, 167, 167);
   
 }
-
 
 .user_data {
   margin: 20px 20px;
