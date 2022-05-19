@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "bcryptjs": "^2.4.3",
     "js-cookie": "^3.0.1",
     "vue-auth-jwt": "^0.4.4"
