@@ -1,14 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/HomeView.vue'
-import Login from '../views/Pages/LoginView.vue'
-import Register from '../views/Pages/RegisterView.vue'
-import Secure from '../views/Pages/SecureView.vue'
-import Users from '../views/UsersView.vue'
-import Resources from '../views/ResourcesView.vue'
-import Topics from '../views/TopicsView.vue'
-import Questions from '../views/QuestionsView.vue'
-import Paths from '../views/PathsView.vue'
-import addUser from '@/views/Pages/addUserView.vue'
+import auth_routes from '@/router/auth'
+import user_routes from '@/router/users'
+import question_routes from '@/router/questions'
+import topics_routes from '@/router/topics'
+import paths_routes from '@/router/paths'
+import resources_routes from '@/router/resources'
+import tests_routes from '@/router/tests'
+
 
 const routes = [
   {
@@ -18,82 +17,15 @@ const routes = [
     meta: {
       requiresAuth: true,
       
-    }
-    
+    },
   },
-  {
-    path: '/login',
-    name: 'login',
-    component: Login,
-    
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: Register,
-    
-  },
-  {
-    path: '/secure',
-    name: 'secure',
-    component: Secure,
-
-  },
-  {
-    path: '/users',
-    name: 'users',
-    component: Users,
-    meta: {
-      requiresAuth: true,
-      
-    }
-  },
-  {
-    path: '/addUser',
-    name: 'addUserView',
-    component: addUser,
-    meta: {
-      requiresAuth: true,
-      
-    }
-  },
-  {
-    path: '/paths',
-    name: 'pathsView',
-    component: Paths,
-    meta: {
-      requiresAuth: true,
-      
-    }
-  },
-  {
-    path: '/questions',
-    name: 'questionsView',
-    component: Questions,
-    meta: {
-      requiresAuth: true,
-      
-    }
-  },
-  {
-    path: '/topics',
-    name: 'topicsView',
-    component: Topics,
-    meta: {
-      requiresAuth: true,
-      
-    }
-  },
-  {
-    path: '/resources',
-    name: 'resourcesView',
-    component: Resources,
-    meta: {
-      requiresAuth: true,
-      
-    }
-  },
-  
+  ...auth_routes,
+  ...user_routes,
+  ...question_routes,
+  ...topics_routes,
+  ...paths_routes,
+  ...resources_routes,
+  ...tests_routes,
  
 ]
 
@@ -110,7 +42,6 @@ router.beforeEach((to, from, next)=>{
   }else{
     next()
   }
-
 
 })
 
