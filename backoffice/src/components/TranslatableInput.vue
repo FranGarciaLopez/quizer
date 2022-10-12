@@ -35,7 +35,7 @@ export default {
     data() {
         return {
             showAddLanguages: true,
-            validLangs: ['es','en','de','fr'],
+            validLangs: ['es','en','de','fr', 'ru'],
         }
     },
     props: {
