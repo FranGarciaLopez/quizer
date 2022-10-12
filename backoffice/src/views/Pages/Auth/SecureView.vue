@@ -6,7 +6,7 @@
             <router-link to="/register">
                 Register
             </router-link>
-            or
+            or you can
             <router-link to="/login">
                 Login
             </router-link>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {authComputed} from '../../store/helpers.js'
+import {authComputed} from '@/store/helpers.js'
 export default {
   name: 'secureView',
   computed:{

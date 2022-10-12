@@ -1,40 +1,36 @@
 <template>
-    <div class="sidebar">
-        <div class="title">
-            Backoffice
-        </div>    
-        <div class="menu-items">
-            
-            <router-link to="/users" active-class="active" tag="button" class="side-btn">
-                <div class="link-container">
-                    Users    
-                </div>            
-            </router-link>
-
-            <router-link to="/paths" active-class="active" tag="button" class="side-btn">
-                <div class="link-container">
-                    Paths    
-                </div>            
-            </router-link>
-
-            <router-link to="/questions" active-class="active" tag="button" class="side-btn">
-                <div class="link-container">
-                    Questions
-                </div>            
-            </router-link>
-            <router-link to="/topics" active-class="active" tag="button" class="side-btn">
-                <div class="link-container">
-                    Topics  
-                </div>            
-            </router-link>
-            <router-link to="/resources" active-class="active" tag="button" class="side-btn">
-                <div class="link-container">
-                    Resources  
-                </div>            
-            </router-link>
-            
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <span class="fs-5 d-none d-sm-inline">Backoffice</span>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <router-link to="/" class="nav-link align-middle px-0">
+                            <i class="bi bi-house" style="font-size: 2rem;"></i> <span class="ms-1 d-none d-sm-inline" style="font-size: 2rem;"> Home</span>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link to="/users" class="nav-link align-middle px-0">
+                            <i class="bi bi-people-fill" style="font-size: 2rem;"></i> <span class="ms-1 d-none d-sm-inline" style="font-size: 2rem;"> Users</span>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link to="/paths" class="nav-link align-middle px-0">
+                            <i class="bi bi-archive" style="font-size: 2rem;"></i> <span class="ms-1 d-none d-sm-inline" style="font-size: 2rem;"> Paths</span>
+                        </router-link>
+                    </li>
+                </ul>
+                <hr>
+            </div>
         </div>
-    </div>    
+        <section class="col py-3">
+            <slot name="body">
+                
+            </slot>
+       </section>
+    </div>
+</div>
 </template>
 
 <script>
@@ -43,40 +39,3 @@ export default {
     
 }
 </script>
-
-<style scoped>
-    .title{
-        color: white;
-        font-size: 24px;
-        margin-top: 10px;
-    }
-    .menu-items{
-        display: flex;
-        flex-direction: column;
-        margin-top: 40px;
-        margin-bottom: 40px;
-
-    }
-    .menu-items > *{
-        margin-top: 40px;
-    }
-
-    .side-btn:focus{
-        outline: none;
-    }
-
-    .side-btn.active{
-        background-color: white;
-        color: teal;
-        font-weight: 500;
-    }
-
-    .side-btn{
-        border: none;
-        padding: 10px 0px;
-        cursor: pointer;
-        font-size: 16px;
-        color: white;
-    }
-
-</style>

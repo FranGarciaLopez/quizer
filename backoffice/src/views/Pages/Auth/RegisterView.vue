@@ -58,8 +58,6 @@ export default {
 }
 </script>
 
-
-
 <style scoped>
 .content{
     position:fixed;

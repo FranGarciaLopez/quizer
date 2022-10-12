@@ -3,11 +3,11 @@
       <nav-view/>
       <router-view/>
     </div>
-    
 </template>
 
 <script>
-import NavView from '../src/views/Pages/NavView.vue';
+import NavView from '@/views/Pages/NavView.vue';
+
 export default {
   name: 'App',
   components: {
@@ -20,7 +20,11 @@ export default {
         this.$store.dispatch('setUser',user)
       }
       else {
-        this.$router.push({name:'login'})
+        const status = JSON.stringify(response.status);
+        if(status == 401){
+          this.$store.dispatch('logout')
+          this.$router.push({name:'secureView'})
+        }
       }
         
     }
