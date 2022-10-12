@@ -3,7 +3,7 @@
         <form>
             <div v-for="(row, index) in this.text" :key="index" class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <select id="lang" class="input-group-text" @change="onSelectChange($event)">
+                    <select id="lang" class="input-group-text" @change="onSelectChange($event, index)">
                         <option :value="index">
                             {{ index }}
                         </option>
@@ -71,9 +71,10 @@ export default {
             var values = Object.values(this.validLangs.filter(e => !lang.includes(e)));
             return values
         },
-        onSelectChange(event) {
-            debugger
-            console.log(event.target.value)
+        onSelectChange(event, prevLang) {
+            const newLang = event.target.value
+            this.text[newLang] = this.text[prevLang];
+            delete this.text[prevLang];
         },
         buildText(){
 

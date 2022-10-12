@@ -67,18 +67,17 @@ export default {
     },   
     methods: {
         save () {
-            debugger;
             var updatedInfo = {
                 name: this.$refs.nameField.getValue(),
                 desc: this.$refs.descField.getValue(),
             };
             if(this.$route.params.id === 'new') {
                 axios.post(this.pathsApiPath, updatedInfo)
-                .then((data) => this.$router.push(`/path`))
+                .then((data) => this.$router.push(`/paths`))
             }
             else{
                 axios.put(this.pathsApiPath+`/paths/${this.$route.params.id}`, updatedInfo)
-                .then(() => this.$router.push(`/path/${this.$route.params.id}`))
+                .then(() => this.$router.push(`/paths/${this.$route.params.id}`))
             }
         },
     },
