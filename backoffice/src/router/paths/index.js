@@ -12,7 +12,7 @@ let routes = [
         }
     },
     {
-        path: '/paths/:id',
+        path: '/paths/:path_id',
         name: 'pathDetailView',
         component: pathDetailView,
         meta: {

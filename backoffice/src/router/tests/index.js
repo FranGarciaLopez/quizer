@@ -3,7 +3,7 @@ import testsDetailView from '@/views/Pages/Tests/testsDetailView.vue'
 
 let routes = [
     {
-        path: '/paths/:id/tests',
+        path: '/paths/:path_id/tests',
         name: 'testsView',
         component: TestsView,
         meta: {

@@ -1,9 +1,9 @@
 import Questions from '@/views/Pages/Questions/QuestionsView.vue'
-import addQuestion from '@/views/Pages/Questions/addQuestionView.vue'
+import questionsDetailView from '@/views/Pages/Questions/questionsDetailView.vue'
 
 let routes = [
     {
-        path: '/questions',
+        path: '/paths/:path_id/tests/:test_id/questions',
         name: 'questionsView',
         component: Questions,
         meta: {
@@ -11,9 +11,9 @@ let routes = [
         }
     },
     {
-        path: '/addQuestion',
-        name: 'addQuestion',
-        component: addQuestion,
+        path: '/paths/:path_id/tests/:test_id/questions/:question_id',
+        name: 'questionsDetailView',
+        component: questionsDetailView,
         meta: {
             requiresAuth: true,
         }
