@@ -5,11 +5,11 @@
             <template v-slot:body>
                 <div class="content">
                     <div v-if="loggedIn">
-                        <h1 v-if="$route.params.id === 'new'">
+                        <h1 v-if="$route.params.path_id === 'new'">
                             Add new path
                         </h1>
                         <h1 v-else>
-                            Edit path {{$route.params.id}}
+                            Edit path {{$route.params.path_id}}
                         </h1>
                         <form @submit.prevent="save">
                             <div class="form-group mb-3">
@@ -17,13 +17,17 @@
                                 <translatable-input class="form-control" ref="nameField" :text="path.name"/>
                             </div>
 
-                            <div class="form-group">
-                                <label class="form-label" name="description">Description: </label>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Description: </label>
                                 <translatable-input class="form-control" ref="descField" :text="path.desc"/>
                             </div>
                             
                             <div class="buttons">
-                                <router-link :to="{name:'pathsView'}"><button type="submit" class="btn btn-danger col-form-label col-md-6">Cancel</button></router-link>
+                                <router-link :to="{name:'pathsView'}">
+                                    <button type="submit" class="btn btn-secondary col-form-label col-md-6">
+                                        Cancel
+                                    </button>
+                                </router-link>
                                 <span><button type="submit" class="btn btn-primary col-md-6">Save</button></span>
                             </div>
                         </form>
@@ -53,12 +57,12 @@ export default {
         Breadcrumb,
     },
     mounted() {
-        if (this.$route.params.id === 'new'){
+        if (this.$route.params.path_id === 'new'){
             return (this.path = {name: {en: ''}, desc: {en: ''}});
         }
 
         axios
-        .get(this.pathsApiPath+`/paths/${this.$route.params.id}`)
+        .get(this.pathsApiPath+`/paths/${this.$route.params.path_id}`)
         .then((response) => {
             return (this.path = response.data[0]);
         })
@@ -71,13 +75,16 @@ export default {
                 name: this.$refs.nameField.getValue(),
                 desc: this.$refs.descField.getValue(),
             };
-            if(this.$route.params.id === 'new') {
-                axios.post(this.pathsApiPath, updatedInfo)
+            if(this.$route.params.path_id === 'new') {
+                axios.post(this.pathsApiPath+`/paths`, updatedInfo)
                 .then((data) => this.$router.push(`/paths`))
             }
             else{
-                axios.put(this.pathsApiPath+`/paths/${this.$route.params.id}`, updatedInfo)
-                .then(() => this.$router.push(`/paths/${this.$route.params.id}`))
+                axios.put(this.pathsApiPath+`/paths/${this.$route.params.path_id}`, updatedInfo)
+                .then(() => {
+                    alert('Updated')
+                    this.$router.push(`/paths/${this.$route.params.path_id}`)
+                })
             }
         },
     },
