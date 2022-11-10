@@ -6,7 +6,7 @@
         <div class="content">
           <div v-if="loggedIn">
             <div class="d-flex flex-row-reverse">
-              <!-- <router-link to="/questionsDetailView"><button  class="btn btn-success float-left btn-lg">Add question <i class="bi bi-plus-square"></i></button></router-link> -->
+              <router-link :to="{name: 'questionsDetailView', params: {question_id: 'new'}}"><button class="btn btn-success float-left btn-lg">Add question <i class="bi bi-plus-square"></i></button></router-link>
             </div>
             <br />
             <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -42,7 +42,7 @@
                               Edit <i class="bi bi-list-ol"></i>
                             </button>
                           </router-link>
-                          <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+                          <button @click="deleteQuestion(question.id)" class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
                         </div>
                       </span>
                     </td>
@@ -84,6 +84,15 @@ export default {
         .then((response) => {this.questions = response.data;})
         .catch((error) => console.log(error));
     },
+    deleteQuestion(questionId) {
+      if(confirm("Do you really want to delete?")){
+        axios.delete(this.ApiUrl+`/questions`+`/${questionId}`)
+        .then(response => {
+          this.questions.splice(questionId, 1).push(response.data);
+          this.fetchData();
+        });
+      }
+    }
   },
   computed: {
     ...authComputed,

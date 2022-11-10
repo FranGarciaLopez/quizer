@@ -5,7 +5,7 @@
       <template v-slot:body>
         <div class="content">
           <div v-if="loggedIn">
-            <router-link to="/users/new"><button class="btn btn-large btn-block btn-success">Add User <i class="bi bi-plus"></i></button></router-link>
+            <router-link class="float-right mb-3" to="/users/new"><button class="btn btn-success">Add User <i class="bi bi-plus-square"></i></button></router-link>
             <div class="table-wrapper-scroll-y my-custom-scrollbar">
               <table class="table table-bordered table-striped table-hover mb-0">
                 <thead class="thead-dark">
@@ -80,11 +80,13 @@ export default {
         .catch(error => console.log(error))
     },
     deleteUser(userId) {
-      axios.delete(this.usersApiUrl+`/${userId}`)
-      .then(response => {
-        this.fetchArticles();
-        return  response;
-      });
+      if(confirm("Do you really want to delete?")){
+        axios.delete(this.usersApiUrl+`/${userId}`)
+        .then(response => {
+          this.users.splice(userId, 1).push(response.data);
+          this.fetchData()
+        });
+      }
     },
   },
   computed: {
