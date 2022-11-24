@@ -1,6 +1,5 @@
 import Users from '@/views/Pages/Users/UsersView.vue'
 import userDetail from '@/views/Pages/Users/userDetailView.vue'
-import translatableInput from '@/components/TranslatableInput.vue'
 
 let routes = [
     {
@@ -21,14 +20,6 @@ let routes = [
             text: "Users"
         }
     },
-  /*   {
-        path: '/input',
-        name: 'translatableInput',
-        component: translatableInput,
-        meta: {
-            requiresAuth: true,
-        }
-    }, */
 ];
 
 export default routes;
