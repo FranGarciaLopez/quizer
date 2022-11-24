@@ -1,6 +1,5 @@
 <template>
-    <div id="app">
-      <nav-view/>
+    <div id="app" style="background: linear-gradient(#D5DBDB, #F4F6F6);">
       <router-view/>
     </div>
 </template>

@@ -2,23 +2,16 @@
     <div>
         <form>
             <div v-for="(answer, index) in this.answers" :key="index" class="input-group mb-3">
-                <div class="input-group-prepend" v-if="answer.result.right === 1">
-                    <input type="text" class="form-control input-group-text text-bg-success" v-model="answer.result.right"/>
-                </div>
-                <div class="input-group-prepend" v-else-if="answer.result.right === 0">
-                    <input type="text" class="form-control input-group-text text-bg-danger" v-model="answer.result.right"/>
-                </div>
-                <input type="text" class="form-control" v-model="answer.text.es">
-                <div class="input-group-append">
-                    <span class="input-group-text text-bg-danger" id="basic-addon2">
-                        <button @click="deleteLanguage(index)" class="btn btn-danger">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </span>
-                </div>
-               
+                <!-- :placeholder="answer.result" -->
+                <translatable-input class="form-control" :text="answer.text" labelText="Answers"/>
+                <result-value class="form-control" :result="answer.result"/>
+                
+                <a @click="deleteAnswerInput(index)" class="btn btn-danger text-white">Delete answer</a>
             </div>
         </form>
+        <div class="buttons btn-group"> 
+            <a @click="addAnswerInput()" class="btn btn-primary text-white">Add answer</a>
+        </div>
     </div>
 </template>
 

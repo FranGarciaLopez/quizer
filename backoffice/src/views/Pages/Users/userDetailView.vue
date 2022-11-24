@@ -1,69 +1,72 @@
 <template>
     <div class="main_content">
-        <Breadcrumb/>
         <Sidebar>
             <template v-slot:body>
                 <div class="content">
                     <div v-if="loggedIn">
-                        <h1 v-if="$route.params.id == 'new'">
-                            Add new user
-                        </h1>
-                        <h1 v-else>
-                            Edit user {{$route.params.id}}
-                        </h1>
-                        <form @submit.prevent="save">
-                            <div class="form-group mb-3">
-                                <label for="form-label">Name: </label>
-                                <input class="form-control d-inline-block col-md-5" required type="text" placeholder="Name" v-model="user.name"/>
-                            </div>
-                            
-                            <br>
-                            <div class="form-group mb-3">
-                                <label for="form-label" name="surname">Surname: </label>
-                                <input class="form-control d-inline-block col-md-5" required v-model="user.surname" id="surname" type="text" placeholder="Surname">
-                            </div>
-                            
-                            <br>
-                            <div class="form-group mb-3">
-                                <label for="form-label" name="surname">Nickname: </label>
-                                <input class="form-control d-inline-block col-md-5" required v-model="user.nickname" id="nickname" type="text" placeholder="Nick Name">
-                            </div>
+                        <div class="bg-light">
+                            <Breadcrumb/>
+                        </div>
+                        <div class="pr-4 content d-flex flex-column min-vh-99 justify-content-center">
+                            <div class="row">
+                                <div class="col-sm-9 col-md-7 col-lg-4 mx-auto">
+                                    <div class="card border-0 shadow rounded-3 my-5">
+                                        <div class="card-body p-4 p-sm-5">
+                                            <h5 v-if="$route.params.id == 'new'">
+                                                Add new user
+                                            </h5>
+                                            <h5 v-else>
+                                                Edit user {{$route.params.id}}
+                                            </h5>
+                                            <form @submit.prevent="save">
+                                                <div class="form-floating mb-3">
+                                                    <input class="form-control" id="floatingName" required v-model="user.name" type="text" placeholder="Name" />
+                                                    <label for="floatingName">Name</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input class="form-control" id="floatingSurname" required v-model="user.surname" type="text" placeholder="Surname">
+                                                    <label for="floatingSurname">Surname</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input class="form-control" id="floatingNickname" required v-model="user.nickname" type="text" placeholder="Nickname">
+                                                    <label for="floatingNickname">Nickname</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <select v-model="user.lang" id="floatingLang" class="form-select">
+                                                        <option value="es">es</option>
+                                                        <option value="en">en</option>
+                                                        <option value="de">de</option>
+                                                    </select>
+                                                    <label for="floatingLang">Language</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input class="form-control" id="floatingEmail" required v-model="user.email" type="email" placeholder="Email">
+                                                    <label for="floatingEmail">E-mail</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input class="form-control" id="floatingPassword" required v-model="user.password" type="password" placeholder="Password"/>
+                                                    <label for="floatingPassword">Password</label>
+                                                </div>
 
-                            <br>
-                            <div class="form-group">
-                                <label for="form-label" name="surname">Language: </label>
-                                <select v-model="user.lang" id="lang"  class="form-select mb-3 d-inline-block col-md-5">
-                                    <option value="es">es</option>
-                                    <option value="en">en</option>
-                                    <option value="de">de</option>
-                                </select>
+                                                <div class="buttons">
+                                                    <router-link to="/users">
+                                                        <button type="submit" class="btn btn-secondary btn-login text-uppercase fw-bold mr-1">
+                                                            Cancel
+                                                        </button>
+                                                    </router-link>
+                                                    <button type="submit" class="btn btn-primary btn-login text-uppercase fw-bold">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            
-                            <br>
-                            <div class="form-group mb-3">
-                                <label for="form-label" name="surname">E-mail: </label>
-                                <input class="form-control d-inline-block col-md-5" required v-model="user.email" id="email" type="email" placeholder="Email">
-                            </div>
-
-                            <br>
-                            <div class="form-group mb-3">
-                                <label for="form-label" name="surname">Password: </label>
-                                <input class="form-control d-inline-block col-md-5" required v-model="user.password" id="password" type="password" placeholder="Password">
-                            </div>   
-
-                            <br>
-                            <div class="buttons">
-                                <router-link to="/users"><button type="submit" class="btn btn-danger btn-lg">Cancel</button></router-link>
-                                <div class="space"></div>
-                                <button type="submit" class="btn btn-primary btn-lg">Save</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </template>
         </Sidebar>
     </div>
-    
 </template>
 
 <script>
@@ -97,7 +100,6 @@ export default {
         .then((response) => {
             return (this.user = response.data[0]);
         })
-        .catch((error) => console.log(error));
     },   
     methods: {
         save () {

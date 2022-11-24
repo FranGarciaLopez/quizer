@@ -1,11 +1,13 @@
 <template>
   <div class="main_content">
-    <Breadcrumb/>
     <Sidebar>
       <template v-slot:body>
         <div class="content">
           <div v-if="loggedIn">
-            <img src="../assets/Fondo.png" style="width: 100%; height:100%;">
+            <div class="bg-light">
+              <Breadcrumb/>
+            </div>
+            <img src="../assets/Fondo.png" class="w-100">
           </div>  
         </div>
       </template>

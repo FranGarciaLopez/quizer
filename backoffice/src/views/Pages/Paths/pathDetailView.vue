@@ -1,37 +1,47 @@
 <template>
     <div class="main_content">
-        <Breadcrumb/>
         <Sidebar>
             <template v-slot:body>
                 <div class="content">
                     <div v-if="loggedIn">
-                        <h1 v-if="$route.params.path_id === 'new'">
-                            Add new path
-                        </h1>
-                        <h1 v-else>
-                            Edit path {{$route.params.path_id}}
-                        </h1>
-                        <form @submit.prevent="save">
-                            <div class="form-group mb-3">
-                                <label class="form-label">Name: </label>
-                                <translatable-input class="form-control" ref="nameField" :text="path.name"/>
-                            </div>
+                        <div class="bg-light">
+                            <Breadcrumb/>
+                        </div>
+                        <div class="pr-4 content d-flex flex-column min-vh-99 justify-content-center">
+                            <div class="row">
+                                <div class="col-sm-9 col-md-7 col-lg-6 mx-auto">
+                                    <div class="card border-0 shadow rounded-3 my-5">
+                                        <div class="card-body p-4 p-sm-10">
+                                            <h5 v-if="$route.params.path_id === 'new'">
+                                                Add new path
+                                            </h5>
+                                            <h5 v-else>
+                                                Edit path {{$route.params.path_id}}
+                                            </h5>
+                                            <form @submit.prevent="save">
 
-                            <div class="form-group mb-3">
-                                <label class="form-label">Description: </label>
-                                <translatable-input class="form-control" ref="descField" :text="path.desc"/>
+                                                <div class="form-group mb-3">
+                                                    <translatable-input class="form-control" required ref="nameField" :text="path.name" labelText="Name" />
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <translatable-input class="form-control" ref="descField" :text="path.desc" labelText="Description"/>
+                                                </div>
+                                                
+                                                <div class="buttons">
+                                                    <router-link :to="{name:'pathsView'}">
+                                                        <button type="submit" class="btn btn-secondary btn-login text-uppercase fw-bold mr-1">
+                                                            Cancel
+                                                        </button>
+                                                    </router-link>
+                                                    <button type="submit" class="btn btn-primary btn-login text-uppercase fw-bold">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            
-                            <div class="buttons">
-                                <router-link :to="{name:'pathsView'}">
-                                    <button type="submit" class="btn btn-secondary col-form-label col-md-6">
-                                        Cancel
-                                    </button>
-                                </router-link>
-                                <span><button type="submit" class="btn btn-primary col-md-6">Save</button></span>
-                            </div>
-                        </form>
-                    </div>  
+                        </div>
+                    </div>
                 </div>
             </template>
         </Sidebar>
@@ -66,7 +76,6 @@ export default {
         .then((response) => {
             return (this.path = response.data[0]);
         })
-        .catch((error) => console.log(error));
 
     },   
     methods: {
