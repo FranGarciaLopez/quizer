@@ -1,6 +1,6 @@
 import Login from '@/views/Pages/Auth/LoginView.vue'
 import Register from '@/views/Pages/Auth/RegisterView.vue'
-import Secure from '@/views/Pages/Auth/SecureView.vue'
+import PageNotFound from '@/components/PageNotFound.vue'
 
 let routes = [
     {
@@ -14,9 +14,9 @@ let routes = [
         component: Register,
     },
     {
-        path: '/secure',
-        name: 'secure',
-        component: Secure,
+        path: '/:pathMatch(.*)*',
+        name: 'notFound',
+        component: PageNotFound,
     },
 ];
 
