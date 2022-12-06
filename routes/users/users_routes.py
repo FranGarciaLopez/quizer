@@ -12,6 +12,7 @@ def user_post():
     return Users(db).post(request.json)
 
 @app.route('/users', methods=['GET'])
+@swag_from("path/to/users.yml")
 @jwt_required()
 @cross_origin()
 def users_get():
