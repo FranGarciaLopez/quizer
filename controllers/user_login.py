@@ -1,5 +1,4 @@
-from venv import create
-from sqlalchemy import false, true
+
 from lib.response_parser import Response_Parser
 from flask import jsonify
 from flask_jwt_extended import create_access_token
@@ -17,7 +16,6 @@ class UserLogin:
         telegram_id = 3
         
         sql_statement = "INSERT INTO users (name, nickname, \"password\", lang, telegram_id) VALUES ('{0}','{1}','{2}','{3}','{4}' )".format(user_name, nickname, password, lang, telegram_id)
-        print(sql_statement)
         
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.post(response)
@@ -28,12 +26,13 @@ class UserLogin:
         password = data["password"]
 
         sql_statement = "SELECT * FROM users WHERE nickname = '{0}' and \"password\" = '{1}'".format(nickname,  password)
-    
         response = self.conn.engine.execute(sql_statement)
+       
         for row in response:
             if((row.nickname == nickname) and (row.password == password)):
-                access_token = create_access_token(identity=row.nickname)                
-                return jsonify({"AccessToken": access_token}), 200
+                message = "login succesful"
+                access_token = create_access_token(identity=row.nickname, expires_delta=False)
+                return jsonify({"AccessToken": access_token, "message": message}), 200
                 
         return jsonify({'Message': "User and password does not match"}), 401
 

@@ -15,7 +15,7 @@ class Topics:
         return Response_Parser.post(response)
         
     def get_all(self):
-        sql_statement = "SELECT * FROM topics"
+        sql_statement = "SELECT * FROM topics ORDER BY topic_id ASC"
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.get(response)

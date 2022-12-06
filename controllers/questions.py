@@ -7,18 +7,19 @@ class Questions:
         self.conn = conn
 
     def post(self, data):
-        test_id = data["test_id"]
         text = json.dumps(data["text"])
         answers = json.dumps(data["answers"])
+        test_id = data["test_id"]
+        
                 
-        sql_statement = "INSERT INTO questions (test_id, text, answers) VALUES ('{0}','{1}','{2}')"
-        sql_statement = sql_statement.format(test_id, text, answers)
+        sql_statement = "INSERT INTO questions (text, answers, test_id) VALUES ('{0}','{1}','{2}')"
+        sql_statement = sql_statement.format(text, answers, test_id)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.post(response)
         
     def get_all(self):
-        sql_statement = "SELECT * FROM questions"
+        sql_statement = "SELECT * FROM questions ORDER BY id ASC"
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.get(response)
@@ -30,19 +31,22 @@ class Questions:
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.get(response)
    
-    def put(self, data):
-        test_id = data["test_id"]
+    def put(self, data, question_id):
         text = json.dumps(data["text"])
         answers = json.dumps(data["answers"])
 
-        sql_statement = "UPDATE tests SET test_id = '{0}', text = '{1}', answers = '{2}'".format(test_id, text, answers)
+        sql_statement = "UPDATE questions SET text = '{0}', answers = '{1}' WHERE id = '{2}'".format(text, answers, question_id)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.put(response)
 
-    def delete_all(self, table_name, id_name, id_value):
-        Db.delete_all_subelement(self, table_name, id_name, id_value)
-    
+    def delete_all(self, test_id):
+        sql_statement = "DELETE FROM questions WHERE test_id = '{0}'"
+        sql_statement = sql_statement.format(test_id)
+        
+        response = self.conn.engine.execute(sql_statement)
+        return Response_Parser.delete(response)
+        
     def delete(self, question_id):
         sql_statement = "DELETE FROM questions WHERE id = '{0}'"
         sql_statement = sql_statement.format(question_id)

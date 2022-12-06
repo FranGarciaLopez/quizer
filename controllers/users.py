@@ -15,16 +15,16 @@ class Users:
         lang = data["lang"]
         email = data["email"]
         telegram_id = data["telegram_id"]
+        password = data["password"]
 
-        sql_statement = "INSERT INTO users (name, surname, nickname, lang, email, telegram_id) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}')"
-        sql_statement = sql_statement.format(name, surname, nickname, lang, email, telegram_id)
+        sql_statement = "INSERT INTO users (name, surname, nickname, lang, email, telegram_id, password) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')"
+        sql_statement = sql_statement.format(name, surname, nickname, lang, email, telegram_id, password)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.post(response)
         
     def get_all(self):
-        sql_statement = "SELECT * FROM users"
-
+        sql_statement = "SELECT * FROM users ORDER BY id ASC"
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.get(response)
     
@@ -41,9 +41,9 @@ class Users:
         lang = data["lang"]
         email = data["email"]
         telegram_id = data["telegram_id"]
-
-        sql_statement = "UPDATE users SET name = '{0}', surname = '{1}', nickname = '{2}', lang = '{3}', email = '{4}', telegram_id = '{5}' WHERE id = '{6}'"
-        sql_statement = sql_statement.format(name, surname, nickname, lang, email, telegram_id, user_id)
+        password = data["password"]
+        sql_statement = "UPDATE users SET name = '{0}', surname = '{1}', nickname = '{2}', lang = '{3}', email = '{4}', telegram_id = '{5}', password = '{6}' WHERE id = '{7}'"
+        sql_statement = sql_statement.format(name, surname, nickname, lang, email, telegram_id, password, user_id)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.put(response)

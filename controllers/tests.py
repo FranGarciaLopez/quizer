@@ -10,9 +10,9 @@ class Tests:
         name = json.dumps(data["name"])
         desc = json.dumps(data["desc"])
         conclusion = json.dumps(data["conclusion"])
-        
-        sql_statement = "INSERT INTO tests (\"name\", \"desc\", conclusion) VALUES ('{0}','{1}','{2}')"
-        sql_statement = sql_statement.format(name, desc, conclusion)
+        path_id = data["path_id"]
+
+        sql_statement = "INSERT INTO tests (\"name\", \"desc\", conclusion, path_id) VALUES ('{0}','{1}','{2}','{3}')".format(name, desc, conclusion, path_id)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.post(response)
@@ -29,21 +29,21 @@ class Tests:
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.get(response)
 
-    def put(self, data):
+    def put(self, data, test_id):
         name = json.dumps(data["name"])
         desc = json.dumps(data["desc"])
         conclusion = json.dumps(data["conclusion"])
 
-        sql_statement = "UPDATE tests SET \"name\" = '{0}', \"desc\" = '{1}', conclusion = '{2}'".format(name, desc, conclusion)
+        sql_statement = "UPDATE tests SET \"name\" = '{0}', \"desc\" = '{1}', conclusion = '{2}' WHERE id = '{3}'".format(name, desc, conclusion, test_id)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.put(response)
 
     def delete(self, test_id):
-        Questions.delete_all(self, "questions", "test_id", test_id)
-       
+        
+        Questions.delete_all(self, test_id)
         sql_statement = "DELETE FROM tests WHERE id = '{0}'".format(test_id)
-
+        
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.delete(response)
     
