@@ -58,7 +58,7 @@ export default {
     data: () => ({
         question: '',
         ApiUrl: 'http://localhost:3000',
-        error: false
+        error: false,
     }),
     components: {
         Sidebar,
@@ -67,6 +67,19 @@ export default {
         ResultInput,
     },
     mounted() {
+        if (this.$route.params.question_id === 'new'){
+            return (
+                this.question = {
+                    text: {  es: ''},
+                    answers: [{
+                        result: {
+
+                        },
+                        text: { es: ''}
+                    }]    
+                }
+            );
+        }
         this.fetchData()
     },
     methods: {
@@ -76,17 +89,26 @@ export default {
             .then((response) => {
                 this.question = response.data[0]
             })
-            .catch((error) => console.log(error));
         },
-       /*  addUser () {
-            var questionData = {
-             QuestionData 
+        save () {
+            var updatedInfo = {
+                text: this.$refs.questionTextField.getValue(),
+                answers: this.$refs.questionAnswersField.getValue(),
+                test_id: this.$route.params.test_id,
             };
-            axios.post('http://localhost:3000/users', newUser)
-            .then(()=>{
-                this.$router.push("/users")
-            })
-        }, */
+            if(this.$route.params.question_id === 'new') {
+                axios.post(this.ApiUrl+`/questions`, updatedInfo)
+                .then(() => {
+                    this.$router.push('/paths'+`/${this.$route.params.path_id}/tests/${this.$route.params.test_id}/questions`)
+                })
+            }
+            else{
+                axios.put(this.ApiUrl+`/questions/${this.$route.params.question_id}`, updatedInfo)
+                .then(() => {
+                    this.$router.push('/paths'+`/${this.$route.params.path_id}/tests/${this.$route.params.test_id}/questions` )
+                })
+            }
+        },
     },
     computed:{
         ...authComputed
