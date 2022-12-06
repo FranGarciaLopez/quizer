@@ -42,7 +42,7 @@ export default {
       nickname: '',
       password: '',
       error: false,
-      error_msg:"",
+      error_msg:" ",
     }
   },
   methods: {
@@ -52,11 +52,17 @@ export default {
         password: this.encryptPassword(this.password)
       })
       .then(()=>{
-        this.error = false,
-        this.$router.push({name:"Users"})
+        this.error = false;
+        this.error_msg = " ";
+        this.$router.push('/users');
       })
-      this.error = true;
-      this.error_msg = "User and password does not match"
+      .catch(error => {
+        if (error.response.status == 401) {
+          
+          this.error = true;
+          this.error_msg = "User and password does not match";
+        }
+      })
     },
     encryptPassword(password) {
       const salt = "$2a$10$fz7KW7q9Yw31TA/Jb5FZJe"
