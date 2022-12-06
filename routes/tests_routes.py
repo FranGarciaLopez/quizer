@@ -20,7 +20,7 @@ def test_get(test_id):
 
 @app.route('/tests/<int:test_id>', methods=['PUT'])
 def test_put(test_id):
-    return Tests(db).put(test_id)
+    return Tests(db).put(request.json, test_id)
 
 @app.route('/tests/<int:test_id>', methods=['DELETE'])
 def test_delete(test_id):
