@@ -13,4 +13,3 @@ def load_config(mode=os.environ.get('MODE')):
     else:
         from .default import Config
         return Config
-        
