@@ -12,7 +12,7 @@ let routes = [
         },
     },
     {
-        path: '/users/:id',
+        path: '/users/:user_id',
         name: 'userDetailView',
         component: userDetail,
         meta: {

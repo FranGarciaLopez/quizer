@@ -53,56 +53,63 @@
 
 <script>
 import axios from "axios";
-import TranslatableInput from '@/components/TranslatableInput.vue';
-import Breadcrumb from '@/components/BreadCrumb.vue';
-import Sidebar from '@/components/Sidebar.vue';
-import {authComputed} from '@/store/helpers.js';
+import TranslatableInput from "@/components/TranslatableInput.vue";
+import Breadcrumb from "@/components/BreadCrumb.vue";
+import Sidebar from "@/components/Sidebar.vue";
+import { authComputed } from "@/store/helpers.js";
 
 export default {
-    name:"testsDetailView", 
+    name: "testsDetailView",
     data: () => ({
-        ApiUrl: 'http://localhost:3000',
-        path:'',
-        test: '',
-    }), 
+        ApiUrl: "http://localhost:3000",
+        path: "",
+        test: "",
+    }),
     components: {
         Sidebar,
         Breadcrumb,
         TranslatableInput,
     },
     mounted() {
-        if (this.$route.params.id === 'new'){
-            return (this.test = {name: {  v: ''}, desc: {en: ''}});
+        if (this.$route.params.test_id === "new") {
+            return (this.test = {
+                name: { es: "" },
+                desc: { es: "" },
+                conclusion: { es: "" },
+            });
         }
         /* tests-questions (axios) */
         this.fetchData();
-    },   
+    },
     methods: {
-        fetchData(){
-            axios
-            .get(this.ApiUrl+`/paths/`+`${this.$route.params.path_id}`+`/tests/`+`${this.$route.params.test_id}`)
+        async fetchData() {
+            await axios
+            .get(this.ApiUrl + `${this.$route.fullPath}`)
             .then((response) => {
                 return (this.test = response.data[0]);
-            })
-            .catch((error) => console.log(error));
+            });
         },
-        /* save () {
+        save() {
             var updatedInfo = {
                 name: this.$refs.nameField.getValue(),
                 desc: this.$refs.descField.getValue(),
+                conclusion: this.$refs.conclusionField.getValue(),
+                path_id: this.$route.params.path_id,
             };
-            if(this.$route.params.id === 'new') {
-                axios.post(this.ApiUrl, updatedInfo)
-                .then((data) => this.$router.push(`/path`))
+            if (this.$route.params.test_id === "new") {
+                axios
+                .post(this.ApiUrl + `/tests`, updatedInfo)
+                .then(() =>
+                    this.$router.push("/paths" + `/${this.$route.params.path_id}` + "/tests"));
+            } else {
+                axios
+                .put(this.ApiUrl + `/tests/${this.$route.params.test_id}`, updatedInfo)
+                .then(() => this.$router.push("/paths" + `/${this.$route.params.path_id}/tests`));
             }
-            else{
-                axios.put(this.ApiUrl+`/paths/${this.$route.params.path_id}`, updatedInfo)
-                .then(() => this.$router.push(`/path/${this.$route.params.path_id}`))
-            }
-        }, */
+        },
     },
-    computed:{
-        ...authComputed
+    computed: {
+        ...authComputed,
     },
-}
+};
 </script>

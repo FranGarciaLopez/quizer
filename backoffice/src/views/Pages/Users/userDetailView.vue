@@ -12,11 +12,11 @@
                                 <div class="col-sm-9 col-md-7 col-lg-4 mx-auto">
                                     <div class="card border-0 shadow rounded-3 my-5">
                                         <div class="card-body p-4 p-sm-5">
-                                            <h5 v-if="$route.params.id == 'new'">
+                                            <h5 v-if="this.$route.params.user_id === 'new'">
                                                 Add new user
                                             </h5>
                                             <h5 v-else>
-                                                Edit user {{$route.params.id}}
+                                                Edit user {{this.$route.params.user_id}}
                                             </h5>
                                             <form @submit.prevent="save">
                                                 <div class="form-floating mb-3">
@@ -50,11 +50,11 @@
 
                                                 <div class="buttons">
                                                     <router-link to="/users">
-                                                        <button type="submit" class="btn btn-secondary btn-login text-uppercase fw-bold mr-1">
+                                                        <button type="submit" class="btn btn-secondary btn-cancel text-uppercase fw-bold mr-1">
                                                             Cancel
                                                         </button>
                                                     </router-link>
-                                                    <button type="submit" class="btn btn-primary btn-login text-uppercase fw-bold">Save</button>
+                                                    <button type="submit" class="btn btn-primary btn-save text-uppercase fw-bold">Save</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -95,15 +95,27 @@ export default {
         }
     }),
     mounted() {
+        if (this.$route.params.user_id === "new") {
+            return (this.user = {
+                name: '',
+                nickname: '',
+                surname: '',
+                email: '',
+                lang: '',
+                telegram_id: 3,
+                password: '',
+            });
+        }
+
         axios
-        .get(this.usersApiUrl+`/${this.$route.params.id}`)
+        .get(this.usersApiUrl+`/${this.$route.params.user_id}`)
         .then((response) => {
             return (this.user = response.data[0]);
         })
     },   
     methods: {
         save () {
-            if(this.$route.params.id == 'new'){
+            if(this.$route.params.user_id == 'new'){
                 var newUser = {
                     name: this.user.name,
                     nickname: this.user.nickname,
@@ -127,7 +139,7 @@ export default {
                     telegram_id: this.user.telegram_id,
                     password: this.encryptPassword(this.user.password),
                 };
-                axios.put(this.usersApiUrl+`/${this.$route.params.id}`, updatedUser)
+                axios.put(this.usersApiUrl+`/${this.$route.params.user_id}`, updatedUser)
                 .then(()=>{
                     this.$router.push("/users")
                 })
