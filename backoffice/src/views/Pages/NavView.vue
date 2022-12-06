@@ -12,9 +12,6 @@
             <li class="nav-item">
               <router-link to="/login" class="text-white navbar-brand">Login</router-link>
             </li>
-            <li class="nav-item">
-              <router-link to="/register" class="text-white navbar-brand">Register</router-link>
-            </li>
           </ul>
         </div>
       </div>
