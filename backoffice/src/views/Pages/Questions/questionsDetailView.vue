@@ -1,28 +1,49 @@
 <template>
-<div class="main_content">
-        <Breadcrumb/>
+    <div class="main_content">
         <Sidebar>
             <template v-slot:body>
                 <div class="content">
-                    <h1 v-if="$route.params.question_id === 'new'">
-                        Add new question
-                    </h1>
-                    <h1 v-else>
-                        Edit question {{$route.params.question_id}}
-                    </h1>
-                    <form @submit.prevent="save">
-                        <div>
-                            <label class="form-label">Question: 
-                            </label><translatable-input class="form-control" :text="this.question.text"/>
-                            <br>
-                            <label class="form-label">Answers: </label>
-                            <result-input class="form-control" :answers="this.question.answers"/>
+                    <div v-if="loggedIn">
+                        <div class="bg-light">
+                            <Breadcrumb />
                         </div>
-                    </form>
+                        <div class="pr-4 content d-flex flex-column min-vh-99 justify-content-center">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-7 col-lg-10 mx-auto">
+                                    <div class="card border-0 shadow rounded-3 my-5">
+                                        <div class="card-body p-4 p-sm-12">
+                                            <h1 v-if="$route.params.question_id === 'new'">
+                                                Add new question
+                                            </h1>
+                                            <h1 v-else>
+                                                Edit question {{$route.params.question_id}}
+                                            </h1>
+                                            <form @submit.prevent="save">
+                                                <div class="form-group mb-4">
+                                                    <translatable-input class="form-control mb-4" required ref="questionTextField" :text="this.question.text" labelText="Question Text"/>
+                                                    <result-input class="form-control" ref="questionAnswersField" :answers="this.question.answers"/>
+                                                </div>
+                                                <div class="buttons">
+                                                    <router-link :to="{ name: 'questionsView' }">
+                                                        <button type="submit" class=" btn btn-secondary btn-login text-uppercase fw-bold mr-1">
+                                                            Cancel
+                                                        </button>
+                                                    </router-link>
+                                                    <button type="submit" class="btn btn-primary btn-login text-uppercase fw-bold">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </template>
         </Sidebar>
-</div>
+    </div>
 </template>
 
 <script>

@@ -21,19 +21,19 @@
                                             <form @submit.prevent="save">
 
                                                 <div class="form-group mb-3">
-                                                    <translatable-input class="form-control" required ref="nameField" :text="path.name" labelText="Name" />
+                                                    <translatable-input class="formName form-control" required ref="nameField" :text="path.name" labelText="Name" />
                                                 </div>
                                                 <div class="form-group mb-3">
-                                                    <translatable-input class="form-control" ref="descField" :text="path.desc" labelText="Description"/>
+                                                    <translatable-input class="formDesc form-control" required ref="descField" :text="path.desc" labelText="Description"/>
                                                 </div>
                                                 
                                                 <div class="buttons">
                                                     <router-link :to="{name:'pathsView'}">
-                                                        <button type="submit" class="btn btn-secondary btn-login text-uppercase fw-bold mr-1">
+                                                        <button type="submit" class="btn btn-secondary btn-cancel text-uppercase fw-bold mr-1">
                                                             Cancel
                                                         </button>
                                                     </router-link>
-                                                    <button type="submit" class="btn btn-primary btn-login text-uppercase fw-bold">Save</button>
+                                                    <button type="submit" class="btn btn-primary btn-save text-uppercase fw-bold">Save</button>
                                                 </div>
                                             </form>
                                         </div>
