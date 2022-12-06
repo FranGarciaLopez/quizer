@@ -7,10 +7,14 @@
                         <option :value="index">
                             {{ index }}
                         </option>
+                        <option v-for="key in this.showAllLangs(index)" :key="key" :value=" key ">
+                            {{ key }}
+                        </option>
                     </select>
+
                 </div>
                 <div class="form-floating mb-1 input-group">
-                    <input type="text" class="form-control" id="formText" v-model="this.text[index]" />
+                    <input type="text" class="formData form-control" id="formText" v-model="this.text[index]" />
                     <label for="formText">{{this.labelText}}</label>
                 </div>
 
@@ -70,18 +74,17 @@ export default {
         setShowAddLanguages() {
             this.showAddLanguages = Object.keys(this.text).length < this.validLangs.length
         },
-        showAllLangs(lang) {
-            var values = Object.values(this.validLangs.filter(e => !lang.includes(e)));
-            return values
+        showAllLangs() {
+            const langsInUse = Object.keys(this.text);
+            var value = Object.values(this.validLangs.filter(e => !langsInUse.includes(e)));
+            return value
         },
         onSelectChange(event, prevLang) {
             const newLang = event.target.value
             this.text[newLang] = this.text[prevLang];
             delete this.text[prevLang];
         },
-        buildText(){
 
-        }
     },
     
 }
