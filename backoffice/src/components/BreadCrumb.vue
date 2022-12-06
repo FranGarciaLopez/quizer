@@ -5,6 +5,9 @@
                 <router-link style="text-decoration: none;" :to="crumb.link">{{crumb.text}}</router-link>
             </li>
         </ol>
+        <button type="button" class="logoutButton" @click="logout">
+      Logout
+    </button>
     </nav>
 </template>
 
@@ -30,6 +33,9 @@ export default {
         },
         capitalizeString(str) {
             return str.charAt(0).toUpperCase() + str.slice(1);
+        },
+        logout() {
+            this.$store.dispatch('logout')
         }
     }
 };
