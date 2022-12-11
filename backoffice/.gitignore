@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 /dist
+/tests_output
 
 
 # local env files
