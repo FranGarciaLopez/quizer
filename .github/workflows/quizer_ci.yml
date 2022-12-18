@@ -21,14 +21,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    
-    - name: run_docker_backup_db
-      run: pg_dump -U postgres tfg-db >  /home/runner/work/quizer-backoffice/api/backup/tfg-db.sql
       
     - name: bash-script
       run: bash run_bg.sh
       
-    - name: restore_docker_backup_db
-      run: psql -U postgres -f /backup/tfg-db.sql
       
     
