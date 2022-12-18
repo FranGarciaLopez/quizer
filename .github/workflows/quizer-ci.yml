@@ -12,6 +12,6 @@ jobs:
       - name: Starting Backoffice
       - run: cd ../backoffice
       - name: Installing dependencies
-      - run: npm install --legacy-peer-deps
+      - run: npm install
       - name: Starting service
       - run: npm run serve
