@@ -1,0 +1,16 @@
+name: install-npm-dependencies-and-run-service
+run-name: ${{ github.actor }}
+on: [push]
+jobs:
+  install-npm-packages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '19'
+      - name: Starting Backoffice
+      - name: Installing dependencies
+      - run: npm install
+      - name: Starting service
+      - run: npm run serve
