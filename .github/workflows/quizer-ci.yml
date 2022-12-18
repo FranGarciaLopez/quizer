@@ -9,4 +9,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '19'
+      - name: Starting Backoffice
+      - run: cd ../backoffice
+      - name: Installing dependencies
       - run: npm install --legacy-peer-deps
+      - name: Starting service
+      - run: npm run serve
