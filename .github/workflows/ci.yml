@@ -1,14 +1,18 @@
 name: backoffice-ci
+
 run-name: ${{ github.actor }}
+
 on: [push]
 jobs:
-  bakcoffice-packages-installation:
+
+  tests:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
 	    - uses: tj-actions/pg-dump@v2.3
         with:
-          node-version: '19'
+          node-version: ${{ matrix.node-version }}
       - name: test
       - run: ./backoffice/scripts/run_bg.sh
