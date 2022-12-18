@@ -11,7 +11,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
       - name: test
       - run: ./backoffice/scripts/run_bg.sh
