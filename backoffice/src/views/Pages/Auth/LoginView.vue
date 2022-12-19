@@ -41,6 +41,7 @@ export default {
     return {
       nickname: '',
       password: '',
+      is_admin:'',
       error: false,
       error_msg:" ",
     }
@@ -49,12 +50,19 @@ export default {
     login() {
       this.$store.dispatch('login',{
         nickname: this.nickname, 
-        password: this.encryptPassword(this.password)
+        password: this.encryptPassword(this.password),
+        is_admin: this.is_admin,
       })
       .then(()=>{
         this.error = false;
         this.error_msg = " ";
-        this.$router.push('/users');
+        var user = JSON.parse(localStorage.user);
+        if(user.is_admin == true){
+          this.$router.push('/admin/users');
+        }
+        else {
+          this.$router.push({name: 'userPathsView', params: { user_id: user.user_id }});
+        }
       })
       .catch(error => {
         if (error.response.status == 401) {
