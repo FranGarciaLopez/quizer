@@ -2,7 +2,7 @@ import Resources from '@/views/Pages/Resources/ResourcesView.vue'
 
 let routes = [
     {
-        path: '/resources',
+        path: '/admin/resources',
         name: 'resourcesView',
         component: Resources,
         meta: {
