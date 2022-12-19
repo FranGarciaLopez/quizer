@@ -28,7 +28,7 @@
                                                 </div>
                                                 
                                                 <div class="buttons">
-                                                    <router-link :to="{name:'pathsView'}">
+                                                    <router-link :to="{name:'adminPathsView'}">
                                                         <button type="submit" class="btn btn-secondary btn-cancel text-uppercase fw-bold mr-1">
                                                             Cancel
                                                         </button>
@@ -56,7 +56,7 @@ import Sidebar from '@/components/Sidebar.vue';
 import {authComputed} from '@/store/helpers.js';
 
 export default {
-    name:"pathDetailView", 
+    name:"adminPathDetailView", 
     data: () => ({
         pathsApiPath: 'http://localhost:3000',
         path:'',
@@ -86,13 +86,13 @@ export default {
             };
             if(this.$route.params.path_id === 'new') {
                 axios.post(this.pathsApiPath+`/paths`, updatedInfo)
-                .then((data) => this.$router.push(`/paths`))
+                .then((data) => this.$router.push(`/admin/paths`))
             }
             else{
                 axios.put(this.pathsApiPath+`/paths/${this.$route.params.path_id}`, updatedInfo)
                 .then(() => {
                     alert('Updated')
-                    this.$router.push(`/paths/${this.$route.params.path_id}`)
+                    this.$router.push(`/admin/paths/${this.$route.params.path_id}`)
                 })
             }
         },

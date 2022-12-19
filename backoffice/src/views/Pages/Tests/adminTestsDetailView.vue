@@ -29,7 +29,7 @@
                                                     <translatable-input class="form-control" required ref="conclusionField" :text="test.conclusion" labelText="Conclusion"/>
                                                 </div>
                                                 <div class="buttons">
-                                                    <router-link :to="{ name: 'testsView' }">
+                                                    <router-link :to="{ name: 'adminTestsView' }">
                                                         <button type="submit" class=" btn btn-secondary btn-cancel text-uppercase fw-bold mr-1">
                                                             Cancel
                                                         </button>
@@ -59,7 +59,7 @@ import Sidebar from "@/components/Sidebar.vue";
 import { authComputed } from "@/store/helpers.js";
 
 export default {
-    name: "testsDetailView",
+    name: "adminTestsDetailView",
     data: () => ({
         ApiUrl: "http://localhost:3000",
         path: "",
@@ -84,7 +84,7 @@ export default {
     methods: {
         async fetchData() {
             await axios
-            .get(this.ApiUrl + `${this.$route.fullPath}`)
+            .get(this.ApiUrl+`/paths`+`/${this.$route.params.path_id}`+`/tests`+`/${this.$route.params.test_id}`)
             .then((response) => {
                 return (this.test = response.data[0]);
             });
@@ -100,11 +100,11 @@ export default {
                 axios
                 .post(this.ApiUrl + `/tests`, updatedInfo)
                 .then(() =>
-                    this.$router.push("/paths" + `/${this.$route.params.path_id}` + "/tests"));
+                    this.$router.push("/admin/paths" + `/${this.$route.params.path_id}` + "/tests"));
             } else {
                 axios
                 .put(this.ApiUrl + `/tests/${this.$route.params.test_id}`, updatedInfo)
-                .then(() => this.$router.push("/paths" + `/${this.$route.params.path_id}/tests`));
+                .then(() => this.$router.push("/admin/paths" + `/${this.$route.params.path_id}/tests`));
             }
         },
     },

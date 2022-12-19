@@ -11,7 +11,7 @@
               <div class="card-header bg-white">
                 <ul class="nav nav-pills card-header-pills">
                   <li class="nav-item">
-                    <router-link class="float-right mb-3 nav-link active" to="/users/new">Add User <i class="bi bi-plus-square"></i></router-link>
+                    <router-link class="float-right mb-3 nav-link active" to="/admin/users/new">Add User <i class="bi bi-plus-square"></i></router-link>
                   </li>
                 </ul>
               </div>
@@ -30,7 +30,7 @@
                     <tbody>
                       <tr v-for="(user) in users" :key="user">
                         <th scope="row row-md-12">{{ user.id }}</th>
-                        <td><router-link class="link-secondary" v-bind:to="'/users/'+user.id">
+                        <td><router-link class="link-secondary" v-bind:to="'/admin/users/'+user.id">
                           <span>
                             {{ user.name }}
                           </span>
@@ -70,7 +70,7 @@ import { authComputed } from "@/store/helpers.js";
 import Sidebar from "@/components/Sidebar.vue";
 import Breadcrumb from "@/components/BreadCrumb.vue";
 export default {
-  name: "usersView",
+  name: "adminUsersView",
   data() {
     return {
       usersApiUrl: "http://localhost:3000/users",

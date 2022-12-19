@@ -24,7 +24,7 @@
                                                     <result-input class="form-control" ref="questionAnswersField" :answers="this.question.answers"/>
                                                 </div>
                                                 <div class="buttons">
-                                                    <router-link :to="{ name: 'questionsView' }">
+                                                    <router-link :to="{ name: 'adminQuestionsView' }">
                                                         <button type="submit" class=" btn btn-secondary btn-login text-uppercase fw-bold mr-1">
                                                             Cancel
                                                         </button>
@@ -54,7 +54,7 @@ import Sidebar from '@/components/Sidebar.vue';
 import {authComputed} from '@/store/helpers.js';
 import axios from "axios";
 export default {
-    name:"questionsDetailView", 
+    name:"adminQuestionsDetailView", 
     data: () => ({
         question: '',
         ApiUrl: 'http://localhost:3000',
@@ -85,7 +85,7 @@ export default {
     methods: {
         fetchData() {
             axios
-            .get(this.ApiUrl+`${this.$route.fullPath}`)
+            .get(this.ApiUrl+`/paths`+`/${this.$route.params.path_id}`+`/tests`+`/${this.$route.params.test_id}`+`/questions`+`/${this.$route.params.question_id}`)
             .then((response) => {
                 this.question = response.data[0]
             })
@@ -99,13 +99,13 @@ export default {
             if(this.$route.params.question_id === 'new') {
                 axios.post(this.ApiUrl+`/questions`, updatedInfo)
                 .then(() => {
-                    this.$router.push('/paths'+`/${this.$route.params.path_id}/tests/${this.$route.params.test_id}/questions`)
+                    this.$router.push('/admin/paths'+`/${this.$route.params.path_id}/tests/${this.$route.params.test_id}/questions`)
                 })
             }
             else{
                 axios.put(this.ApiUrl+`/questions/${this.$route.params.question_id}`, updatedInfo)
                 .then(() => {
-                    this.$router.push('/paths'+`/${this.$route.params.path_id}/tests/${this.$route.params.test_id}/questions` )
+                    this.$router.push('/admin/paths'+`/${this.$route.params.path_id}/tests/${this.$route.params.test_id}/questions` )
                 })
             }
         },

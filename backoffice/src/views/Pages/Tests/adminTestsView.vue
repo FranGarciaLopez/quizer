@@ -11,7 +11,7 @@
                             <div class="card-header bg-white">
                                 <ul class="nav nav-pills card-header-pills">
                                     <li class="nav-item">
-                                        <router-link class="float-right mb-3 nav-link active" :to="{name: 'testsDetailView', params: {test_id: 'new'}}">Add test <i class="bi bi-plus-square"></i></router-link>
+                                        <router-link class="float-right mb-3 nav-link active" :to="{name: 'adminTestsDetailView', params: {test_id: 'new'}}">Add test <i class="bi bi-plus-square"></i></router-link>
                                     </li>
                                 </ul>
                             </div>
@@ -32,7 +32,7 @@
                                         <tr v-for="test in tests" :key="test">
                                             <th scope="row">{{ test.id }}</th>
                                             <td>
-                                            <span><router-link  class="link-secondary" v-bind:to="'/paths/'+`${this.$route.params.path_id}/`+'tests/'+test.id">
+                                            <span><router-link  class="link-secondary" v-bind:to="'/admin/paths/'+`${this.$route.params.path_id}/`+'tests/'+test.id">
                                                 {{ test.name.es }}
                                             </router-link></span>
                                             </td>
@@ -54,7 +54,7 @@
                                             <td>
                                             <span>
                                                 <div class="btn-group">
-                                                    <router-link v-bind:to="`/paths`+`/${this.$route.params.path_id}`+`/tests/`+test.id+`/questions`">
+                                                    <router-link v-bind:to="`/admin/paths`+`/${this.$route.params.path_id}`+`/tests/`+test.id+`/questions`">
                                                         <button class="btn btn-outline-primary">
                                                             <i class="bi bi-list-ol"></i>
                                                         </button>
@@ -85,7 +85,7 @@ import { authComputed } from "@/store/helpers.js";
 import Sidebar from "@/components/Sidebar.vue";
 import Breadcrumb from "@/components/BreadCrumb.vue";
 export default {
-    name:"testsView", 
+    name:"adminTestsView", 
     data: () => ({
         ApiUrl: 'http://localhost:3000',
         tests: '',

@@ -49,7 +49,7 @@
                                                 </div>
 
                                                 <div class="buttons">
-                                                    <router-link to="/users">
+                                                    <router-link to="/admin/users">
                                                         <button type="submit" class="btn btn-secondary btn-cancel text-uppercase fw-bold mr-1">
                                                             Cancel
                                                         </button>
@@ -76,7 +76,7 @@ import Breadcrumb from '@/components/BreadCrumb.vue';
 import Sidebar from '@/components/Sidebar.vue';
 import {authComputed} from '@/store/helpers.js';
 export default {
-    name:"addUserView",
+    name:"adminUserDetailView",
     components: {
         Sidebar,
         Breadcrumb,
@@ -127,7 +127,7 @@ export default {
                 };
                 axios.post(this.usersApiUrl, newUser)
                 .then(()=>{
-                    this.$router.push("/users")
+                    this.$router.push("/admin/users")
                 })
             }else{
                 var updatedUser = {
@@ -141,7 +141,7 @@ export default {
                 };
                 axios.put(this.usersApiUrl+`/${this.$route.params.user_id}`, updatedUser)
                 .then(()=>{
-                    this.$router.push("/users")
+                    this.$router.push("/admin/users")
                 })
             }
             
