@@ -3,7 +3,7 @@
 #psql -U postgres -f /backup/tfg-db.sql
 echo "Starting API"
 cd "../../api" 
-
+mkdir ./logs
 echo "  - Enabling virtual environment" && source "venv/bin/activate" > ./logs/api_logs.log &
 echo "  - Installing dependencies" && pip install -r requirements.txt  >> ./logs/api_logs.log &
 echo "  - Intalling psycopg2" && pip install psycopg2 >> ./logs/api_logs.log &
@@ -15,6 +15,7 @@ sleep 10
 echo ""
 echo "Starting Backoffice"
 cd "../backoffice"
+mkdir ./logs
 
 echo "  - Installing dependencies" && npm install --legacy-peer-deps > ./logs/backoffice.log &
 echo "  - Starting service" && npm run serve >> ./logs/backoffice.log &
