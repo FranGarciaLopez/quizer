@@ -7,6 +7,7 @@ cd "../../api"
 echo "  - Enabling virtual environment" && source "venv/bin/activate" > ./logs/api_logs.log &
 echo "  - Installing dependencies" && pip install -r requirements.txt  >> ./logs/api_logs.log &
 echo "  - Intalling psycopg2" && pip install psycopg2 >> ./logs/api_logs.log &
+sleep 5
 echo "  - Starting server" && python3 app.py >> ./logs/api_logs.log &
 echo "  - Server running"
 sleep 10
