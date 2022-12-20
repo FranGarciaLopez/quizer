@@ -12,12 +12,12 @@ jobs:
     - uses: actions/setup-node@v3
       run: cd ../../backoffice/scripts
 
-  tests:
-    needs: build
-    runs-on: ubuntu-latest
+  #tests:
+  #  needs: build
+  #  runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - name: tests
-        run: bash run_bg.sh
+    #steps:
+     # - uses: actions/checkout@v3
+      #- uses: actions/setup-node@v3
+      #- name: tests
+       # run: bash run_bg.sh
