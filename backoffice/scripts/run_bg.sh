@@ -6,8 +6,8 @@
 echo "Starting API"
 cd "../../api" 
 
-echo "  - Enabling virtual environment" && source "venv/bin/activate" >> ./logs/api.log &
-pip install psycopg2 &
+echo "  - Enabling virtual environment" && source "venv/bin/activate" > ./logs/api.log &
+echo "  - Intalling psycopg2" && pip install psycopg2 >> ./logs/api.log &
 echo "  - Installing dependencies" && pip install -r requirements.txt >> ./logs/api.log 
 echo "  - Starting server" && python3 app.py >> ./logs/api.log &
 echo "  - Server running"
@@ -17,7 +17,7 @@ echo ""
 echo "Starting Backoffice"
 cd "../backoffice"
 
-echo "  - Installing dependencies" && npm install --legacy-peer-deps >> ./logs/backoffice.log
+echo "  - Installing dependencies" && npm install --legacy-peer-deps >>./logs/backoffice.log
 echo "  - Starting service" && npm run serve >> ./logs/backoffice.log &
 sleep 10
 
