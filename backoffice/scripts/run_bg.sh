@@ -3,7 +3,7 @@
 #psql -U postgres -f /backup/tfg-db.sql
 echo "Starting API"
 cd "../../api"
-mkdir ./logs/api_logs.log &
+mkdir ../logs &
 echo "  - Enabling virtual environment" && source "venv/bin/activate" > ./logs/api_logs.log &
 echo "  - Installing dependencies" && pip install -r requirements.txt  >> ./logs/api_logs.log &
 echo "  - Starting server" && python3 app.py >> ./logs/api_logs.log &
@@ -13,7 +13,7 @@ sleep 10
 echo ""
 echo "Starting Backoffice"
 cd "../backoffice"
-mkdir ./logs/backoffice.log &
+mkdir ../logs &
 echo "  - Installing vue-cli-service" && npm install -g @vue/cli-service > ./logs/backoffice.log &
 echo "  - Installing dependencies" && npm install --legacy-peer-deps >> ./logs/backoffice.log &
 echo "  - Starting service" && npm run serve >> ./logs/backoffice.log &
