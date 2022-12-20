@@ -11,7 +11,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      - name: Changing directory
-        run: cd ../../backoffice/scripts
-      -name: test        
-        run: bash run_bg.sh
+      - name: tests
+        run: cd ../../backoffice/scripts && bash run_bg.sh
