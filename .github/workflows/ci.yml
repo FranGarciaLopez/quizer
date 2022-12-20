@@ -5,11 +5,19 @@ run-name: ${{ github.actor }}
 on: [push]
 jobs:
 
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      run: cd ../../backoffice/scripts
+
   tests:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      - name: test
-      - run: ./backoffice/scripts/run_bg.sh
+      - name: tests
+        run: bash run_bg.sh
