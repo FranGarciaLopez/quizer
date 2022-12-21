@@ -10,7 +10,7 @@ echo "  - Installing postgres..." &&  sudo apt-get update > ./logs/postgres_logs
 echo "  - Installing postgres..." &&  sudo apt install postgresql postgresql-contrib >> ./logs/postgres_logs.log 
 echo "  - Updating postgres service" && sudo service postgresql start >> ./logs/postgres_logs.log 
 echo "  - Accessing postgres" && sudo -u postgres psql >> ./logs/postgres_logs.log 
-echo "  - Creating database backup for tests" && pg_dump -U postgres tfg-db > /backup/tfg-db.sql >> ./logs/postgres_logs.log 
+echo "  - Creating database backup for tests" && pg_dump -U postgres tfg-db > ./backup/tfg-db.sql >> ./logs/postgres_logs.log 
 sleep 10
 
 echo "Installing headless chromium"

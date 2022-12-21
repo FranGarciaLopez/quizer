@@ -10,7 +10,7 @@ services:
       PGDATA: /data/postgres
     volumes:
        - postgres:/data/postgres
-       - C:\Users\Fran\code\quizer-api\backup:/backup
+       - C:\Users\Fran\code\quizer-backoffice\api\backup:/backup
     ports:
       - "5432:5432"
     networks:

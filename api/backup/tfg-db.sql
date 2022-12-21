@@ -517,7 +517,8 @@ CREATE TABLE public.users (
     studing boolean,
     working boolean,
     job_title character varying,
-    password character varying DEFAULT ''::character varying NOT NULL
+    password character varying DEFAULT ''::character varying NOT NULL,
+    is_admin boolean DEFAULT false NOT NULL
 );
 
 
@@ -610,7 +611,6 @@ COPY public.paths (id, name, "desc", type, subtype, requirements, created, updat
 15	{"es": "otro path"}	{"es": "otro path"}	psyco	\N	[]	2022-11-14 17:17:20.775537+00	2022-11-14 17:17:20.775537+00
 2	{"en": "Test", "es": "Prueba"}	{"en": "Test description", "es": "desc de prueba 1"}	psyco	\N	"\\"[]\\""	2021-08-24 20:24:57.127691+00	2021-08-24 20:24:57.127691+00
 1	{"en": "Don`t do that.", "es": "No lo hagas."}	{"en": "As a mentor, I want to meet you and to meet yourself.", "es": "Como mentor, necesito conocerte y necesito que te conozcas. . Es la única manera de que este viaje te lleve al lugar correcto"}	psyco	\N	"\\"[]\\""	2020-12-17 17:28:16.091338+00	2020-12-17 17:28:16.091338+00
-66	{"es": "Java"}	{"es": "Aprende los conceptos de Java"}	psyco	\N	[]	2022-12-06 13:55:53.592247+00	2022-12-06 13:55:53.592247+00
 40	{"es": "Java edited"}	{"es": "Aprende los conceptos de Java edited"}	psyco	\N	[]	2022-11-28 12:29:33.776665+00	2022-11-28 12:29:33.776665+00
 \.
 
@@ -735,8 +735,9 @@ COPY public.questions (test_id, topic_id, "order", text, image, timeout, answers
 21	\N	\N	{"es": "La clase DataInputStream se utiliza para ..."}	\N	\N	[{"text": {"es": "Abrir un fichero binario para lectura."}, "result": {"right": "0"}}, {"text": {"es": "Leer datos de tipo primitivo."}, "result": {"right": "1"}}]	172	2022-12-01 17:27:56.121825+00	2022-12-01 17:27:56.121825+00	[]	{}
 21	\N	\N	{"es": "Un objeto de la clase URLConnection nos permite:"}	\N	\N	[{"text": {"es": "Averiguar la dirección IP de cualquier ordenador a partir de su nombre, y viceversa."}, "result": {"right": "0"}}, {"text": {"es": "Trocear en paquetes la información a transmitir a través de un socket."}, "result": {"right": "0"}}]	173	2022-12-01 17:28:32.588163+00	2022-12-01 17:28:32.588163+00	[]	{}
 21	\N	\N	{"es": "¿Con qué otro nombre se conoce a la base de datos relacional JavaDB?"}	\N	\N	[{"text": {"es": "Apache Derby"}, "result": {"right": "1"}}, {"text": {"es": "Java Derby"}, "result": {"right": "0"}}]	174	2022-12-01 17:28:55.886037+00	2022-12-01 17:28:55.886037+00	[]	{}
+15	\N	\N	{"es": "a"}	\N	\N	[{"text": {"es": "aa"}, "result": {"right": "a", "total": 1}}, {"text": {"es": "bb"}, "result": {"right": "b", "total": 0}}, {"text": {"es": "cc"}, "result": {"right": "c", "total": 0}}]	264	2022-12-06 10:22:54.632187+00	2022-12-06 10:22:54.632187+00	[]	{}
+15	\N	\N	{"es": ""}	\N	\N	[{"text": {"es": "c"}, "result": {"right": "a", "total": 1}}, {"text": {"es": "b"}, "result": {"right": "b", "total": 0}}, {"text": {"es": "a"}, "result": {"right": "c", "total": 0}}, {"text": {"es": "d"}, "result": {"right": "d", "total": 1}}]	265	2022-12-06 16:32:25.429261+00	2022-12-06 16:32:25.429261+00	[]	{}
 15	\N	\N	{"es": "Pregunta 1"}	\N	\N	[{"text": {"es": "RespuestaA"}, "result": {"right": "a", "total": 1}}, {"text": {"es": "RespuestaB"}, "result": {"right": "b", "total": 0}}, {"text": {"es": "RespuestaC"}, "result": {"right": "c", "total": 0}}]	260	2022-12-06 09:42:09.499498+00	2022-12-06 09:42:09.499498+00	[]	{}
-15	\N	\N	{"es": ""}	\N	\N	[{"text": {"es": ""}, "result": {}}, {"text": {"es": ""}, "result": {}}]	264	2022-12-06 10:22:54.632187+00	2022-12-06 10:22:54.632187+00	[]	{}
 \.
 
 
@@ -755,8 +756,8 @@ COPY public.resources (id, topic_id, name, url, status, created, updated) FROM s
 --
 
 COPY public.tests (dimentions, id, path_id, name, "desc", created, updated, priority, questions_last, questions_day, key, conclusion) FROM stdin;
-\N	2	2	{"es": "Todo programador Javascript que se precide debe tener un buen conocimiento de los tipos de datos que puede manejar"}	{"es": "vamos a empezar con algo sencillo para ir calentando motores 🚀"}	2021-08-24 20:25:08.290341+00	2021-08-24 20:25:08.290341+00	9000	2021-08-24	5	js-data_types-basic	{"es": "Vale, hemos acabado con las preguntas básicas sobre tipos de variables. Aquí van tus restulados! {{#each conclusions}}{{name}}: {{#if importance}}*{{/if}}({{value}}/10) {{message}}{{#if importance}}*{{/if}}. {{/each}}"}
 {"a": {"name": {"es": "Necesidad de logro"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "b": {"name": {"es": "Necesidad de pertenecer a grupos"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "c": {"name": {"es": "Orden"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "d": {"name": {"es": "Atención a los detalles"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "e": {"name": {"es": "Contención emocional"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "f": {"name": {"es": "Necesidad de apoyar a sus superiores"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "g": {"name": {"es": "Rol del trabajador duro"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "h": {"name": {"es": "Planificación"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "i": {"name": {"es": "Facilidad para tomar decisiones"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "k": {"name": {"es": "Necesidad de imponerse a los demás"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "l": {"name": {"es": "Rol de líder"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "n": {"name": {"es": "Necesidad de terminar una tarea"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "o": {"name": {"es": "Necesidad de intimidad y afecto"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "p": {"name": {"es": "Necesidad de controlar a los demás"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "r": {"name": {"es": "Pensamiento teórico"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "s": {"name": {"es": "Cordialidad"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "t": {"name": {"es": "Ritmo de trabajo"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "v": {"name": {"es": "Persistencia"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "w": {"name": {"es": "Necesidad de normas"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "x": {"name": {"es": "Necesidad de protagonismo"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}, "z": {"name": {"es": "Necesidad de cambio"}, "evaluations": [{"max": 3, "min": 0, "message": {"es": "Por debajo de la media"}, "importance": 1}, {"max": 6, "min": 4, "message": {"es": "En la media"}, "importance": 0}, {"max": 10, "min": 7, "message": {"es": "Por encima de la media"}, "importance": 1}]}}	1	1	{"es": "Me gustaría continuar con el Test PAPI, que viene del inglés \\"Personality and Preference Inventory\\""}	{"es": "Es uno de los test más utilizados en RRHH porque es bastante fiables y rápido de hacer. Normalmente se utiliza para saber si una persona encaja en un determinado puesto. Ten en cuenta que este test no se puede aprobar o suspender. Sólo indica como eres. Te interesa saber como te ven las empresas?"}	2020-12-17 17:20:54.872029+00	2020-12-17 17:20:54.872029+00	1000	2020-12-22	5	papi	{"es": "Ya hemos terminado el test PAPI. Estos son los resultados. {{#each conclusions}}{{name}}: {{#if importance}}*{{/if}}({{value}}/10) {{message}}{{#if importance}}*{{/if}}. {{/each}}"}
+\N	2	2	{"es": "Todo programador Javascript que se precide debe tener un buen conocimiento de los tipos de datos que puede manejar"}	{"es": "vamos a empezar con algo sencillo para ir calentando motores 🚀"}	2021-08-24 20:25:08.290341+00	2021-08-24 20:25:08.290341+00	9000	2021-08-24	5	js-data_types-basic	{"es": "Vale, hemos acabado con las preguntas básicas sobre tipos de variables. Aquí van tus restulados! {{#each conclusions}}{{name}}: {{#if importance}}*{{/if}}({{value}}/10) {{message}}{{#if importance}}*{{/if}}. {{/each}}"}
 \N	21	40	{"es": "Java Test Febrero 2022"}	{"es": "Cuestionario tipo test del examen 2022 asignatura programación avanzada"}	2022-11-28 17:10:15.634559+00	2022-11-28 17:10:15.634559+00	0	2022-11-28	5	\N	{"es": "Evaluación ordinaria programación avanzada"}
 \N	30	40	{"es": "Java Test 2"}	{"es": "Este es el segundo test de Java"}	2022-12-04 14:17:50.724736+00	2022-12-04 14:17:50.724736+00	0	2022-12-04	5	\N	{"es": "Necesito ver primero tus conocimientos de Java"}
 \N	20	2	{"es": "Que hay de nuevo amigo"}	{"es": "Test muy novedoso"}	2022-11-10 14:13:34.428485+00	2022-11-10 14:13:34.428485+00	0	2022-11-10	5	\N	{"es": "Claro que sí"}
@@ -794,6 +795,10 @@ COPY public.user_careers (career_id, user_id, status, created, updated) FROM std
 --
 
 COPY public.user_paths (path_id, user_id, status, created, updated) FROM stdin;
+15	233	active	2022-12-14 13:34:15.267936+00	2022-12-14 13:34:15.267936+00
+40	233	active	2022-12-14 13:43:43.244748+00	2022-12-14 13:43:43.244748+00
+1	233	active	2022-12-14 13:43:45.652292+00	2022-12-14 13:43:45.652292+00
+2	233	active	2022-12-14 13:43:39.818252+00	2022-12-14 13:43:39.818252+00
 \.
 
 
@@ -841,12 +846,13 @@ COPY public.user_tests (id, test_id, user_id, status, acc_results, created, upda
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.users (id, name, surname, nickname, lang, telegram_id, initialized, created, updated, today_questions, average_questions, email, age, studing, working, job_title, password) FROM stdin;
-19	Jovi	Sogorb	Jovi	es	3	t	2020-12-20 21:38:39.383+00	2020-12-20 21:38:39.383+00	5	5	frangalo34@gmail.com	\N	f	t	\N	$2a$10$fz7KW7q9Yw31TA/Jb5FZJeZA8ZO/UAIm5jEcWfD5v6ooyAh1lzQbe
-24	admin	admin	admin	es	3	f	2021-01-03 17:30:55.123+00	2021-01-03 17:30:55.123+00	5	5	NULL	\N	f	t	\N	
-71	Parco	Forglore	Parco	es	3	f	2022-05-18 10:15:54.252808+00	2022-05-18 10:15:54.252808+00	5	5	frangalo34@gmail.com	\N	\N	\N	\N	$2a$10$fz7KW7q9Yw31TA/Jb5FZJeKkppyHiVYYjUYRYtvdUfW006bfgCtum
-51	Maria12	Maria12	Maria12	es	3	f	2022-02-21 12:32:38.299142+00	2022-02-21 12:32:38.299142+00	5	5	frangalo34@gmail.com	\N	\N	\N	\N	$2a$10$fz7KW7q9Yw31TA/Jb5FZJeKkppyHiVYYjUYRYtvdUfW006bfgCtum
-103	admin	admin	admin	es	3	f	2022-11-08 21:12:43.27099+00	2022-11-08 21:12:43.27099+00	5	5	fsdf@xdfs	\N	\N	\N	\N	$2a$10$fz7KW7q9Yw31TA/Jb5FZJeCftiIXAwlPTaJTzMLMZxvjGZBiDgZTG
+COPY public.users (id, name, surname, nickname, lang, telegram_id, initialized, created, updated, today_questions, average_questions, email, age, studing, working, job_title, password, is_admin) FROM stdin;
+19	Jovi	Sogorb	Jovi	es	3	t	2020-12-20 21:38:39.383+00	2020-12-20 21:38:39.383+00	5	5	frangalo34@gmail.com	\N	f	t	\N	$2a$10$fz7KW7q9Yw31TA/Jb5FZJeZA8ZO/UAIm5jEcWfD5v6ooyAh1lzQbe	t
+218	Parco	Froglore	parquito	en	3	f	2022-12-06 19:55:13.656142+00	2022-12-06 19:55:13.656142+00	5	5	parco_forglore@gmail.com	\N	\N	\N	\N	$2a$10$fz7KW7q9Yw31TA/Jb5FZJeKkppyHiVYYjUYRYtvdUfW006bfgCtum	t
+24	admin	admin	admin	es	3	f	2021-01-03 17:30:55.123+00	2021-01-03 17:30:55.123+00	5	5	NULL	\N	f	t	\N		t
+233	user	user	user	en	3	f	2022-12-12 17:49:14.903951+00	2022-12-12 17:49:14.903951+00	5	5	user@user.es	\N	f	t	\N	$2a$10$fz7KW7q9Yw31TA/Jb5FZJeWMxotDfIpSLSUH8GNj7D6LrEMx1Ckv2	f
+51	Maria12	Maria12	Maria12	es	3	f	2022-02-21 12:32:38.299142+00	2022-02-21 12:32:38.299142+00	5	5	frangalo34@gmail.com	\N	\N	\N	\N	$2a$10$fz7KW7q9Yw31TA/Jb5FZJeKkppyHiVYYjUYRYtvdUfW006bfgCtum	t
+103	admin	admin	admin	es	3	f	2022-11-08 21:12:43.27099+00	2022-11-08 21:12:43.27099+00	5	5	fsdf@xdfs	\N	\N	\N	\N	$2a$10$fz7KW7q9Yw31TA/Jb5FZJeCftiIXAwlPTaJTzMLMZxvjGZBiDgZTG	t
 \.
 
 
@@ -861,14 +867,14 @@ SELECT pg_catalog.setval('public.careers_id_seq', 1, false);
 -- Name: paths_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.paths_id_seq', 66, true);
+SELECT pg_catalog.setval('public.paths_id_seq', 83, true);
 
 
 --
 -- Name: questions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.questions_id_seq', 264, true);
+SELECT pg_catalog.setval('public.questions_id_seq', 271, true);
 
 
 --
@@ -889,7 +895,7 @@ SELECT pg_catalog.setval('public.table_name_id_seq', 1, false);
 -- Name: tests_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.tests_id_seq', 48, true);
+SELECT pg_catalog.setval('public.tests_id_seq', 64, true);
 
 
 --
@@ -910,7 +916,7 @@ SELECT pg_catalog.setval('public.user_test_id_seq', 144, true);
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 216, true);
+SELECT pg_catalog.setval('public.users_id_seq', 239, true);
 
 
 --
