@@ -14,7 +14,7 @@ echo "Starting Backoffice"
 cd "../backoffice"
 mkdir -p ./backoffice/logs
 echo "  - Installing vue-cli-service" && npm install -g @vue/cli-service > ./backoffice/logs/backoffice.log
-echo "  - Installing dependencies" && npm install --legacy-peer-deps >> ./backoffice/logs/backoffice.log
+echo "  - Installing dependencies" && npm install --legacy-peer-deps --loglevel=error >> ./backoffice/logs/backoffice.log
 echo "  - Starting service" && npm run serve >> ./backoffice/logs/backoffice.log &
 sleep 15
 
