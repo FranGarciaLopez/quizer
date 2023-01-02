@@ -1,12 +1,12 @@
-const when = '[Users] When a logged user is in /users area'
+const when = '[Users] When a logged admin is in /admin/users area'
 describe('Users', function() {
 
-    it(when+' if the user clicks in "Add user" button, it should redirect to "/users/new" page', function(browser) {
+    it(when+' if the user clicks in "Add user" button, it should redirect to "/admin/users/new" page', function(browser) {
         browser
-            .url('http://localhost:3001/users')
+            .url('http://localhost:3001/admin/users')
             .waitForElementPresent('.table-responsive')
-            .click('#app .content a[href="/users/new"]')
-            .assert.urlEquals('http://localhost:3001/users/new')
+            .click('#app .content a[href="/admin/users/new"]')
+            .assert.urlEquals('http://localhost:3001/admin/users/new')
     });
     
     [
@@ -19,16 +19,16 @@ describe('Users', function() {
     ].forEach((data) => {
         it(when+' if the user is at "/user/new" URL '+data.testVariation+' then the user must complete all the fields to create a new user', function(browser) {
             browser
-                .url('http://localhost:3001/users/new')
+                .url('http://localhost:3001/admin/users/new')
                 .waitForElementPresent('.card')
                 .setValue(data.selector, data.value)
-                .assert.urlEquals('http://localhost:3001/users/new')
+                .assert.urlEquals('http://localhost:3001/admin/users/new')
         });
     });
  
-    it(when+' if the user is at "/user/new" URL and complete the form, he should be redirected to "/users"', function(browser) {
+    it(when+' if the user is at "/admin/user/new" URL and complete the form, he should be redirected to "/admin/users"', function(browser) {
         browser
-            .url('http://localhost:3001/users/new')
+            .url('http://localhost:3001/admin/users/new')
             .waitForElementPresent('.card')
             .setValue('#floatingName',     'Francisco')
             .setValue('#floatingSurname',  'Garcia')
@@ -37,17 +37,17 @@ describe('Users', function() {
             .setValue('#floatingEmail',    'frangalo34@gmail.com')
             .setValue('#floatingPassword', '1234567.A')
             .click('.btn-save')
-            .assert.urlEquals('http://localhost:3001/users')
+            .assert.urlEquals('http://localhost:3001/admin/users')
     });
 
     it(when+' if the user has created a new user and wants to edit its data', function(browser) {
         /* const rows = browser.elements("css selector", "table tr td a.link-secondary").length; */
         browser
-            .url('http://localhost:3001/users')
+            .url('http://localhost:3001/admin/users')
             .waitForElementPresent('.table-responsive')
             /* var index = [...document.querySelectorAll("table tr td a.link-secondary")].pop() */
-            .waitForElementPresent(`tr:nth-child(6) .link-secondary > span`)
-            .click((`tr:nth-child(6) .link-secondary > span`))
+            .waitForElementPresent(`tr:nth-child(7) .link-secondary > span`)
+            .click((`tr:nth-child(7) .link-secondary > span`))
             .clearValue('#floatingName')
             .setValue(  '#floatingName',     'Fran')
             .clearValue('#floatingSurname')
@@ -60,19 +60,21 @@ describe('Users', function() {
             .clearValue('#floatingPassword')
             .setValue(  '#floatingPassword', '7654321.B')
             .click('.btn-save')
-            .assert.urlEquals('http://localhost:3001/users')
+            .pause(1000)
+            .assert.urlEquals('http://localhost:3001/admin/users')
     });
 
     it(when+' if the user wants to delete a user, the page should delete it', function(browser) {
         browser
-            .url('http://localhost:3001/users')
+            .url('http://localhost:3001/admin/users')
             .waitForElementPresent('.table-responsive')
             .useXpath()
-            .click('//tr[6]/td[4]/span/button/i')
+            .click('//tr[7]/td[4]/span/button/i')
             .pause(1000)
             .acceptAlert()
-            .assert.urlEquals('http://localhost:3001/users')
+            .assert.urlEquals('http://localhost:3001/admin/users')
             .useXpath()
+            .pause(1000)
             .click('//span[contains(.,"Paths")]')
     });
 });

@@ -21,9 +21,9 @@ describe('Login', function() {
     });
 
     [
-        {url: '/paths'},
+        {url: '/admin/paths'},
     ].forEach((data) => {
-        it(when+'if the user tryes to access a protected URL then it will be redirected to /login', function(browser) {
+        it(when+' if the user tryes to access a protected URL then it will be redirected to /login', function(browser) {
             browser
                 .url('http://localhost:3001'+data.url)
                 .waitForElementPresent('#app')
@@ -31,18 +31,18 @@ describe('Login', function() {
         });
     });
 
-   it(when+'if the user tryes to access a invalid URL then it will be redirected to "404 page not found"', function(browser) {
+   it(when+' if the user tryes to access a in valid URL then it will be redirected to "404 page not found"', function(browser) {
             browser
                 .url('http://localhost:3001/tests')
                 .waitForElementPresent('#app')
     });
    
-    it(when+'if the user writes a correct combiation of valid user and password then it should be redirected to /users', function(browser) {
+    it(when+' if the user writes a correct combiation of valid user and password then it should be redirected to /users', function(browser) {
         browser
         .url('http://localhost:3001/login')
         .setValue('#app .content .mb-3:nth-child(1) > .form-control', 'admin')
         .sendKeys('#app .content .mb-3:nth-child(2) > .form-control', 'admin')
         .click('#app .content button[type=submit]')
-        .assert.urlEquals('http://localhost:3001/users')
+        .assert.urlEquals('http://localhost:3001/admin/users')
     });
 });
