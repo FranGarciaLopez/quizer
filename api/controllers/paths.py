@@ -13,7 +13,7 @@ class Paths:
 
         sql_statement = "INSERT INTO paths (\"name\", \"desc\", \"type\") VALUES ('{0}', '{1}', '{2}');"
         sql_statement = sql_statement.format(name, desc, type)
-        print(sql_statement)
+
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.post(response)
         
