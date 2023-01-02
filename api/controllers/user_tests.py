@@ -11,8 +11,15 @@ class UserTests:
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.post(response)
         
-    def get_all(self, user_id):
-        sql_statement = "SELECT * FROM user_tests where user_id = '{0}'".format(user_id)
+    def get_all(self, user_id, path_id):
+        sql_statement = """
+            SELECT DISTINCT up.path_id, up.user_id, t."name", t.conclusion, t."desc", t.id, ut.acc_results
+            FROM user_paths up 
+            LEFT JOIN tests t on t.path_id = up.path_id 
+            LEFT JOIN user_tests ut on t.id = ut.test_id AND ut.user_id = {0}
+            WHERE up.path_id = {1}
+            ORDER BY t.id ASC
+        """.format(user_id, path_id)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.get(response)

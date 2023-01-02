@@ -12,7 +12,11 @@ class UserPaths:
         return Response_Parser.post(response)
         
     def get_all(self, user_id):
-        sql_statement = "SELECT * FROM user_paths where user_id = '{0}'".format(user_id)
+        sql_statement = """
+            select up.user_id, up.status, p.id, p."name", p."desc"
+            from paths p left join user_paths up on p.id = up.path_id 
+            where up.user_id = {0} ORDER BY p.id ASC
+        """.format(user_id)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.get(response)

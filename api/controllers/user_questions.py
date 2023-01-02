@@ -1,3 +1,4 @@
+import json
 from lib.response_parser import Response_Parser
 from lib.db import Db
 
@@ -11,14 +12,19 @@ class UserQuestions:
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.post(response)
         
-    def get_all(self, user_id):
-        sql_statement = "SELECT * FROM user_questions where user_id = '{0}'".format(user_id)
+    def get_all(self, user_id, path_id, test_id, next_id):
+        sql_statement = """select q.* from questions q
+            left join user_tests ut on ut.test_id = q.test_id where ut.test_id = {2} and q.order = {3}
+            order by q."order" desc limit 1""".format(user_id, path_id, test_id, next_id)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.get(response)
-    
-    def get_one(self, user_id, question_id):
-        sql_statement = "SELECT * FROM user_questions WHERE user_id = '{0}' and question_id = '{1}'".format(user_id, question_id)
+
+    def get_last_question(self, user_id, path_id, test_id):
+        sql_statement = """select q.order 
+            from questions q left join user_questions uq on q.test_id = uq.test_id
+            where q.test_id = {2} and uq.user_id = {0}
+            order by q.order desc limit 1""".format(user_id, path_id, test_id)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.get(response)
