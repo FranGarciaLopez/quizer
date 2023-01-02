@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar navbar-expand-md navbar-light bg-primary">
   <div class="container-fluid">
-    <router-link to="/" class="p-2 text-white navbar-brand">Home</router-link>
+    <router-link v-bind:to="`/user/${this.$route.params.user_id}/paths`" class="p-2 text-white navbar-brand">Home</router-link>
     <div v-if="!loggedIn">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="p-2 navbar-toggler-icon"></span>
