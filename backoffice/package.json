@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:e2e": "vue-cli-service test:e2e",
-    "test": "npx nightwatch tests/tests.e2e.test.js --reuse-browser"
+    "test": "npx nightwatch tests/tests.e2e.test.js --headless --reuse-browser"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",

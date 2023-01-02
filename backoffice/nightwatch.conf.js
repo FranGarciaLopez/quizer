@@ -26,10 +26,11 @@ module.exports = {
   custom_assertions_path: ['nightwatch/custom-assertions'],
 
   // See https://nightwatchjs.org/guide/extending-nightwatch/adding-plugins.html
-  // plugins: [],
+  plugins: [],
   
   // See https://nightwatchjs.org/guide/concepts/test-globals.html
   globals_path: '',
+  
 
   webdriver: {},
 
@@ -59,29 +60,6 @@ module.exports = {
       
     },
     
-    firefox: {
-      desiredCapabilities: {
-        browserName: 'firefox',
-        alwaysMatch: {
-          acceptInsecureCerts: true,
-          'moz:firefoxOptions': {
-            args: [
-              // '-headless',
-              // '-verbose'
-            ]
-          }
-        }
-      },
-      webdriver: {
-        start_process: true,
-        server_path: '',
-        cli_args: [
-          // very verbose geckodriver logs
-          // '-vv'
-        ]
-      }
-    },
-    
     chrome: {
       desiredCapabilities: {
         browserName: 'chrome',
@@ -108,48 +86,41 @@ module.exports = {
       }
     },
     
-    //////////////////////////////////////////////////////////////////////////////////
-    // Configuration for using the browserstack.com cloud service                    |
-    //                                                                               |
-    // Please set the username and access key by setting the environment variables:  |
-    // - BROWSERSTACK_USERNAME                                                       |
-    // - BROWSERSTACK_ACCESS_KEY                                                     |
-    // .env files are supported                                                      |
-    //////////////////////////////////////////////////////////////////////////////////
-    browserstack: {
+    ////////////////////////////////////////////////////////////////////////////////////////
+    // Configuration for using remote Selenium service or a cloud-based testing provider.  |
+    //                                                                                     |
+    // Please set the hostname and port of your remote selenium-server or cloud-provider   |
+    // (by setting the following properties in the configuration below):                   |
+    // - `selenium.host`                                                                   |
+    // - `selenium.port`                                                                   |
+    //                                                                                     |
+    // If you are using a cloud provider such as CrossBrowserTesting, LambdaTests, etc.,   |
+    // please set the username and access_key by setting the below environment variables:  |
+    // - REMOTE_USERNAME                                                                   |
+    // - REMOTE_ACCESS_KEY                                                                 |
+    // (.env files are supported)                                                          |
+    ////////////////////////////////////////////////////////////////////////////////////////
+    remote: {
+      // Info on all the available options with "selenium":
+      // https://nightwatchjs.org/guide/configuration/settings.html#selenium-server-settings
       selenium: {
-        host: 'hub.browserstack.com',
-        port: 443
-      },
-      // More info on configuring capabilities can be found on:
-      // https://www.browserstack.com/automate/capabilities?tag=selenium-4
-      desiredCapabilities: {
-        'bstack:options': {
-          userName: '${BROWSERSTACK_USERNAME}',
-          accessKey: '${BROWSERSTACK_ACCESS_KEY}'
-        }
+        start_process: false,
+        server_path: '',
+        host: '<remote-hostname>',
+        port: 4444
       },
 
-      disable_error_log: true,
+      username: '${REMOTE_USERNAME}',
+      access_key: '${REMOTE_ACCESS_KEY}',
+
       webdriver: {
-        timeout_options: {
-          timeout: 15000,
-          retry_attempts: 3
-        },
         keep_alive: true,
         start_process: false
       }
     },
-
-    'browserstack.local': {
-      extends: 'browserstack',
-      desiredCapabilities: {
-        'browserstack.local': true
-      }
-    },
     
-    'browserstack.chrome': {
-      extends: 'browserstack',
+    'remote.chrome': {
+      extends: 'remote',
       desiredCapabilities: {
         browserName: 'chrome',
         'goog:chromeOptions': {
@@ -158,32 +129,12 @@ module.exports = {
       }
     },
     
-    'browserstack.firefox': {
-      extends: 'browserstack',
-      desiredCapabilities: {
-        browserName: 'firefox'
-      }
-    },
-    
-    'browserstack.local_chrome': {
-      extends: 'browserstack.local',
-      desiredCapabilities: {
-        browserName: 'chrome'
-      }
-    },
-    
-    'browserstack.local_firefox': {
-      extends: 'browserstack.local',
-      desiredCapabilities: {
-        browserName: 'firefox'
-      }
-    },
-    
   },
-
+  
   usage_analytics: {
-    enabled: false,
+    enabled: true,
     log_path: './logs/analytics',
-    client_id: '6cbac90b-d669-415d-8da5-6ffe10824c9f'
+    client_id: 'fa462a2a-ef44-4fde-a326-c63fb22d242d'
   }
+  
 };
