@@ -24,20 +24,13 @@ class UserLogin:
     def login(self, data):
         nickname = data["nickname"]
         password = data["password"]
-
+    
         sql_statement = "SELECT * FROM users WHERE nickname = '{0}' and \"password\" = '{1}'".format(nickname,  password)
         response = self.conn.engine.execute(sql_statement)
-       
         for row in response:
             if((row.nickname == nickname) and (row.password == password)):
                 message = "login succesful"
                 access_token = create_access_token(identity=row.nickname, expires_delta=False)
-                return jsonify({"AccessToken": access_token, "message": message}), 200
+                return jsonify({"AccessToken": access_token, "message": message, "is_admin":row.is_admin, "lang":row.lang, "user_id":row.id}), 200
                 
         return jsonify({'Message': "User and password does not match"}), 401
-
-
-        
-
-
-        
