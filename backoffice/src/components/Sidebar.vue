@@ -12,12 +12,12 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link to="/users" class="nav-link align-middle px-0 text-white">
+                        <router-link to="/admin/users" class="nav-link align-middle px-0 text-white">
                             <i class="bi bi-people-fill" style="font-size: 1.5rem;"></i> <span class="ms-1 d-none d-sm-inline" style="font-size: 1.5rem;"> Users</span>
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link to="/paths" class="nav-link align-middle px-0 text-white">
+                        <router-link to="/admin/paths" class="nav-link align-middle px-0 text-white">
                             <i class="bi bi-archive" style="font-size: 1.5rem;"></i> <span class="ms-1 d-none d-sm-inline" style="font-size: 1.5rem;"> Paths</span>
                         </router-link>
                     </li>

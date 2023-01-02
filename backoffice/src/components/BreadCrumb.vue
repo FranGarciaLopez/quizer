@@ -20,7 +20,7 @@ export default {
     },
     methods: {
         getCrumbs() {
-            const crumbs = [{text: 'Home', link: '/'}]
+            const crumbs = [{text: 'Home', link: '/admin/'}]
             const pathSplit = this.$route.path.split('/');
             const reversePath = [pathSplit.shift()];
             for(var i=0; i< pathSplit.length; i++){
