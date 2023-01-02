@@ -3,8 +3,8 @@
         <form>
             <div v-for="(answer, index) in this.answers" :key="index" class="input-group mb-3">
                 <!-- :placeholder="answer.result" -->
-                <translatable-input ref="answerTextField" class="form-control" :text="answer.text" labelText="Answers"/>
-                <result-value ref="answerResultField" class="form-control" :result="answer.result"/>
+                <translatable-input ref="answerTextField"       class="form-control" :text="answer.text" labelText="Answers"/>
+                <result-value       ref="answerResultField"     class="form-control" :result="answer.result"/>
                 
                 <a @click="deleteAnswerInput(index)" class="btn btn-danger text-white">Delete answer</a>
             </div>
@@ -38,7 +38,10 @@ export default {
         },
         addAnswerInput() {
             this.answers.push({
-                result: {},
+                result: {
+                    right: '',
+                    total: '',
+                },
                 text: { es: '' }
             })
         },

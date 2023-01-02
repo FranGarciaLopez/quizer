@@ -20,8 +20,8 @@
                                             </h1>
                                             <form @submit.prevent="save">
                                                 <div class="form-group mb-4">
-                                                    <translatable-input class="form-control mb-4" required ref="questionTextField" :text="this.question.text" labelText="Question Text"/>
-                                                    <result-input class="form-control" ref="questionAnswersField" :answers="this.question.answers"/>
+                                                    <translatable-input class="form-control mb-4" required  ref="questionTextField"    :text="this.question.text" labelText="Question Text"/>
+                                                    <result-input       class="form-control"      required  ref="questionAnswersField" :answers="this.question.answers"/>
                                                 </div>
                                                 <div class="buttons">
                                                     <router-link :to="{ name: 'adminQuestionsView' }">
@@ -73,7 +73,8 @@ export default {
                     text: {  es: ''},
                     answers: [{
                         result: {
-
+                            right: this.$refs.questionAnswersField.$.components.ResultValue.props.result.right,
+                            total: this.$refs.questionAnswersField.$.components.ResultValue.props.result.total,
                         },
                         text: { es: ''}
                     }]    
