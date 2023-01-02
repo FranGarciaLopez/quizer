@@ -6,7 +6,7 @@ class UserTests:
         self.conn = conn
 
     def post(self, user_id, test_id):
-        sql_statement = "INSERT INTO user_tests (user_id, test_id) VALUES ('{0}','{1}')".format(user_id, test_id)
+        sql_statement = "INSERT INTO user_tests (user_id, test_id) VALUES ('{0}','{1}') ON CONFLICT (user_id, test_id) DO NOTHING;".format(user_id, test_id)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.post(response)
@@ -31,7 +31,18 @@ class UserTests:
         return Response_Parser.get(response)
 
     def put(self, user_id, test_id):
-        sql_statement = "UPDATE users_tests SET user_id = '{0}', test_id = '{1}'".format(user_id, test_id)
+        sql_statement = """
+            UPDATE user_tests ut
+            SET acc_results = (
+            SELECT JSON_BUILD_OBJECT(
+                'right', SUM(CAST(uq.answer->>'right' AS integer)),
+                'total', SUM(CAST(uq.answer->>'total' AS integer))
+            )
+            FROM user_questions uq
+            WHERE uq.test_id = ut.test_id AND uq.user_id = ut.user_id
+            )
+            WHERE ut.user_id = {0} AND ut.test_id = {1};
+            """.format(user_id, test_id)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.put(response)
