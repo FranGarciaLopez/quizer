@@ -21,7 +21,7 @@ sleep 15
 echo ""
 echo "Starting tests"
 cd "../backoffice"
-echo "  - Running tests" && npx nightwatch --headless --reuse-browser > ./backoffice/logs/tests.log
+echo "  - Running tests" && npx nightwatch --headless --reuse-browser
 sleep 10
 
 echo "Stopping services"
