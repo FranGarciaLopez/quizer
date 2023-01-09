@@ -10,13 +10,12 @@ jobs:
     steps: 
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
-    - name: Install and start PostgreSQL
+    - name: Install PostgreSQL client
       run: |
         sudo apt-get update
-        sudo apt-get install -y postgresql postgresql-client
-        sudo -u postgres psql -c "SHOW listen_addresses;"
-
-        sudo -u postgres pg_ctlcluster 12 main start
+        sudo apt-get install -y postgresql-client
+    - name: show cluster
+        pg_lsclusters
     - name: Run SQL script
       run: |
         psql -U postgres -f sql/script.sql
