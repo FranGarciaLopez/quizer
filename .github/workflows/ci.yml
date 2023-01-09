@@ -10,6 +10,14 @@ jobs:
     steps: 
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
+    - name: Install and start PostgreSQL
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y postgresql postgresql-client
+        sudo -u postgres pg_ctlcluster 12 main start
+    - name: Run SQL script
+      run: |
+        psql -U postgres -f sql/script.sql
     - run: cd ../quizer/backoffice/scripts && bash run_ubuntu_comands.sh
     - run: cd ../quizer/backoffice/scripts && bash run_bg.sh
   
