@@ -9,7 +9,8 @@ cd "../../api/backup/"
 mkdir -p ./logs
 echo "  - Installing postgres"    && sudo apt-get update && sudo apt-get install -qq postgresql-client                >> ./logs/postgres_logs.log
 echo "  - Create database"        && psql postgresql://postgres:changeme@localhost:5432 -c "CREATE DATABASE \"tfg-db\"" >> ./logs/postgres_logs.log
-echo "  - Loading data for tests" && psql postgresql://postgres:changeme@localhost:5432 -f tfg-db.sql                 >> ./logs/postgres_logs.log
+#echo "  - Loading data for tests" && psql postgresql://postgres:changeme@localhost:5432 -f tfg-db.sql                 >> ./logs/postgres_logs.log
+echo "  - Loading data for tests" && PGPASSWORD=changeme pg_restore -h localhost -p 5434 -U postgres -v -d "tfg-db" tfg-db.sql
 psql postgresql://postgres:changeme@localhost:5432 \dt
 
 echo "Installing headless chromium"
