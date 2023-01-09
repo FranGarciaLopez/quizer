@@ -9,6 +9,7 @@ mkdir -p ./logs
 echo "  -dir created"
 echo "  - Installing postgres..."             && sudo apt-get update                                             > ./logs/postgres_logs.log
 echo "  - Installing postgres..."             && sudo apt install postgresql postgresql-client                  >> ./logs/postgres_logs.log
+echo "  - Starting postgres server"           && pg_ctlcluster                                                  >> ./logs/postgres_logs.log
 echo "  - Starting postgres server"           && sudo -u postgres pg_ctlcluster 12 main start                   >> ./logs/postgres_logs.log
 echo "  - Creating new database"              && sudo -u postgres  createdb tfg-db                              >> ./logs/postgres_logs.log
 echo "  - Creating database backup for tests" && export PGPASSWORD=123456                                       >> ./logs/postgres_logs.log
