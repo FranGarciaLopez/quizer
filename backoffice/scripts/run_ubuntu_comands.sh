@@ -4,10 +4,10 @@
 #pg_dump -U postgres tfg-db > /backup/tfg-db.sql
 #psql -U postgres -f /backup/tfg-db.sql
 echo "Installing postgres on Ubuntu"
-cd "../../api" 
+cd "../../api" && ls
 mkdir -p ./logs
 echo "  - Installing postgres..." &&  sudo apt-get update > ./logs/postgres_logs.log 
-echo "  - Installing postgres..." &&  sudo apt install postgresql postgresql--client >> ./logs/postgres_logs.log 
+echo "  - Installing postgres..." &&  sudo apt install postgresql postgresql-client >> ./logs/postgres_logs.log 
 echo "  - Updating postgres service" && sudo -u postgres psql >> ./logs/postgres_logs.log 
 echo "  - Accessing postgres" && sudo -u postgres psql >> ./logs/postgres_logs.log
 echo "  - Creating new user" && sudo -u postgres createuser --interactive >> ./logs/postgres_logs.log
