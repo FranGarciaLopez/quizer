@@ -1,18 +1,15 @@
 from flask import request
 from controllers.users import Users
-from __main__ import app, db
+from app import db, app
 from flask_cors import cross_origin
-from flasgger.utils import swag_from
 from flask_jwt_extended import jwt_required
-
 #/users-----------------------------------------------------------------#
-@app.route('/users', methods = ['POST'])
-@jwt_required()
+@app.route('/users', methods= ['POST'])
+@jwt_required() 
 def user_post():
     return Users(db).post(request.json)
 
-@app.route('/users', methods=['GET'])
-@swag_from("path/to/users.yml")
+@app.route('/users', methods= ['GET'])
 @jwt_required()
 @cross_origin()
 def users_get():
@@ -34,3 +31,5 @@ def user_put(user_id):
 @jwt_required()
 def user_delete(user_id):
     return Users(db).delete(user_id)
+
+ 

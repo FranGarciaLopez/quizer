@@ -1,6 +1,6 @@
 from flask import request, jsonify
 from controllers.user_login import UserLogin
-from __main__ import app, db
+from app import app, db
 from flask_cors import cross_origin
 
 #topics----------------------------------------------------------------------#

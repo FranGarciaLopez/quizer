@@ -1,6 +1,6 @@
 from flask import request
 from controllers.tests import Tests
-from __main__ import app, db
+from app import app, db
 from flask_cors import cross_origin
 
 #/tests-----------------------------------------------------------------#

@@ -1,5 +1,5 @@
 from controllers.user_questions import UserQuestions
-from __main__ import app, db
+from app import app, db
 from flask_cors import cross_origin
 from flask import request, jsonify
 

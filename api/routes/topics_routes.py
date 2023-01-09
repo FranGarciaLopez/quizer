@@ -1,6 +1,6 @@
 from flask import request
 from controllers.topics import Topics
-from __main__ import app, db
+from app import app, db
 from flask_cors import cross_origin
 from flask_jwt_extended import jwt_required
 

@@ -1,5 +1,5 @@
 from controllers.user_resources import UserResources
-from __main__ import app, db
+from app import app, db
 from flask_cors import cross_origin
 
 #user/resources-----------------------------------------------------------#

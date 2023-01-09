@@ -1,6 +1,6 @@
 from flask import request
 from controllers.user_tests import UserTests
-from __main__ import app, db
+from app import app, db
 from flask_cors import cross_origin
 
 #user/tests--------------------------------------------------------------#
