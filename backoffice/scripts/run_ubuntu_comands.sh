@@ -8,11 +8,12 @@ echo "Installing postgres on Ubuntu"
 cd "../../api/backup/"
 mkdir -p ./logs
 echo "  - Installing postgres..."             && sudo apt-get update                                             > ./logs/postgres_logs.log
-echo "  - Installing postgres..."             && sudo apt install postgresql postgresql-client                  >> ./logs/postgres_logs.log
-echo "  - Starting postgres server"           && sudo -u postgres pg_ctlcluster 12 main start                   >> ./logs/postgres_logs.log
-echo "  - Creating new database"              && sudo -u postgres createdb tfg-db                               >> ./logs/postgres_logs.log
-echo "  - Creating database backup for tests" && pg_dump -U postgres -d tfg-db > tfg-db.sql                     >> ./logs/postgres_logs.log
-sleep 10
+echo "  - Installing postgres..."             && sudo apt install postgresql-client                  >> ./logs/postgres_logs.log
+#echo "  - Starting postgres server"           && sudo -u postgres pg_ctlcluster 12 main start                   >> ./logs/postgres_logs.log
+#echo "  - Creating new database"              && sudo -u postgres createdb tfg-db                               >> ./logs/postgres_logs.log
+pwd
+echo "  - Creating database backup for tests" && PGPASSWORD=changeme psql -h postgres -U postgres -f ./backup/tfg-db.sql                     >> ./logs/postgres_logs.log
+
 
 echo "Installing headless chromium"
 mkdir -p ./logs
