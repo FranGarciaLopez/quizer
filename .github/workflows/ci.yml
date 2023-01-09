@@ -14,7 +14,8 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y postgresql postgresql-client
-        sudo -u postgres psql -c "SELECT datname, datdba, datpath FROM pg_catalog.pg_database;"
+        sudo -u postgres psql -c "SHOW listen_addresses;"
+
         sudo -u postgres pg_ctlcluster 12 main start
     - name: Run SQL script
       run: |
