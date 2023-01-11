@@ -1,5 +1,6 @@
 from lib.response_parser import Response_Parser
 from lib.db import Db
+from flask import request
 
 class UserTests:
     def __init__(self, conn):
@@ -13,7 +14,7 @@ class UserTests:
         
     def get_all(self, user_id, path_id):
         sql_statement = """
-            SELECT DISTINCT up.path_id, up.user_id, t."name", t.conclusion, t."desc", t.id, ut.acc_results
+            SELECT DISTINCT up.path_id, up.user_id, t."name", t."desc", t.id, ut.acc_results, ut.status
             FROM user_paths up 
             LEFT JOIN tests t on t.path_id = up.path_id 
             LEFT JOIN user_tests ut on t.id = ut.test_id AND ut.user_id = {0}
@@ -40,7 +41,7 @@ class UserTests:
             )
             FROM user_questions uq
             WHERE uq.test_id = ut.test_id AND uq.user_id = ut.user_id
-            )
+            ), status = 'complete'
             WHERE ut.user_id = {0} AND ut.test_id = {1};
             """.format(user_id, test_id)
 

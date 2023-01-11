@@ -89,7 +89,6 @@ export default {
             surname: '',
             email: '',
             lang: '',
-            telegram_id: 3,
             password: '',
             error: false
         }
@@ -102,7 +101,6 @@ export default {
                 surname: '',
                 email: '',
                 lang: '',
-                telegram_id: 3,
                 password: '',
             });
         }
@@ -122,7 +120,6 @@ export default {
                     surname: this.user.surname,
                     email: this.user.email,
                     lang: this.user.lang,
-                    telegram_id: this.user.telegram_id,
                     password: this.encryptPassword(this.user.password),
                 };
                 axios.post(this.usersApiUrl, newUser)
@@ -136,7 +133,6 @@ export default {
                     surname: this.user.surname,
                     email: this.user.email,
                     lang: this.user.lang,
-                    telegram_id: this.user.telegram_id,
                     password: this.encryptPassword(this.user.password),
                 };
                 axios.put(this.usersApiUrl+`/${this.$route.params.user_id}`, updatedUser)

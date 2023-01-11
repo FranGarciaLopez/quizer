@@ -23,7 +23,6 @@
                                             <th scope="col">Id</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Description</th>
-                                            <th scope="col">Conclusion</th>
                                             <th scope="col">Number of questions</th>
                                             <th scope="col">Buttons</th>
                                         </tr>
@@ -39,11 +38,6 @@
                                             <td>
                                             <span>
                                                 {{ test.desc.es }}
-                                            </span>
-                                            </td>
-                                            <td>
-                                            <span>
-                                                {{ test.conclusion.es }}
                                             </span>
                                             </td>
                                             <td>

@@ -13,9 +13,8 @@ class UserLogin:
         nickname = data["nickname"]
         password = data["password"]
         lang = data["lang"]
-        telegram_id = 3
         
-        sql_statement = "INSERT INTO users (name, nickname, \"password\", lang, telegram_id) VALUES ('{0}','{1}','{2}','{3}','{4}' )".format(user_name, nickname, password, lang, telegram_id)
+        sql_statement = "INSERT INTO users (name, nickname, \"password\", lang) VALUES ('{0}','{1}','{2}','{3}','{4}' )".format(user_name, nickname, password, lang)
         
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.post(response)

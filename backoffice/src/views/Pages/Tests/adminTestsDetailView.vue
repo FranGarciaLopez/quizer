@@ -25,9 +25,6 @@
                                                 <div class="form-group mb-4">
                                                     <translatable-input class="form-control" required ref="descField" :text="test.desc" labelText="Description"/>
                                                 </div>
-                                                <div class="form-group mb-4">
-                                                    <translatable-input class="form-control" required ref="conclusionField" :text="test.conclusion" labelText="Conclusion"/>
-                                                </div>
                                                 <div class="buttons">
                                                     <router-link :to="{ name: 'adminTestsView' }">
                                                         <button type="submit" class=" btn btn-secondary btn-cancel text-uppercase fw-bold mr-1">
@@ -75,7 +72,6 @@ export default {
             return (this.test = {
                 name: { es: "" },
                 desc: { es: "" },
-                conclusion: { es: "" },
             });
         }
         /* tests-questions (axios) */
@@ -93,7 +89,6 @@ export default {
             var updatedInfo = {
                 name: this.$refs.nameField.getValue(),
                 desc: this.$refs.descField.getValue(),
-                conclusion: this.$refs.conclusionField.getValue(),
                 path_id: this.$route.params.path_id,
             };
             if (this.$route.params.test_id === "new") {

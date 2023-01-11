@@ -19,11 +19,10 @@ class Paths:
         
     def get_all(self):
         sql_statement = """
-            select p.id, p.name, p.desc, p."type" , p.subtype, p.requirements, p.created, p.updated, count(t.id) as test_count from paths p
+            select p.id, p.name, p.desc, p."type" , p.requirements, p.created, p.updated, count(t.id) as test_count from paths p
             left join tests t on t.path_id = p.id
-            group by p.id, p.name, p.desc, p."type" , p.subtype, p.requirements, p.created, p.updated
+            group by p.id, p.name, p.desc, p."type" ,  p.requirements, p.created, p.updated
             ORDER BY p.id ASC
-
         """
 
         response = self.conn.engine.execute(sql_statement)
