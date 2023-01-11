@@ -1,12 +1,17 @@
 #!/bin/bash
+#pg_dump -U postgres tfg-db > tfg-db.sql 
+#psql -U postgres -d  tfg-db < tfg-db.sql
 
+echo "Installing postgres on Ubuntu"
+cd "../../api/backup/"
+mkdir -p ./logs
+echo "  - Installing postgres"    && sudo apt-get update && sudo apt-get install -qq postgresql-client                >> ./logs/postgres_logs.log
+echo "  - Create database"        && psql postgresql://postgres:changeme@localhost:5432 -c "CREATE DATABASE \"tfg-db\"" >> ./logs/postgres_logs.log
 
-#pg_dump -U postgres tfg-db > /backup/tfg-db.sql
-#psql -U postgres -f /backup/tfg-db.sql
+echo "  - Loading data for tests"  &&  export PGPASSWORD=changeme && psql -q -h localhost -p 5432 -U postgres -d tfg-db < tfg-db.sql
+psql postgresql://postgres:changeme@localhost:5432 \dt
 
 echo "Installing headless chromium"
-mkdir -p ./logs
-cd "../backoffice"
 mkdir -p ./logs
 echo "  - Installing dependencies..." &&  sudo apt-get install -y libappindicator1 fonts-liberation > ./logs/chromium_logs.log
 #echo "  - Installing dependencies..." &&  sudo apt-get install -f >> ./logs/chromium_logs.log

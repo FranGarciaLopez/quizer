@@ -7,18 +7,20 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        ports:
+          # Opens tcp port 5432 on the host and service container
+          - 5432:5432
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: changeme
     steps: 
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-    - name: Install PostgreSQL client
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y postgresql-client
-    - name: show cluster
-        run: pg_lsclusters
-    - name: Run SQL script
-      run: |
-        psql -U postgres -f sql/script.sql
-    - run: cd ../quizer/backoffice/scripts && bash run_ubuntu_comands.sh
-    - run: cd ../quizer/backoffice/scripts && bash run_bg.sh
-  
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: cd ../quizer/backoffice/scripts && bash run_ubuntu_comands.sh
+      - run: cd ../quizer/backoffice/scripts && bash run_bg.sh
