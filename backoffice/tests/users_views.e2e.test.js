@@ -5,7 +5,7 @@ describe('Users', function() {
         browser
             .url('http://localhost:3001/admin/users')
             .useXpath()
-            .waitForElementPresent('//div[2]/div[2]/div')
+            .waitForElementPresent('//div[2]/div[2]/div', 1000) 
             .click('//a[contains(text(),`Add User`)]')
             .assert.urlEquals('http://localhost:3001/admin/users/new')
     });
@@ -45,7 +45,7 @@ describe('Users', function() {
         /* const rows = browser.elements("css selector", "table tr td a.link-secondary").length; */
         browser
             .url('http://localhost:3001/admin/users')
-            .waitForElementPresent('//div[2]/div[2]/div')
+            .waitForElementPresent('//div[2]/div[2]/div', 1000)
             /* var index = [...document.querySelectorAll("table tr td a.link-secondary")].pop() */
             .waitForElementPresent(`//tr[7]/td/a/span`)
             .click((`//tr[7]/td/a/span`))
@@ -68,7 +68,7 @@ describe('Users', function() {
     it(when+' if the user wants to delete a user, the page should delete it', function(browser) {
         browser
             .url('http://localhost:3001/admin/users')
-            .waitForElementPresent('//div[2]/div[2]/div')
+            .waitForElementPresent('//div[2]/div[2]/div', 1000)
             .useXpath()
             .click('//tr[7]/td[4]/span/button/i')
             .pause(1000)
