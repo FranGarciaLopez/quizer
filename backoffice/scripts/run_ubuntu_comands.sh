@@ -14,6 +14,7 @@ psql postgresql://postgres:changeme@localhost:5432 \dt
 echo "Installing headless chromium"
 mkdir -p ./logs
 echo "  - Installing dependencies..." &&  sudo apt-get install -y libappindicator1 fonts-liberation > ./logs/chromium_logs.log
-echo "  - Downloading headless Chromium version 107" && wget -q wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb >> ./logs/chromium_logs.log
+echo "  - Installing Chromedriver..." && sudo apt-get install chromium-chromedriver >> ./logs/chromium_logs.log
+echo "  - Downloading headless Chromium" && wget -q wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb >> ./logs/chromium_logs.log
 #echo "  - Installing dependencies..." &&  sudo apt-get install -f >> ./logs/chromium_logs.log
 echo "  - Installing headless Chromium" && sudo dpkg -i google-chrome-stable_current_amd64.deb >> ./logs/chromium_logs.log
