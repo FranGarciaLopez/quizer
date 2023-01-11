@@ -5,7 +5,7 @@ describe('Users', function() {
         browser
             .url('http://localhost:3001/admin/users')
             .useXpath()
-            .waitForElementPresent('//div[@id=`app`]/div/div/div/section/div/div/div[2]/div[2]/div')
+            .waitForElementPresent('//div[2]/div[2]/div')
             .click('#app .content a[href="/admin/users/new"]')
             .assert.urlEquals('http://localhost:3001/admin/users/new')
     });
@@ -45,7 +45,7 @@ describe('Users', function() {
         /* const rows = browser.elements("css selector", "table tr td a.link-secondary").length; */
         browser
             .url('http://localhost:3001/admin/users')
-            .waitForElementPresent('//div[@id=`app`]/div/div/div/section/div/div/div[2]/div[2]/div')
+            .waitForElementPresent('//div[2]/div[2]/div')
             /* var index = [...document.querySelectorAll("table tr td a.link-secondary")].pop() */
             .waitForElementPresent(`//tr[7]/td/a/span`)
             .click((`//tr[7]/td/a/span`))
