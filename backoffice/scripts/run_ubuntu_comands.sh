@@ -1,9 +1,6 @@
 #!/bin/bash
-#pg_dump -U postgres tfg-db > tfg-db.sql
-#psql -U postgres -d tfg-db < tfg-db.sql
-#pg_restore -U postgres -Ft -v -C --disable-triggers -d tfg-db tfg-db.sql
-#pg_dump -U postgres --clean tfg-db > tfg-db.sql
-#psql -U postgres -f /backup/tfg-db.sql
+#pg_dump -U postgres tfg-db -c -Ft -f tfg-db.tar 
+#pg_restore -U postgres -d  tfg-db -c tfg-db.tar
 
 echo "Installing postgres on Ubuntu"
 cd "../../api/backup/"
@@ -11,7 +8,7 @@ mkdir -p ./logs
 echo "  - Installing postgres"    && sudo apt-get update && sudo apt-get install -qq postgresql-client                >> ./logs/postgres_logs.log
 echo "  - Create database"        && psql postgresql://postgres:changeme@localhost:5432 -c "CREATE DATABASE \"tfg-db\"" >> ./logs/postgres_logs.log
 
-echo "  - Loading data for tests"  &&  export PGPASSWORD=changeme && psql -h localhost -p 5432 -U postgres -d tfg-db < tfg-db.sql
+echo "  - Loading data for tests"  &&  export PGPASSWORD=changeme && pg_restore -h localhost -p 5432 -U postgres -d tfg-db -c tfg-db.tar
 psql postgresql://postgres:changeme@localhost:5432 \dt
 
 echo "Installing headless chromium"
