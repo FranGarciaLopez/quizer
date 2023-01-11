@@ -6,7 +6,7 @@ describe('Users', function() {
             .url('http://localhost:3001/admin/users')
             .useXpath()
             .waitForElementPresent('//div[2]/div[2]/div')
-            .click('#app .content a[href="/admin/users/new"]')
+            .click('//a[contains(text(),`Add User`)]')
             .assert.urlEquals('http://localhost:3001/admin/users/new')
     });
     
