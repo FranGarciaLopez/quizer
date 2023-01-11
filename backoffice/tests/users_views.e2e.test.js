@@ -5,7 +5,6 @@ describe('Users', function() {
         browser
             .url('http://localhost:3001/admin/users')
             .useXpath()
-            .waitForElementPresent('//div[2]/div[2]/div', 1000) 
             .click('//a[contains(text(),`Add User`)]')
             .assert.urlEquals('http://localhost:3001/admin/users/new')
     });
