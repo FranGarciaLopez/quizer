@@ -5,7 +5,7 @@ describe('Users', function() {
         browser
             .url('http://localhost:3001/admin/users')
             .useXpath()
-            .click('//a[contains(text(),`Add User`)]')
+            .click('//a[contains(.,`Add User `)]')
             .assert.urlEquals('http://localhost:3001/admin/users/new')
     });
     
