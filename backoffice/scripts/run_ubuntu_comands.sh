@@ -15,5 +15,4 @@ echo "Installing headless chromium"
 mkdir -p ./logs
 echo "  - Installing dependencies..." &&  sudo apt-get install -y libappindicator1 fonts-liberation > ./logs/chromium_logs.log
 #echo "  - Installing dependencies..." &&  sudo apt-get install -f >> ./logs/chromium_logs.log
-echo "  - Downloading headless Chromium version 107" && wget -q https://dl.google.com/linux/direct/google-chrome-stable_107.0.3_amd64.deb >> ./logs/chromium_logs.log
-echo "  - Installing headless Chromium version 107" && sudo dpkg -i google-chrome-stable_107.0.3_amd64.deb >> ./logs/chromium_logs.log
+echo "  - Installing headless Chromium" && sudo dpkg -i google-chrome*.deb >> ./logs/chromium_logs.log
