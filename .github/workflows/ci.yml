@@ -19,10 +19,8 @@ jobs:
         # Provide the password for postgres
         env:
           POSTGRES_PASSWORD: changeme
-
-  steps: 
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
+    steps: 
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
       - run: cd ../quizer/backoffice/scripts && bash run_ubuntu_comands.sh
       - run: cd ../quizer/backoffice/scripts && bash run_bg.sh
-  
