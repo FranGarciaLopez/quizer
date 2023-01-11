@@ -25,8 +25,8 @@ done
 
 echo ""
 echo "Starting tests"
-cd "../backoffice"
-echo "  - Running tests" && npx nightwatch tests/tests.e2e.test.js --headless --reuse-browser >> ./logs/tests.log &
+cd "../backoffice/tests"
+echo "  - Running tests" && npx nightwatch tests.e2e.test.js --headless --reuse-browser >> ./logs/tests.log &
 sleep 10
 
 echo "Stopping services"
