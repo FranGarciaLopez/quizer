@@ -26,7 +26,6 @@ done
 echo ""
 echo "Starting tests"
 cd "../backoffice"
-echo "  - Installing last chromedriver" && npm install chromedriver@latest --save-dev
 echo "  - Running tests" && npx nightwatch tests/tests.e2e.test.js --headless --reuse-browser 
 sleep 10
 
