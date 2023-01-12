@@ -7,7 +7,7 @@ from flask_jwt_extended import jwt_required
 @app.route('/users', methods= ['POST'])
 @jwt_required() 
 def user_post():
-    return Users(db).post()
+    return Users(db).post(request.json)
 
 @app.route('/users', methods= ['GET'])
 @jwt_required()

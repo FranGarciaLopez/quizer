@@ -16,7 +16,7 @@ class Users:
         email = data["email"]
         password = data["password"]
 
-        sql_statement = "INSERT INTO users (name, surname, nickname, lang, email, password) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')"
+        sql_statement = "INSERT INTO users (name, surname, nickname, lang, email, password) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}')"
         sql_statement = sql_statement.format(name, surname, nickname, lang, email, password)
 
         response = self.conn.engine.execute(sql_statement)
