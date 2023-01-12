@@ -30,7 +30,7 @@ describe('Tests', function() {
             .setValue('.input-group:nth-child(2) .input-group:nth-child(1) > .input-group-apend', 1)
             .setValue('.input-group:nth-child(2) .input-group:nth-child(2) > .input-group-apend', 1)
 
-            .click('.card-body .btn-save')
+            .click('.btn-save')
             .waitForElementPresent('.table-responsive', 1000)
             .assert.urlEquals('http://localhost:3001/admin/paths/2/tests/20/questions')
             .pause(2000)
@@ -50,7 +50,7 @@ describe('Tests', function() {
             .setValue('.input-group:nth-child(2) .input-group:nth-child(1) > .input-group-apend', 0)
             .setValue('.input-group:nth-child(2) .input-group:nth-child(2) > .input-group-apend', 1)
             
-            .click('.card-body .btn-save')
+            .click('.btn-save')
             .click('a[href="/admin/paths/2/tests/20/questions"]')
             .pause(1000)
 
@@ -63,6 +63,7 @@ describe('Tests', function() {
             .waitForElementPresent('.table-responsive')
 
             .click(`tr:nth-child(5) .btn-group > .btn > .bi`)
+            .acceptAlert()
             .assert.urlEquals('http://localhost:3001/admin/paths/2/tests/20/questions')
     });
 });
