@@ -1,7 +1,7 @@
 const when = '[Tests] When a logged user is in /admin/paths/id/tests area'
 describe('Tests', function() {
 
-    it(when+' if the users is on "/admin/users" and wants to go to the paths page then he should click on the sidebar paths button.', function(browser) {
+    it(when+' if the users is on "/admin/paths" and wants to go to the tests page then he should click on the button of the tests he wants to go.', function(browser) {
         browser
         .click('a[href="/admin/paths/2/tests"]')
         .assert.urlEquals('http://localhost:3001/admin/paths/2/tests');
@@ -74,6 +74,6 @@ describe('Tests', function() {
 
             .click(`tr:nth-child(4) .btn-group > .btn > .bi`)
             .acceptAlert()
-            .assert.urlEquals('http://localhost:3001/admin/paths/40/tests')
+            .assert.urlEquals('http://localhost:3001/admin/paths/2/tests')
     });
 });
