@@ -17,47 +17,47 @@ describe('Paths', function() {
     it(when+' if the user is at "/admin/paths/new" URL and wants to add a path', function(browser) {
         browser
             .url('http://localhost:3001/admin/paths/new')
-            .waitForElementPresent('(//input[@id="formText"])[1]')
-            .setValue('(//select[@id="lang"])[1]',    'es')
-            .setValue('(//input[@id="formText"])[1]', 'Java')
-            .setValue('(//select[@id="lang"])[2]',    'es')
-            .setValue('(//input[@id="formText"])[2]', 'Aprende los conceptos de Java')
-            .click('(//button[@type="submit"])[2]')
+            .waitForElementPresent('.formName #formText')
+            .setValue('.formName #lang',    'es')
+            .setValue('.formName #formText', 'Java')
+            .setValue('.formDesc #lang',    'es')
+            .setValue('.formDesc #formText', 'Aprende los conceptos de Java')
+            .click('.card-body .btn-save')
             .assert.urlEquals('http://localhost:3001/admin/paths')
     });
  
     it(when+' if the user has created a new path and wants to edit it then he must go to "/admin/paths/id" URL and edit a field from the form, then should be redirected to "/admin/paths" with the edited data', function(browser) {
         browser
-            .click('//tr[4]/td/a/span')
-            .waitForElementPresent('(//input[@id="formText"])[1]')
+            .click('tr:nth-child(5) a.link-secondary > span')
+            .waitForElementPresent('.formName #lang')
 
-            .setValue('(//input[@id="formText"])[1]', 'Java edited')
-            .setValue('(//input[@id="formText"])[2]', 'Aprende los conceptos de Java edited')
+            .setValue('.formName #lang', 'Java edited')
+            .setValue('.formDesc #formText', 'Aprende los conceptos de Java edited')
             
-            .click('(//button[@type="submit"])[2]')
+            .click('.card-body .btn-save')
             .pause(1000)
             .acceptAlert()
-            .click('//button[@type="submit"]')
+            .click('.card-body .btn-cancel')
             .assert.urlEquals('http://localhost:3001/admin/paths')
     });
 
     it(when+' if the user is in "/admin/paths" and wants to know the tests that are in one path then he should be redirected to "/admin/paths/id/tests" and if there are not tests, a message "there is no data here" must be displayed', function(browser) {
         browser
             .url('http://localhost:3001/admin/paths')
-            .waitForElementPresent('//div[2]/div[2]/div')
+            .waitForElementPresent('.table-responsive')
             
-            .click(('//tr[2]/td[5]/span/div/a/button/i'))
-            .waitForElementPresent('//div[2]/div[2]/div', 1000)
+            .click(('tr:nth-child(2) .styledLink > .btn'))
+            .waitForElementPresent('.table-responsive', 1000)
 
-            .click('//a[contains(text(),"Paths")]')
+            .click('a[href="/admin/paths"]')
             .assert.urlEquals('http://localhost:3001/admin/paths')
             
-            .click(('//tr[3]/td[5]/span/div/a/button/i'))
-            .waitForElementPresent('//h1')
-            .getText('//h1', function () {
-                browser.expect.element('//h1').text.to.equal("There is no data here");
+            .click(('tr:nth-child(3) .styledLink > .btn'))
+            .waitForElementPresent('h1')
+            .getText('h1', function () {
+                browser.expect.element('h1').text.to.equal("There is no data here");
             })
-            .click('//a[contains(text(),"Paths")]')
+            .click('a[href="/admin/paths"]')
             .assert.urlEquals('http://localhost:3001/admin/paths')
 
     });
@@ -65,11 +65,11 @@ describe('Paths', function() {
     it(when+' if the user wants to delete a path, the page should delete it', function(browser) {
         browser
             .url('http://localhost:3001/admin/paths')
-            .waitForElementPresent('//div[2]/div[2]/div')
+            .waitForElementPresent('.table-responsive')
             .useXpath()
-            .click((`//tr[5]/td[5]/span/div/button/i`))
+            .click((`tr:nth-child(5) .btn-group > .btn > .bi`))
             .acceptAlert()
             .assert.urlEquals('http://localhost:3001/admin/paths')
-            .click('//tr[4]/td[5]/span/div/a/button/i')
+            .click('tr:nth-child(2) .styledLink > .btn')
     });
 });
