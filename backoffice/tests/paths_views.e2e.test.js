@@ -3,10 +3,9 @@ describe('Paths', function() {
 
     it(when+' if the user clicks in "Add path" button then it should redirect to "/admin/paths/new" page', function(browser) {
         browser
-            .click('#menu .nav-item:nth-of-type(2) a.nav-link.align-middle.px-0.text-white')
+            .click('#menu .nav-item:nth-of-type(2) a.nav-link')
             .assert.urlEquals('http://localhost:3001/admin/paths')
-            .useXpath()
-            .click('//a[contains(text(),"Add Path")]')
+            .click('.float-right')
             .assert.urlEquals('http://localhost:3001/admin/paths/new')
     });
 

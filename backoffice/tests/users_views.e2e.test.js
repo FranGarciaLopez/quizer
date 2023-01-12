@@ -72,6 +72,6 @@ describe('Users', function() {
             .acceptAlert()
             .assert.urlEquals('http://localhost:3001/admin/users')
             .pause(1000)
-            .click('#menu .nav-item:nth-of-type(2) a.nav-link.align-middle.px-0.text-white')
+            .click('#menu .nav-item:nth-of-type(2) a.nav-link')
     });
 });
