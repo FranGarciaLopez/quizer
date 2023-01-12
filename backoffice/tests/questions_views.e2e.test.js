@@ -21,10 +21,12 @@ describe('Tests', function() {
 
             .waitForElementPresent('.mb-4 > form #formText')
 
-            .setValue('.mb-4 > form #formText', 'Java question Title')
+            .setValue('.questionTextField .form-control', 'Java question Title')
             .setValue('.input-group > .form-control #formText', 'Java question answer 1')
             .setValue('.input-group:nth-child(1) > .input-group-apend', 1)
             .setValue('.input-group:nth-child(2) > .input-group-apend', 0)
+
+            .click('.btn-addAnswer')
 
             .setValue('.input-group:nth-child(2) > .form-control #formText', 'Java question answer 2')
             .setValue('.input-group:nth-child(2) .input-group:nth-child(1) > .input-group-apend', 1)
@@ -47,7 +49,7 @@ describe('Tests', function() {
             .setValue('.input-group:nth-child(2) > .input-group-apend', 1)
 
             .setValue('.input-group:nth-child(2) > .form-control #formText', 'Java question answer 2  edited')
-            .setValue('.input-group:nth-child(2) .input-group:nth-child(1) > .input-group-apend', 0)
+            .setValue('.input-group:nth-child(2) .input-group:nth-child(1) > .input-group-apend', 1)
             .setValue('.input-group:nth-child(2) .input-group:nth-child(2) > .input-group-apend', 1)
             
             .click('.btn-save')

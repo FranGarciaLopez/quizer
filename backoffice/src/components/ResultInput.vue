@@ -9,7 +9,7 @@
                 <a @click="deleteAnswerInput(index)" class="btn btn-danger text-white">Delete answer</a>
             </div>
         </form>
-        <div class="buttons btn-group"> 
+        <div class="buttons btn-group .btn-addAnswer"> 
             <a @click="addAnswerInput()" class="btn btn-primary text-white">Add answer</a>
         </div>
     </div>
