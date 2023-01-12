@@ -40,7 +40,8 @@ describe('Tests', function() {
             
             .click('.card-body .btn-save')
             .pause(1000)
-            .click('.card-body .btn-cancel')
+            .click('a[href="/admin/paths/2/tests"]')
+
 
             .assert.urlEquals('http://localhost:3001/admin/paths/2/tests')
     });
