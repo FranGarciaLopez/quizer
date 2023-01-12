@@ -66,15 +66,14 @@ describe('Tests', function() {
             .assert.urlEquals('http://localhost:3001/admin/paths/2/tests')
 
     });
- /* 
+
     it(when+' if the user wants to delete a test from a path then it should be deleted', function(browser) {
         browser
             .url('http://localhost:3001/admin/paths/2/tests')
             .waitForElementPresent('.table-responsive')
 
-            .click((``))
+            .click(`tr:nth-child(4) .btn-group > .btn > .bi`)
             .acceptAlert()
             .assert.urlEquals('http://localhost:3001/admin/paths/40/tests')
-            .click('//tr[2]/td[5]/span/div/a/button')
-    });*/
+    });
 });
