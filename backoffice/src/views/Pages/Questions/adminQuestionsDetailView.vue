@@ -25,11 +25,11 @@
                                                 </div>
                                                 <div class="buttons">
                                                     <router-link :to="{ name: 'adminQuestionsView' }">
-                                                        <button type="submit" class=" btn btn-secondary btn-login text-uppercase fw-bold mr-1">
+                                                        <button type="submit" class=" btn btn-secondary btn-cancel text-uppercase fw-bold mr-1">
                                                             Cancel
                                                         </button>
                                                     </router-link>
-                                                    <button type="submit" class="btn btn-primary btn-login text-uppercase fw-bold">
+                                                    <button type="submit" class="btn btn-primary btn-save text-uppercase fw-bold">
                                                         Save
                                                     </button>
                                                 </div>
