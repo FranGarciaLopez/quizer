@@ -11,7 +11,7 @@ class Tests:
         desc = json.dumps(data["desc"])
         path_id = data["path_id"]
 
-        sql_statement = "INSERT INTO tests (\"name\", \"desc\", path_id) VALUES ('{0}','{1}','{2}','{3}')".format(name, desc, path_id)
+        sql_statement = "INSERT INTO tests (\"name\", \"desc\", path_id) VALUES ('{0}','{1}','{2}')".format(name, desc, path_id)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.post(response)
