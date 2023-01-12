@@ -66,7 +66,6 @@ describe('Paths', function() {
         browser
             .url('http://localhost:3001/admin/paths')
             .waitForElementPresent('.table-responsive')
-            .useXpath()
             .click((`tr:nth-child(5) .btn-group > .btn > .bi`))
             .acceptAlert()
             .assert.urlEquals('http://localhost:3001/admin/paths')
