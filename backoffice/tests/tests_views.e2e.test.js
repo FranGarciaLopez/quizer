@@ -51,17 +51,17 @@ describe('Tests', function() {
             .click('tr:nth-child(3) .link-secondary')
             .waitForElementPresent('.table-responsive')
             
-            .click(('a[href="/admin/paths/2/tests"]'))
+            .click('a[href="/admin/paths/2/tests"]')
             .waitForElementPresent('.table-responsive', 1000)
 
             .click('tr:nth-child(4) .link-secondary')
-            .assert.urlEquals('http://localhost:3001/admin/paths/2/tests/15/questions')
+            .assert.urlEquals('http://localhost:3001/admin/paths/2/tests/66/questions')
             
             .waitForElementPresent('h1')
             .getText('h1', function () {
                 browser.expect.element('h1').text.to.equal("There is no data here");
             })
-            .click(('a[href="/admin/paths/2/tests"]'))
+            .click('a[href="/admin/paths/2/tests"]')
             .assert.urlEquals('http://localhost:3001/admin/paths/2/tests')
 
     });
