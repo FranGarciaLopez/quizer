@@ -35,7 +35,7 @@ describe('Users', function() {
             .setValue('#floatingLang',     'es')
             .setValue('#floatingEmail',    'frangalo34@gmail.com')
             .setValue('#floatingPassword', '1234567.A')
-            .click('.btn-primary')
+            .click('.card-body .btn-save')
             .assert.urlEquals('http://localhost:3001/admin/users')
     });
 
@@ -58,7 +58,7 @@ describe('Users', function() {
             .setValue(  '#floatingEmail',    'francopper2@gmail.com')
             .clearValue('#floatingPassword')
             .setValue(  '#floatingPassword', '7654321.B')
-            .click('.btn-save')
+            .click('.card-body .btn-save')
             .pause(1000)
             .assert.urlEquals('http://localhost:3001/admin/users')
     });
