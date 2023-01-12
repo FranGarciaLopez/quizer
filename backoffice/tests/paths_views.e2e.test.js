@@ -3,7 +3,7 @@ describe('Paths', function() {
 
     it(when+' if the users is on "/admin/users" and wants to go to the paths page then he should click on the sidebar paths button.', function(browser) {
         browser
-        .click('#menu .nav-item:nth-of-type(2) a.nav-link')
+        .click('span[text()=`Paths`]')
         .assert.urlEquals('http://localhost:3001/admin/paths');
     });
 
