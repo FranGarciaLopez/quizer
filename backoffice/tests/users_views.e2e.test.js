@@ -74,5 +74,7 @@ describe('Users', function() {
             .pause(1000)
             .waitForElementPresent('#menu .nav-item:nth-of-type(2) a.nav-link')
             .click('#menu .nav-item:nth-of-type(2) a.nav-link')
+            .waitForElementPresent('.breadcrumb-item > .router-link-active')
+
     });
 });
