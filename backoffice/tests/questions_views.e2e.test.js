@@ -1,7 +1,7 @@
 const when = '[Questions] When a logged user is in /paths/id/tests/id/questions area'
 describe('Tests', function() {
 
-    t(when+' if the users is on "/admin/paths/id/tests/id/questions" and wants to go to the questions page then he should click on the button that goes to the questions lists for that test.', function(browser) {
+    it(when+' if the users is on "/admin/paths/id/tests/id/questions" and wants to go to the questions page then he should click on the button that goes to the questions lists for that test.', function(browser) {
         browser
         .click('a[href="/admin/paths/2/tests/20/questions"]')
         .assert.urlEquals('http://localhost:3001/admin/paths/2/tests/20/questions');
