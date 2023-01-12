@@ -22,7 +22,7 @@ export default {
         const status = JSON.stringify(this.response.status);
         if(status == 401){
           this.$store.dispatch('logout')
-          this.$router.push({name:'secureView'})
+          this.$router.push({name:'login'})
         }
       }
         
