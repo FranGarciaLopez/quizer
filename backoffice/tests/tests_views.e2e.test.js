@@ -40,7 +40,6 @@ describe('Tests', function() {
             
             .click('.card-body .btn-save')
             .pause(1000)
-            .acceptAlert()
             .click('.card-body .btn-cancel')
 
             .assert.urlEquals('http://localhost:3001/admin/paths/2/tests')
@@ -55,8 +54,8 @@ describe('Tests', function() {
             .click('a[href="/admin/paths/2/tests"]')
             .waitForElementPresent('.table-responsive', 1000)
 
-            .click('tr:nth-child(2) a .bi')
-            .assert.urlEquals('http://localhost:3001/admin/paths/2/tests/15/questions')
+            .click('tr:nth-child(4) a .bi')
+            .assert.urlEquals('http://localhost:3001/admin/paths/2/tests/66/questions')
             
             .waitForElementPresent('h1')
             .getText('h1', function () {
