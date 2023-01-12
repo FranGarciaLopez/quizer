@@ -39,8 +39,9 @@ describe('Tests', function() {
             .setValue('.form-group:nth-child(2) #formText', 'Este es el segundo test de Java edited')
             
             .click('.card-body .btn-save')
-            .click('.card-body .btn-cancel')
             .pause(1000)
+            .acceptAlert()
+            .click('.card-body .btn-cancel')
 
             .assert.urlEquals('http://localhost:3001/admin/paths/2/tests')
     });
@@ -48,14 +49,14 @@ describe('Tests', function() {
     it(when+' if the user is in "/admin/paths/id/tests" and wants to know the questions that are in one test then he should be redirected to "/admin/paths/id/tests/id/questions" and if there are not tests, a message "there is no data here" must be displayed', function(browser) {
         browser
             .assert.urlEquals('http://localhost:3001/admin/paths/2/tests')
-            .click('tr:nth-child(3) .link-secondary')
-            .waitForElementPresent('.table-responsive')
+            .click('tr:nth-child(3) a > .btn')
+            .waitForElementPresent('.card-body .table-responsive')
             
             .click('a[href="/admin/paths/2/tests"]')
             .waitForElementPresent('.table-responsive', 1000)
 
-            .click('tr:nth-child(4) .link-secondary')
-            .assert.urlEquals('http://localhost:3001/admin/paths/2/tests/66/questions')
+            .click('tr:nth-child(2) a .bi')
+            .assert.urlEquals('http://localhost:3001/admin/paths/2/tests/15/questions')
             
             .waitForElementPresent('h1')
             .getText('h1', function () {
