@@ -1,76 +1,68 @@
 const when = '[Questions] When a logged user is in /paths/id/tests/id/questions area'
 describe('Tests', function() {
 
-    it(when+' if the user clicks in "Add test" button, it should redirect to "/paths/id/tests/new" page', function(browser) {
+    t(when+' if the users is on "/admin/paths/id/tests/id/questions" and wants to go to the questions page then he should click on the button that goes to the questions lists for that test.', function(browser) {
         browser
-            .assert.urlEquals('http://localhost:3001/paths/40/tests')
-            .useXpath()
-            .click('//a[contains(text(),"Add test")]')
-            .assert.urlEquals('http://localhost:3001/paths/40/tests/new')
+        .click('a[href="/admin/paths/2/tests/20/questions"]')
+        .assert.urlEquals('http://localhost:3001/admin/paths/2/tests/20/questions');
+    });
+
+    it(when+' if the user is in /admin/paths/id/tests/id/questions and clicks in "Add question" button, it should redirect to "/admin/paths/id/tests/id/questions/new" page', function(browser) {
+        browser
+            .assert.urlEquals('http://localhost:3001/admin/paths/2/tests/20/questions')
+            .click('.float-right')
+            .assert.urlEquals('http://localhost:3001/paths/2/tests/20/questions/new')
             .pause(1000)
     });
 
-    it(when+' if the user is at "/paths/40/tests/new" URL and wants to add a test to the path with id "40"', function(browser) {
+    it(when+' if the user is at "/paths/2/tests/20/questions/new" URL and wants to add a question to the test with id "20"', function(browser) {
         browser
-            .assert.urlEquals('http://localhost:3001/paths/40/tests/new')
+            .assert.urlEquals('http://localhost:3001/paths/2/tests/20/questions/new')
 
-            .waitForElementPresent('(//input[@id="formText"])[1]')
+            .waitForElementPresent('.mb-4 > form #formText')
 
-            .setValue('(//input[@id="formText"])[1]', 'Java Test 2')
-            .setValue('(//input[@id="formText"])[2]', 'Este es el segundo test de Java')
-            .setValue('(//input[@id="formText"])[3]', 'Necesito ver primero tus conocimientos de Java')
+            .setValue('.mb-4 > form #formText', 'Java question Title')
+            .setValue('.input-group > .form-control #formText', 'Java question answer 1')
+            .setValue('.input-group:nth-child(1) > .input-group-apend', 1)
+            .setValue('.input-group:nth-child(2) > .input-group-apend', 0)
 
-            .click('(//button[@type="submit"])[2]')
-            .waitForElementPresent('//div[2]/div[2]/div', 1000)
-            .assert.urlEquals('http://localhost:3001/paths/40/tests')
+            .setValue('.input-group:nth-child(2) > .form-control #formText', 'Java question answer 2')
+            .setValue('.input-group:nth-child(2) .input-group:nth-child(1) > .input-group-apend', 1)
+            .setValue('.input-group:nth-child(2) .input-group:nth-child(2) > .input-group-apend', 1)
+
+            .click('.card-body .btn-save')
+            .waitForElementPresent('.table-responsive', 1000)
+            .assert.urlEquals('http://localhost:3001/paths/2/tests/20/questions')
             .pause(2000)
     });
  
-    it(when+' if the user has created a new test from a path and wants to edit it then he must go to "/paths/id/tests/id" URL and edit a field from the form then he should be redirected to "/paths/id/tests" with the edited data', function(browser) {
+    it(when+' if the user has created a new question from a test and wants to edit it then he must go to "/paths/id/tests/id/question/id" URL and edit a field from the form then he should be redirected to "/paths/id/tests/id/questions" with the edited data', function(browser) {
         browser
-            .click('//a[contains(text(),"Java Test 2")]')
-            .waitForElementPresent('(//input[@id="formText"])[1]')
+            .click('tr:nth-child(5) a > .btn')
+            .waitForElementPresent('.mb-4 > form #formText')
 
-            .setValue('(//input[@id="formText"])[1]', 'Java Test 2 edited')
-            .setValue('(//input[@id="formText"])[2]', 'Este es el segundo test de Java edited')
-            .setValue('(//input[@id="formText"])[3]', 'Necesito ver primero tus conocimientos de Java edited')
+            .setValue('.mb-4 > form #formText', 'Java question Title edited')
+            .setValue('.input-group > .form-control #formText', 'Java question answer 1  edited')
+            .setValue('.input-group:nth-child(1) > .input-group-apend', 0)
+            .setValue('.input-group:nth-child(2) > .input-group-apend', 1)
+
+            .setValue('.input-group:nth-child(2) > .form-control #formText', 'Java question answer 2  edited')
+            .setValue('.input-group:nth-child(2) .input-group:nth-child(1) > .input-group-apend', 0)
+            .setValue('.input-group:nth-child(2) .input-group:nth-child(2) > .input-group-apend', 1)
             
-            .click('(//button[@type="submit"])[2]')
-            .click('//button[@type="submit"]')
+            .click('.card-body .btn-save')
+            .click('a[href="/admin/paths/2/tests/20/questions"]')
             .pause(1000)
 
-            .assert.urlEquals('http://localhost:3001/paths/40/tests')
-    });
-
-    it(when+' if the user is in "/paths/id/tests" and wants to know the questions that are in one test then he should be redirected to "/paths/id/tests/id/questions" and if there are not tests, a message "there is no data here" must be displayed', function(browser) {
-        browser
-            .assert.urlEquals('http://localhost:3001/paths/40/tests')
-            .click('//tr[1]/td[5]/span/div/a/button/i')
-            .waitForElementPresent('//div[2]/div[2]/div')
-            
-            .click(('//a[contains(text(),"Tests")]'))
-            .waitForElementPresent('//div[2]/div[2]/div', 1000)
-
-            .click('//tr[3]/td[5]/span/div/a/button/i')
-            .assert.urlEquals('http://localhost:3001/paths/40/tests/30/questions')
-            
-            .waitForElementPresent('//h1')
-            .getText('//h1', function () {
-                browser.expect.element('//h1').text.to.equal("There is no data here");
-            })
-            .click('//a[contains(text(),"Tests")]')
-            .assert.urlEquals('http://localhost:3001/paths/40/tests')
-
+            .assert.urlEquals('http://localhost:3001/paths/2/tests/20/questions')
     });
  
-    it(when+' if the user wants to delete a test from a path then it should be deleted', function(browser) {
+    it(when+' if the user wants to delete a question from a path and clicks the delete button then it should be deleted', function(browser) {
         browser
-            .url('http://localhost:3001/paths/40/tests')
-            .waitForElementPresent('//div[2]/div[2]/div')
+            .url('http://localhost:3001/paths/2/tests/20/questions')
+            .waitForElementPresent('.table-responsive')
 
-            .click((`//tr[4]/td[5]/span/div/button/i`))
-            .acceptAlert()
-            .assert.urlEquals('http://localhost:3001/paths/40/tests')
-            .click('//tr[2]/td[5]/span/div/a/button')
+            .click(`tr:nth-child(5) .btn-group > .btn > .bi`)
+            .assert.urlEquals('http://localhost:3001/paths/2/tests/20/questions')
     });
 });
