@@ -72,6 +72,7 @@ describe('Users', function() {
             .acceptAlert()
             .assert.urlEquals('http://localhost:3001/admin/users')
             .pause(1000)
-            .click('.nav-item:nth-child(2) .ms-1')
+            .useXpath()
+            .click('//span[contains(.,`Paths`)]')
     });
 });
