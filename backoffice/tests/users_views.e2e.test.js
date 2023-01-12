@@ -73,8 +73,6 @@ describe('Users', function() {
             .assert.urlEquals('http://localhost:3001/admin/users')
             .pause(1000)
             .waitForElementPresent('#menu .nav-item:nth-of-type(2) a.nav-link')
-            .click('#menu .nav-item:nth-of-type(2) a.nav-link')
-            .waitForElementPresent('.breadcrumb-item > .router-link-active')
 
     });
 });

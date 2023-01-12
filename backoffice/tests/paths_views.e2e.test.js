@@ -1,6 +1,12 @@
 const when = '[Paths] When a logged user is in /admin/paths area'
 describe('Paths', function() {
 
+    it(when+' if the users is on "/admin/users" and wants to go to the paths page then he should click on the sidebar paths button.', function(browser) {
+        browser
+        .click('#menu .nav-item:nth-of-type(2) a.nav-link')
+        .assert.urlEquals('http://localhost:3001/admin/paths');
+    });
+
     it(when+' if the user clicks in "Add path" button then it should redirect to "/admin/paths/new" page', function(browser) {
         browser
             .assert.urlEquals('http://localhost:3001/admin/paths')
