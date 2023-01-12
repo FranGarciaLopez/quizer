@@ -48,13 +48,13 @@ describe('Tests', function() {
     it(when+' if the user is in "/admin/paths/id/tests" and wants to know the questions that are in one test then he should be redirected to "/admin/paths/id/tests/id/questions" and if there are not tests, a message "there is no data here" must be displayed', function(browser) {
         browser
             .assert.urlEquals('http://localhost:3001/admin/paths/2/tests')
-            .click('css=tr:nth-child(3) .link-secondary')
+            .click('tr:nth-child(3) .link-secondary')
             .waitForElementPresent('.table-responsive')
             
             .click(('a[href="/admin/paths/2/tests"]'))
             .waitForElementPresent('.table-responsive', 1000)
 
-            .click('css=tr:nth-child(4) .link-secondary')
+            .click('tr:nth-child(4) .link-secondary')
             .assert.urlEquals('http://localhost:3001/admin/paths/2/tests/15/questions')
             
             .waitForElementPresent('h1')
