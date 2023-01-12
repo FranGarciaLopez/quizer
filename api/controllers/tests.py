@@ -32,7 +32,7 @@ class Tests:
         name = json.dumps(data["name"])
         desc = json.dumps(data["desc"])
 
-        sql_statement = "UPDATE tests SET \"name\" = '{0}', \"desc\" = '{1}',  WHERE id = '{2}'".format(name, desc, test_id)
+        sql_statement = "UPDATE tests SET \"name\" = '{0}', \"desc\" = '{1}' WHERE id = '{2}'".format(name, desc, test_id)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.put(response)
