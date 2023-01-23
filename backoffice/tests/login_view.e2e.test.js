@@ -2,16 +2,16 @@ const when = '[Login] When a user is not logged in'
 describe('Login', function() {
 
     [
-        {user: 'admin',     pass: 'another_password', testVariation: 'valid user but a wrong password'},
-        {user: 'another_user', pass: 'admin',           testVariation: 'valid password but a wrong user'},
+        {user: 'admin',        pass: 'another_password', testVariation: 'valid user but a wrong password'},
+        {user: 'another_user', pass: 'admin',            testVariation: 'valid password but a wrong user'},
         {user: 'another_user', pass: 'another_password', testVariation: 'wrong user and password'},
     ].forEach((data) => {
         it(when+' if the user writes a '+data.testVariation+' then it should display an error message saing "user and password does not match"', function(browser) {
         browser
             .url('http://localhost:3001/login')
-            .setValue('#app .content .mb-3:nth-child(1) > .form-control', data.user)
-            .sendKeys('#app .content .mb-3:nth-child(2) > .form-control', data.pass)
-            .click('#app .content button[type=submit]')
+            .setValue('#app .card-body .form-floating #floatingInput', data.user)
+            .sendKeys('#app .card-body .form-floating #floatingPassword', data.pass)
+            .click('#app .card-body .btn .btn-primary .btn-login')
             .waitForElementPresent('.alert')
             .click('.btn-close')
             .waitForElementNotPresent('.alert')
