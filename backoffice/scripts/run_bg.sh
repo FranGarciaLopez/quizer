@@ -37,4 +37,3 @@ echo "  - Backoffice stopped"
 kill $(ps | grep python3 | awk {'print$1'})
 echo "  - API stopped"
 
-echo " - Creating a restore from the database " &&  
