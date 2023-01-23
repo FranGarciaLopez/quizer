@@ -45,6 +45,7 @@ export default {
       last_question: '',
       next_id: 0,
       message: '',
+      score: 0,
     };
   },
   mounted() {
@@ -70,10 +71,11 @@ export default {
         this.insertAnswers(selectedIndex);
         document.querySelectorAll('input[type="radio"]').forEach(input => input.checked = false);
       }
-      if(this.next_id > this.last_question.order){
+      if(this.next_id > this.last_question.order){      
         axios
           .put(this.ApiUrl+`/users/${this.$route.params.user_id}/tests/${this.$route.params.test_id}`)
-        this.$router.push({name:'userTestsView'})
+          this.$emit("testCompleted");
+          this.$router.push({name:'userTestsView'})
       }
     },
     insertAnswers(selectedIndex) {
@@ -87,8 +89,10 @@ export default {
           total: this.next_question[0].answers[selectedIndex].result.total,
         },
       };
+
       axios
         .post(this.ApiUrl+`/users/${this.$route.params.user_id}/tests/${this.$route.params.test_id}/questions/${this.next_question[0].id}`, updatedInfo);
+        
     },
   },
   computed: {
