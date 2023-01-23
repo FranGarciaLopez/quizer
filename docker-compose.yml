@@ -1,0 +1,44 @@
+version: '3.5'
+services:
+  api1:
+    build:
+      context: ../quizer-backoffice/api
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000" 
+    depends_on:
+      - postgres
+
+  web1:
+    build:
+      context: ../quizer-backoffice/backoffice
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    depends_on:
+      - api1
+
+    command: npm run serve -- --host 0.0.0.0
+
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+  
+  
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+    postgres:
