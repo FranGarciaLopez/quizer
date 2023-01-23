@@ -55,7 +55,7 @@ describe('Tests', function() {
             .click('a[href="/admin/paths/2/tests"]')
             .waitForElementPresent('.table-responsive', 1000)
 
-            .click('tr:nth-child(3) a .bi')
+            .click('tr:nth-child(2) a .bi')
             .assert.urlEquals('http://localhost:3001/admin/paths/2/tests/69/questions')
             
             .waitForElementPresent('h1')

@@ -11,7 +11,7 @@ describe('Login', function() {
             .url('http://localhost:3001/login')
             .setValue('#app .card-body .form-floating #floatingInput', data.user)
             .sendKeys('#app .card-body .form-floating #floatingPassword', data.pass)
-            .click('#app .card-body .btn .btn-primary .btn-login')
+            .click('#app .content button[type=submit]')
             .waitForElementPresent('.alert')
             .click('.btn-close')
             .waitForElementNotPresent('.alert')
