@@ -3,9 +3,9 @@
 echo "Starting API"
 cd "../../api"
 mkdir -p ./logs
-echo "  - Enabling virtual environment"      && virtualenv -p python3 venv && source "venv/bin/activate" > ./logs/api.log &
-echo "  - Installing dependencies"           && pip install -r requirements.txt                          >> ./logs/api.log &              
-echo "  - Starting server"                   && python3 app.py                                           >> ./logs/api.log &    
+echo "  - Enabling virtual environment"      && virtualenv -p python venv && source "venv/bin/activate" > ./logs/api.log 
+echo "  - Installing dependencies"           && pip install -r requirements.txt                          >> ./logs/api.log               
+echo "  - Starting server"                   && python app.py                                           >> ./logs/api.log &    
 echo "  - Server running"
 sleep 10
 
@@ -15,7 +15,7 @@ cd "../backoffice"
 mkdir -p ./logs
 echo "  - Installing vue-cli-service"    && npm install -g @vue/cli-service                       > ./logs/backoffice.log           
 echo "  - Installing dependencies"       && npm install --legacy-peer-deps --loglevel=error       >> ./logs/backoffice.log
-echo "  - Starting service"              && npm run serve                                        
+echo "  - Starting service"              && npm run serve                                        >> ./logs/backoffice.log &
 sleep 20
 
 until $(curl --output /dev/null  --head --fail http://localhost:3001); do
