@@ -5,9 +5,7 @@
                 <router-link style="text-decoration: none;" :to="crumb.link">{{crumb.text}}</router-link>
             </li>
         </ol>
-        <button type="button" class="logoutButton" @click="logout">
-      Logout
-    </button>
+        <button @click="logout" class="btn"><i class="bi bi-box-arrow-left"> Logout</i></button>
     </nav>
 </template>
 
@@ -20,7 +18,7 @@ export default {
     },
     methods: {
         getCrumbs() {
-            const crumbs = [{text: 'Home', link: '/admin/'}]
+            const crumbs = []
             const pathSplit = this.$route.path.split('/');
             const reversePath = [pathSplit.shift()];
             for(var i=0; i< pathSplit.length; i++){
