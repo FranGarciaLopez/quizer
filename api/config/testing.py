@@ -1,6 +1,6 @@
 class TestingConfig():
     TESTING = True
-    DEBUG = False
+    DEBUG = True
     ENV = 'testing'
 
     JWT_SECRET_KEY = "5iNySaf97&NW"
