@@ -5,7 +5,7 @@
               <div class="bg-light">
                 <NavView/>
               </div>
-              <card-view :text="this.user_tests" buttonText="Questions" :link="`${this.$route.fullPath}/test`"/>
+              <card-view :text="this.user_tests" buttonText="Questions" :link="`${this.$route.fullPath}/test`" v-on:testCompleted="fetchData"/>
             </div>
         </div>
     </div>
@@ -43,5 +43,6 @@ export default {
   computed: {
     ...authComputed,
   },
+
 };
 </script>;
