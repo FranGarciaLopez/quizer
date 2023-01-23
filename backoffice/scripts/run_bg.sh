@@ -15,7 +15,7 @@ cd "../backoffice"
 mkdir -p ./logs
 echo "  - Installing vue-cli-service"    && npm install -g @vue/cli-service                       > ./logs/backoffice.log           
 echo "  - Installing dependencies"       && npm install --legacy-peer-deps --loglevel=error       >> ./logs/backoffice.log
-echo "  - Starting service"              && npm run serve                                        >> ./logs/backoffice.log &
+echo "  - Starting service"              && npm run serve -- --host=0.0.0.0                                       
 sleep 20
 
 until $(curl --output /dev/null  --head --fail http://localhost:3001); do
