@@ -29,16 +29,16 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="(path) in paths" :key="path">
+                      <tr v-for="(path) in  this.paths" :key="path">
                         <th scope="row">{{ path.id }}</th>
                         <td><router-link class="link-secondary" v-bind:to="'/admin/paths/'+path.id">
                           <span>
-                            {{ path.name.es }}
+                            {{ path.name[userLang] }}
                           </span>
                         </router-link></td>
                         <td>
                           <span>
-                            {{ path.desc.es }}
+                            {{ path.desc[userLang] }}
                           </span>
                         </td>
                         <td>
@@ -47,9 +47,9 @@
                           </span>
                         </td>
                         <td>
-                            <span>
-                              {{ path.test_count }}
-                            </span>
+                          <span>
+                            {{ path.test_count }}
+                          </span>
                         </td>
                         <td>
                           <span>
@@ -85,7 +85,6 @@ export default {
   name: "adminPathsView",
   data() {
     return {
-      lang:null,
       ApiUrl: "http://localhost:3000",
       paths: '',
     };
@@ -99,8 +98,6 @@ export default {
   },
   methods: {
     fetchData(){
-      this.lang = JSON.parse(localStorage.user).lang
-      typeof(this.lang)
       axios
         .get(this.ApiUrl+`/paths`)
         .then(response => {
@@ -119,6 +116,10 @@ export default {
   },
   computed: {
     ...authComputed,
+    userLang() {
+      let lang = JSON.parse(localStorage.user).lang
+      return lang;
+    }
   },
 };
 </script>;
