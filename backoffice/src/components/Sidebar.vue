@@ -7,11 +7,6 @@
                 <hr class="w-100">
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start " id="menu">
                     <li class="nav-item">
-                        <router-link to="/" class="nav-link align-middle px-0 text-white">
-                            <i class="bi bi-house" style="font-size: 1.5rem;"></i> <span class="ms-1 d-none d-sm-inline" style="font-size: 1.5rem;"> Home</span>
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
                         <router-link to="/admin/users" class="nav-link align-middle px-0 text-white">
                             <i class="bi bi-people-fill" style="font-size: 1.5rem;"></i> <span class="ms-1 d-none d-sm-inline" style="font-size: 1.5rem;"> Users</span>
                         </router-link>
