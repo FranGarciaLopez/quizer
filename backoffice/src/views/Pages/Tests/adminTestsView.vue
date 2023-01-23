@@ -83,6 +83,7 @@ export default {
     data: () => ({
         ApiUrl: 'http://localhost:3000',
         tests: '',
+        language: '',
     }), 
     components: {
         Sidebar,
@@ -113,6 +114,10 @@ export default {
     },
     computed: {
         ...authComputed,
+        userLang() {
+        let lang = JSON.parse(localStorage.user).lang
+        return lang;
+        }
     },
 }
 </script>
