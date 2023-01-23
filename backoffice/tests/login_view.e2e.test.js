@@ -9,9 +9,9 @@ describe('Login', function() {
         it(when+' if the user writes a '+data.testVariation+' then it should display an error message saing "user and password does not match"', function(browser) {
         browser
             .url('http://localhost:3001/login')
-            .setValue('#floatingInput', data.user)
-            .sendKeys('#floatingPassword', data.pass)
-            .click('#app .card-body .btn-login')
+            .setValue('#app .card-body .form-floating #floatingInput', data.user)
+            .sendKeys('#app .card-body .form-floating #floatingPassword', data.pass)
+            .click('#app .card-body .btn .btn-primary .btn-login')
             .waitForElementPresent('.alert')
             .click('.btn-close')
             .waitForElementNotPresent('.alert')
