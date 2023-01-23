@@ -25,11 +25,11 @@ export default new Vuex.Store({
     },
     actions: {
         async register ({ commit }, credentials) {
-            const { data } = await axios.post('http://localhost:3000/register', credentials);
+            const { data } = await axios.post('http://127.0.0.1:3000/register', credentials);
             commit('SET_USER_DATA', data);
         },
         async login ({ commit }, credentials) {
-            const { data } = await axios.post('http://localhost:3000/login', credentials);
+            const { data } = await axios.post('http://127.0.0.1:3000/login', credentials);
             commit('SET_USER_DATA', data);
         },
         logout ({ commit }) {
