@@ -1,24 +1,24 @@
 <template>
 <nav class="navbar navbar-expand-md navbar-light bg-primary">
   <div class="container-fluid">
-    <router-link v-bind:to="`/user/${this.$route.params.user_id}/paths`" class="p-2 text-white navbar-brand">Home</router-link>
-    <div v-if="!loggedIn">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="p-2 navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <ul class="navbar-nav me-auto mb-md-0">
-            <li class="nav-item">
-              <router-link to="/login" class="text-white navbar-brand">Login</router-link>
-            </li>
-          </ul>
-        </div>
+    <div v-if="loggedIn">
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <h1 class="p-2 navbar-brand">userApp</h1>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 d-flex align-items-start" v-if="this.$route.name === 'userPathsView'">
+          <li class="nav-item active">
+            <router-link v-bind:to="`/user/${this.$route.params.user_id}/paths`" class="p-2 text-white navbar-brand">Paths</router-link>
+            <!--<router-link v-bind:to="`/user/${this.$route.params.user_id}/paths/${this.$route.params.path_id}`" class="p-2 text-white navbar-brand">Tests</router-link>-->
+          </li>
+        </ul>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 d-flex align-items-start" v-else>
+          <li class="nav-item active">
+            <router-link v-bind:to="`/user/${this.$route.params.user_id}/paths`" class="p-2 text-white navbar-brand">Paths</router-link>
+            <router-link v-bind:to="`/user/${this.$route.params.user_id}/paths/${this.$route.params.path_id}`" class="p-2 text-white navbar-brand">Tests</router-link>
+          </li>
+        </ul>
       </div>
     </div>
-    <button v-else type="button" class="logoutButton" @click="logout">
-      Logout
-    </button>
+    <button @click="logout" class="btn text-white"><i class="bi bi-box-arrow-left"> Logout</i></button>
   </div>
 </nav>
 </template>
