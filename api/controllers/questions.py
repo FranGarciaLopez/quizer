@@ -10,10 +10,10 @@ class Questions:
         text = json.dumps(data["text"])
         answers = json.dumps(data["answers"])
         test_id = data["test_id"]
-        
+        order = data["order"]
                 
-        sql_statement = "INSERT INTO questions (text, answers, test_id) VALUES ('{0}','{1}','{2}')"
-        sql_statement = sql_statement.format(text, answers, test_id)
+        sql_statement = "INSERT INTO questions (text, answers, \"order\", test_id) VALUES ('{0}','{1}','{2}','{3}')"
+        sql_statement = sql_statement.format(text, answers, order, test_id)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.post(response)
@@ -34,8 +34,9 @@ class Questions:
     def put(self, data, question_id):
         text = json.dumps(data["text"])
         answers = json.dumps(data["answers"])
+        order = json.dumps(data["order"])
 
-        sql_statement = "UPDATE questions SET text = '{0}', answers = '{1}' WHERE id = '{2}'".format(text, answers, question_id)
+        sql_statement = "UPDATE questions SET text = '{0}', answers = '{1}', \"order\"='{2}' WHERE id = '{3}'".format(text, answers, order, question_id)
 
         response = self.conn.engine.execute(sql_statement)
         return Response_Parser.put(response)

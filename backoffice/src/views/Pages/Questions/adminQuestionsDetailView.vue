@@ -18,10 +18,14 @@
                                             <h1 v-else>
                                                 Edit question {{$route.params.question_id}}
                                             </h1>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="floatingOrder" required v-model="question.order" max="20" type="number" placeholder="order" />
+                                                <label for="floatingOrder">Question order</label>
+                                            </div>
                                             <form @submit.prevent="save">
                                                 <div class="form-group mb-4">
-                                                    <translatable-input class="form-control mb-4" required  ref="questionTextField"    :text="this.question.text" labelText="Question Text"/>
-                                                    <result-input       class="form-control"      required  ref="questionAnswersField" :answers="this.question.answers"/>
+                                                    <translatable-input class="form-control mb-4 questionTextField" required  ref="questionTextField"    :text="this.question.text" labelText="Question Text"/>
+                                                    <result-input       class="form-control questionAnswersField"   required  ref="questionAnswersField" :answers="this.question.answers"/>
                                                 </div>
                                                 <div class="buttons">
                                                     <router-link :to="{ name: 'adminQuestionsView' }">
@@ -33,7 +37,7 @@
                                                         Save
                                                     </button>
                                                 </div>
-                                            </form>
+                                                </form>
                                         </div>
                                     </div>
                                 </div>
@@ -59,6 +63,7 @@ export default {
         question: '',
         ApiUrl: 'http://localhost:3000',
         error: false,
+        order: '',
     }),
     components: {
         Sidebar,
@@ -76,8 +81,9 @@ export default {
                             right: this.$refs.questionAnswersField.$.components.ResultValue.props.result.right,
                             total: this.$refs.questionAnswersField.$.components.ResultValue.props.result.total,
                         },
-                        text: { es: ''}
-                    }]    
+                        text: { es: ''},
+                    }],    
+                    order: 0,
                 }
             );
         }
@@ -95,6 +101,7 @@ export default {
             var updatedInfo = {
                 text: this.$refs.questionTextField.getValue(),
                 answers: this.$refs.questionAnswersField.getValue(),
+                order: parseInt(this.question.order),
                 test_id: this.$route.params.test_id,
             };
             if(this.$route.params.question_id === 'new') {
