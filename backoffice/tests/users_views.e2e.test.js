@@ -45,8 +45,8 @@ describe('Users', function() {
             .url('http://localhost:3001/admin/users')
             .waitForElementPresent('.table-responsive')
             /* var index = [...document.querySelectorAll("table tr td a.link-secondary")].pop() */
-            .waitForElementPresent(`tr:nth-child(7) .link-secondary > span`)
-            .click((`tr:nth-child(7) .link-secondary > span`))
+            .waitForElementPresent(`tr:nth-child(6) .link-secondary > span`)
+            .click((`tr:nth-child(6) .link-secondary > span`))
             .clearValue('#floatingName')
             .setValue(  '#floatingName',     'Fran')
             .clearValue('#floatingSurname')
@@ -67,7 +67,7 @@ describe('Users', function() {
         browser
             .url('http://localhost:3001/admin/users')
             .waitForElementPresent('.table-responsive')
-            .click('tr:nth-child(7) .bi')
+            .click('tr:nth-child(6) .bi')
             .pause(1000)
             .acceptAlert()
             .assert.urlEquals('http://localhost:3001/admin/users')

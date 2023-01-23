@@ -32,7 +32,7 @@ describe('Tests', function() {
  
     it(when+' if the user has created a new test from a path and wants to edit it then he must go to "/admin/paths/id/tests/id" URL and edit a field from the form then he should be redirected to "/admin/paths/id/tests" with the edited data', function(browser) {
         browser
-            .click('tr:nth-child(4) .link-secondary')
+            .click('tr:nth-child(2) .link-secondary')
             .waitForElementPresent('.form-group:nth-child(1) #formText')
 
             .setValue('.form-group:nth-child(1) #formText', 'Java Test 2 edited')
@@ -49,14 +49,14 @@ describe('Tests', function() {
     it(when+' if the user is in "/admin/paths/id/tests" and wants to know the questions that are in one test then he should be redirected to "/admin/paths/id/tests/id/questions" and if there are not tests, a message "there is no data here" must be displayed', function(browser) {
         browser
             .assert.urlEquals('http://localhost:3001/admin/paths/2/tests')
-            .click('tr:nth-child(3) a > .btn')
+            .click('tr:nth-child(1) a > .btn')
             .waitForElementPresent('.card-body .table-responsive')
             
             .click('a[href="/admin/paths/2/tests"]')
             .waitForElementPresent('.table-responsive', 1000)
 
-            .click('tr:nth-child(4) a .bi')
-            .assert.urlEquals('http://localhost:3001/admin/paths/2/tests/66/questions')
+            .click('tr:nth-child(3) a .bi')
+            .assert.urlEquals('http://localhost:3001/admin/paths/2/tests/69/questions')
             
             .waitForElementPresent('h1')
             .getText('h1', function () {
@@ -72,7 +72,7 @@ describe('Tests', function() {
             .url('http://localhost:3001/admin/paths/2/tests')
             .waitForElementPresent('.table-responsive')
 
-            .click(`tr:nth-child(4) .btn-group > .btn > .bi`)
+            .click(`tr:nth-child(3) .btn-group > .btn > .bi`)
             .acceptAlert()
             .assert.urlEquals('http://localhost:3001/admin/paths/2/tests')
     });
