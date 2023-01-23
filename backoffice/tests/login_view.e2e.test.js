@@ -11,7 +11,7 @@ describe('Login', function() {
             .url('http://localhost:3001/login')
             .setValue('#app .content .mb-3:nth-child(1) > .form-control', data.user)
             .sendKeys('#app .content .mb-3:nth-child(2) > .form-control', data.pass)
-            .click('#app .content button[type=submit]')
+            .click('#app .card-body .btn-login')
             .waitForElementPresent('.alert')
             .click('.btn-close')
             .waitForElementNotPresent('.alert')
