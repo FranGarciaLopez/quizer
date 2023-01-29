@@ -143,7 +143,7 @@ export default {
             
         },
         encryptPassword(password) {
-            const salt =  "$2a$10$fz7KW7q9Yw31TA/Jb5FZJe"
+            const salt =  10;
             password = bcrypt.hashSync(password, salt)
             return password
         },

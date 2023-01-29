@@ -48,12 +48,14 @@ export default {
   },
   methods: {
     login() {
+      debugger;
       this.$store.dispatch('login',{
+        
         nickname: this.nickname, 
-        password: this.encryptPassword(this.password),
+        password: this.password,
         is_admin: this.is_admin,
       })
-      .then(()=>{
+      .then(() => {
         this.error = false;
         this.error_msg = " ";
         var user = JSON.parse(localStorage.user);
@@ -63,21 +65,11 @@ export default {
         else {
           this.$router.push({name: 'userPathsView', params: { user_id: user.user_id }});
         }
+        // login failed
+        this.error = true;
+        this.error_msg = "User and password does not match";
       })
-      .catch(error => {
-        if (error.response.status == 401) {
-          
-          this.error = true;
-          this.error_msg = "User and password does not match";
-        }
-      })
-    },
-    encryptPassword(password) {
-      const salt = "$2a$10$fz7KW7q9Yw31TA/Jb5FZJe"
-      password = bcrypt.hashSync(password, salt)
-      return password
     },
   },
-  
 }
 </script>
