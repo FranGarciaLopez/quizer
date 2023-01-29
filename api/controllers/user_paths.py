@@ -13,9 +13,10 @@ class UserPaths:
         
     def get_all(self, user_id):
         sql_statement = """
-            select up.user_id, up.status, p.id, p."name", p."desc"
-            from paths p left join user_paths up on p.id = up.path_id 
-            where up.user_id = {0} ORDER BY p.id ASC
+            SELECT up.user_id, up.status, p.id, p."name", p."desc"
+            FROM paths p 
+            LEFT JOIN user_paths up ON p.id = up.path_id
+            ORDER BY p.id ASC;
         """.format(user_id)
 
         response = self.conn.engine.execute(sql_statement)
