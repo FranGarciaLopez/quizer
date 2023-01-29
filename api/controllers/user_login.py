@@ -7,17 +7,6 @@ class UserLogin:
     def __init__(self, conn):
         self.conn = conn
 
-    def register(self, data):
-
-        user_name = data["user_name"]
-        nickname = data["nickname"]
-        password = data["password"]
-        lang = data["lang"]
-        
-        sql_statement = "INSERT INTO users (name, nickname, \"password\", lang) VALUES ('{0}','{1}','{2}','{3}','{4}' )".format(user_name, nickname, password, lang)
-        
-        response = self.conn.engine.execute(sql_statement)
-        return Response_Parser.post(response)
 
 
     def login(self, data):
