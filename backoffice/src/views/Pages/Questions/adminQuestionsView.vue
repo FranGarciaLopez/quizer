@@ -8,12 +8,13 @@
               <Breadcrumb/>
             </div>
             <div class="card m-4">
-              <div class="card-header bg-white">
+              <div class="card-header bg-white d-flex justify-content-between">
                 <ul class="nav nav-pills card-header-pills">
-                  <li class="nav-item">
-                    <router-link class="float-right mb-3 nav-link active" :to="{name: 'adminQuestionsDetailView', params: {question_id: 'new'}}">Add question <i class="bi bi-plus-square"></i></router-link>
+                  <li class="nav-item justify-content-start justify-content-center">
+                    <router-link class="float-left m-2 nav-link active" :to="{name: 'adminQuestionsDetailView', params: {question_id: 'new'}}">Add question <i class="bi bi-plus-square"></i></router-link>
                   </li>
                 </ul>
+                <button class="btn btn-primary m-2" @click="this.convertToMoodleXML()">Export to Moodle <i class="bi bi-download"></i></button>
               </div>
               <div class="card-body bg-white">
                 <div class="table-responsive col-sm-12">
@@ -74,6 +75,7 @@ import axios from "axios";
 import { authComputed } from "@/store/helpers.js";
 import Sidebar from "@/components/Sidebar.vue";
 import Breadcrumb from "@/components/BreadCrumb.vue";
+
 export default {
   name: "adminQuestionsView",
   data() {
@@ -95,6 +97,9 @@ export default {
         .get(this.ApiUrl+`/paths`+`/${this.$route.params.path_id}`+`/tests`+`/${this.$route.params.test_id}`+`/questions`)
         .then((response) => {this.questions = response.data;})
     },
+    downloadXMLFile() {
+      
+    },
     deleteQuestion(questionId) {
       if(confirm("Do you really want to delete?")){
         axios.delete(this.ApiUrl+`/questions`+`/${questionId}`)
@@ -103,7 +108,42 @@ export default {
           this.fetchData();
         });
       }
-    }
+    },
+    downloadXMLFile(xmlString){
+      const element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(xmlString));
+      element.setAttribute('download', 'test.xml');
+      element.style.display = 'none';
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    },
+    convertToMoodleXML() {
+      let xmlString = '<?xml version="1.0" encoding="UTF-8"?>\n';
+      xmlString += '<quiz>\n';
+
+      this.questions.forEach((question) => {
+        xmlString += '  <question type="multichoice">\n';
+        xmlString += `    <name><text>Question ${question.id}</text></name>\n`;
+        xmlString += `    <questiontext format="html"><text>${question.text.es}</text></questiontext>\n`;
+
+        question.answers.forEach((answer) => {
+          xmlString += '    <answer fraction=';
+          xmlString += answer.result.right === 1 ? '"100"' : '"0"';
+          xmlString += ' format="html">\n';
+          xmlString += `      <text>${answer.text.es}</text>\n`;
+          xmlString += '      <feedback format="html">\n';
+          xmlString += '        <text></text>\n';
+          xmlString += '      </feedback>\n';
+          xmlString += '    </answer>\n';
+        });
+
+        xmlString += '  </question>\n';
+      });
+
+      xmlString += '</quiz>\n';
+      this.downloadXMLFile(xmlString)
+    },
   },
   computed: {
     ...authComputed,
