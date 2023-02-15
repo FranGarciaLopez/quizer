@@ -11,7 +11,7 @@
               <div class="card-header bg-white">
                 <ul class="nav nav-pills card-header-pills">
                   <li class="nav-item">
-                    <router-link class="float-right mb-3 nav-link active" to="/admin/users/new">Add User <i class="bi bi-plus-square"></i></router-link>
+                    <router-link class="float-left m-2 nav-link active" to="/admin/users/new">Add User <i class="bi bi-plus-square"></i></router-link>
                   </li>
                 </ul>
               </div>
