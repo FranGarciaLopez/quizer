@@ -11,7 +11,7 @@
               <div class="card-header bg-white d-flex justify-content-between">
                 <ul class="nav nav-pills card-header-pills">
                   <li class="nav-item justify-content-start justify-content-center">
-                    <router-link class="float-left m-2 nav-link active" :to="{name: 'adminQuestionsDetailView', params: {question_id: 'new'}}">Add question <i class="bi bi-plus-square"></i></router-link>
+                    <router-link class="float-right m-2 nav-link active" :to="{name: 'adminQuestionsDetailView', params: {question_id: 'new'}}">Add question <i class="bi bi-plus-square"></i></router-link>
                   </li>
                 </ul>
                 <button class="btn btn-primary m-2" @click="this.convertToMoodleXML()">Export to Moodle <i class="bi bi-download"></i></button>
@@ -112,7 +112,7 @@ export default {
     downloadXMLFile(xmlString){
       const element = document.createElement('a');
       element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(xmlString));
-      element.setAttribute('download', 'test.xml');
+      element.setAttribute('download', `test_${this.$route.params.test_id}.xml`);
       element.style.display = 'none';
       document.body.appendChild(element);
       element.click();
