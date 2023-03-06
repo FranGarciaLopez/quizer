@@ -3,11 +3,10 @@
 #psql -U postgres -d  tfg-db < tfg-db.sql
 
 echo "Installing postgres on Ubuntu"
-cd "../../api/backup/"
+cd "../../quizer/"
 mkdir -p ./logs
 echo "  - Installing postgres"     && sudo apt-get update && sudo apt-get install -qq postgresql-client                   >> ./logs/postgres_logs.log
 echo "  - Create database"         && psql postgresql://postgres:changeme@localhost:5432 -c "CREATE DATABASE \"tfg-db\""  >> ./logs/postgres_logs.log
-
 echo "  - Loading data for tests"  &&  export PGPASSWORD=changeme && psql -q -h localhost -p 5432 -U postgres -d tfg-db < tfg-db.sql
 
 echo "Installing headless chromium"
