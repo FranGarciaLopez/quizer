@@ -3,7 +3,7 @@
 #psql -U postgres -d  tfg-db < tfg-db.sql
 
 echo "Installing postgres on Ubuntu"
-cd "../../quizer"
+cd "../../"
 mkdir -p ./logs
 echo "  - Installing postgres"     && sudo apt-get update && sudo apt-get install -qq postgresql-client                   >> ./logs/postgres_logs.log
 echo "  - Create database"         && psql postgresql://postgres:changeme@localhost:5432 -c "CREATE DATABASE \"tfg-db\""  >> ./logs/postgres_logs.log
